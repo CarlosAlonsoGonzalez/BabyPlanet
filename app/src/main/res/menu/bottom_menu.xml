@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/actividades"
+        android:title="Actividades"
+        android:icon="@drawable/actividad"/>
+    <item
+        android:id="@+id/consejos"
+        android:title="Consejos"
+        android:icon="@drawable/consejos"/>
+</menu>
