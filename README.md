@@ -30,13 +30,10 @@ Diseño basico de los distintos iconos para consejos [iconos](mockup/iconosConse
 ### Diagramas
 Diseño basico del diagrama de entidad-relacion y diagrama de clases [diagramas]()<br>
 Diagrama entidad-relacion:
-> Actividades sensoriales <br>
-> Actividades motoras <br>
-> Actividades cognitivas <br>
+> 
 
 Diagrama de clases:
-> Actividades socioafectivas <br>
-> Actividades del lenguaje <br>
+> 
 
 ### Mejoras a la aplicación
 TODO
