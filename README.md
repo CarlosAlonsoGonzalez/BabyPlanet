@@ -28,9 +28,14 @@ Diseño basico de los distintos iconos para consejos [iconos](mockup/iconosConse
 > Consejo de gestión emociones <br>
 
 ### Diagramas
-Diseño basico del diagrama de entidad-relacion y diagrama de clases [diagramas]()<br>
+Diseño basico del diagrama de entidad-relacion y diagrama de clases [diagramas](mockup/diagramas)<br>
 Diagrama entidad-relacion:
-> 
+> Persona <br>
+> Rango <br>
+> Actividades <br>
+> Consejos <br>
+> Categorias <br>
+> Materiales <br>
 
 Diagrama de clases:
 > 
