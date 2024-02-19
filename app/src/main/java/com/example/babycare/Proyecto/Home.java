@@ -32,7 +32,7 @@ public class Home extends AppCompatActivity {
             if(item.getItemId() == R.id.actividades){
                 replaceFragment(new ActividadesFragment());
             }else if(item.getItemId() == R.id.consejos){
-                replaceFragment(new ConsejosFragment());
+                replaceFragment(new ConsejoFragment());
             }
 
         });

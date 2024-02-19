@@ -13,13 +13,13 @@ import com.example.babycare.R;
 
 import java.util.ArrayList;
 
-public class ConsejosAdapter extends RecyclerView.Adapter<ConsejosAdapter.ViewHolder>{
+public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHolder>{
 
-    private ArrayList<Consejos> datos;
-    private static final double COLOR_RANGE =254 ;
+    private ArrayList<Consejo> datos;
+    private static final double COLOR_RANGE = 254;
 
     public interface ItemClickListener {
-        void onClick(View view, int position, Consejos consejo);
+        void onClick(View view, int position, Consejo consejo);
     }
 
     private ItemClickListener clickListener;
@@ -60,12 +60,12 @@ public class ConsejosAdapter extends RecyclerView.Adapter<ConsejosAdapter.ViewHo
          * @param dataSet String[] containing the data_RickAndMorty to populate views to be used
          * by RecyclerView.
          */
-        public ConsejosAdapter(ArrayList<Consejos> dataSet) {
-            datos = new ArrayList<Consejos>();
+        public ConsejoAdapter(ArrayList<Consejo> dataSet) {
+            datos = new ArrayList<Consejo>();
             add(dataSet);
         }
 
-        public ConsejosAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        public ConsejoAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             // Create a new view, which defines the UI of the list item
             View view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.row_consejo, viewGroup, false);
@@ -75,14 +75,14 @@ public class ConsejosAdapter extends RecyclerView.Adapter<ConsejosAdapter.ViewHo
                     (int)(Math.random()*COLOR_RANGE),
                     (int)(Math.random()*COLOR_RANGE)
             ));
-            return new ConsejosAdapter.ViewHolder(view);
+            return new ConsejoAdapter.ViewHolder(view);
         }
 
-        public void onBindViewHolder(ConsejosAdapter.ViewHolder viewHolder, final int position) {
+        public void onBindViewHolder(ConsejoAdapter.ViewHolder viewHolder, final int position) {
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
-            Consejos consejo = datos.get(position);
+            Consejo consejo = datos.get(position);
             viewHolder.setInfo(consejo.getNombre(), consejo.getId());//TODO cambiar esto por icono si fuera necesario
 
         }
@@ -91,7 +91,7 @@ public class ConsejosAdapter extends RecyclerView.Adapter<ConsejosAdapter.ViewHo
             return datos.size();
         }
 
-        public void add(ArrayList<Consejos> dataSet){
+        public void add(ArrayList<Consejo> dataSet){
             datos.addAll(dataSet);
             notifyDataSetChanged();
         }
