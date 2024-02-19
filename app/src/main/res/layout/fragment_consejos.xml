@@ -6,13 +6,8 @@
     android:background="@color/Complementario"
     tools:context=".Proyecto.ConsejosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListaConsejos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Consejos"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/Oscuro" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>
