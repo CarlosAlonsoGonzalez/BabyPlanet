@@ -23,4 +23,5 @@ public class Consejo {
     private String nombre;
     private String descripcion;
     private int rango;
+    private String tipo;
 }
