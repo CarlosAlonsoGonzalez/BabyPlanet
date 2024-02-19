@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Babycare"
         tools:targetApi="31">
         <activity
+            android:name=".Proyecto.ActividadDetalles"
+            android:exported="false" />
+        <activity
             android:name=".Proyecto.Home"
             android:exported="false" />
         <activity

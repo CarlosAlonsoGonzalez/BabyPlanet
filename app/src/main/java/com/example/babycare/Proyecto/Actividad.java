@@ -8,11 +8,11 @@ public class Actividad {
     int id;
     String nombre;
     String descripcion;
-    String rango;
+    int rango;
     String areaDesarrollo;
     int icono;//este esta fuera de la base de datos se pone sgun el areaDesarrollo
 
-    public Actividad(int id, String nombre, String descripcion, String rango, String areaDesarrollo) {
+    public Actividad(int id, String nombre, String descripcion, int rango, String areaDesarrollo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -32,7 +32,7 @@ public class Actividad {
         return descripcion;
     }
 
-    public String getRango() {
+    public int getRango() {
         return rango;
     }
 
@@ -48,10 +48,11 @@ public class Actividad {
         this.icono = icono;
     }
 
-    public static ArrayList<Actividad> generador(){//TODO: API HERE NO SEEEEE
+
+    /*public static ArrayList<Actividad> generador(){//TODO: API HERE NO SEEEEE
         ArrayList<Actividad> listadoApi = new ArrayList<Actividad>();
 
-        listadoApi.add(new Actividad(4,"Comunicación positiva", "Habla con tu bebé regularmente, aunque no entienda todas las palabras. Usa un tono de voz suave y afectuoso. La comunicación positiva contribuye al desarrollo del lenguaje", "0-3","sensorial"));
+        listadoApi.add(new Actividad(4,"Comunicación positiva", "Habla con tu bebé regularmente, aunque no entienda todas las palabras. Usa un tono de voz suave y afectuoso. La comunicación positiva contribuye al desarrollo del lenguaje", 0,"sensorial"));
 
         //Ponemos el icono segun el area
         int iconoArea = 0;
@@ -72,6 +73,6 @@ public class Actividad {
             actividad.setIcono(iconoArea);
         }
         return listadoApi;
-    }
+    }*/
 
 }
