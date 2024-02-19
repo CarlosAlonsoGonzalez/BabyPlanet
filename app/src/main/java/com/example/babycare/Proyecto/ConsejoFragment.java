@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.babycare.R;
 
-public class ConsejosFragment extends Fragment {
+public class ConsejoFragment extends Fragment {
 
     RecyclerView rvConsejos;
-    ConsejosAdapter adapter;
+    ConsejoAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,13 +23,11 @@ public class ConsejosFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_consejos, container, false);
         rvConsejos = layout.findViewById(R.id.rcvListaConsejos);
 
-        rvConsejos.setLayoutManager(new LinearLayoutManager(ConsejosFragment.super.getContext()));
+        rvConsejos.setLayoutManager(new LinearLayoutManager(ConsejoFragment.super.getContext()));
 
-        adapter = new ConsejosAdapter(Consejos.generador());
+        adapter = new ConsejoAdapter(Consejo.generador());
         rvConsejos.setAdapter(adapter);
         // Inflate the layout for this fragment
         return layout;
-
-
     }
 }
