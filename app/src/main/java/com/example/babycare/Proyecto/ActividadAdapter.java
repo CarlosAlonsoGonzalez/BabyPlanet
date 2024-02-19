@@ -44,8 +44,8 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
             super(view);
             // Define click listener for the ViewHolder's View
 
-            tvTitulo = (TextView) view.findViewById(R.id.tvTitulo);
-            icono = (ImageView) view.findViewById(R.id.ivIcono);
+            tvTitulo = (TextView) view.findViewById(R.id.tvTituloConsejo);
+            icono = (ImageView) view.findViewById(R.id.imgIconoConsejo);
             view.setOnClickListener(this);
         }
 
