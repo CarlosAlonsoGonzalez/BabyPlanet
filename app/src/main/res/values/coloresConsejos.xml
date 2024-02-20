@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="alimentacion">#FFB073</color>
+    <color name="educacion">#ACB3B7</color>
+    <color name="emocional">#FFA8E3</color>
+    <color name="higiene">#52AEDC</color>
+    <color name="salud">#FFFFFF</color>
+</resources>

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.ViewHolder> {
 
     private ArrayList<Actividad> datos;
-    private static final double COLOR_RANGE =254 ;
 
     public interface ItemClickListener {
         void onClick(View view, int position, Actividad unaActividad);
@@ -36,8 +35,8 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
             super(view);
             // Define click listener for the ViewHolder's View
 
-            tvTitulo = (TextView) view.findViewById(R.id.tvTituloConsejo);
-            icono = (ImageView) view.findViewById(R.id.imgIconoConsejo);
+            tvTitulo = (TextView) view.findViewById(R.id.tvTituloActividad);
+            icono = (ImageView) view.findViewById(R.id.imgIconoActividad);
             view.setOnClickListener(this);
         }
 
@@ -60,8 +59,7 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
      * by RecyclerView.
      */
     public ActividadAdapter(ArrayList<Actividad> dataSet) {
-        datos = new ArrayList<Actividad>();
-        add(dataSet);
+        datos = dataSet;
     }
 
     // Create new views (invoked by the layout manager)
@@ -69,13 +67,8 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.row_actividad, viewGroup, false);//TODO: crear el layout este
+                .inflate(R.layout.row_actividad, viewGroup, false);
 
-        view.setBackgroundColor(Color.rgb(
-                (int)(Math.random()*COLOR_RANGE),
-                (int)(Math.random()*COLOR_RANGE),
-                (int)(Math.random()*COLOR_RANGE)
-        ));
         return new ViewHolder(view);
     }
 
@@ -96,8 +89,9 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
         return datos.size();
     }
 
-    public void add(ArrayList<Actividad> dataSet){
-        datos.addAll(dataSet);
+    public void setActividades(ArrayList<Actividad> actividades){
+        datos.clear();
+        datos.addAll(actividades);
         notifyDataSetChanged();
     }
 }
