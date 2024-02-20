@@ -1,5 +1,9 @@
 package com.example.babycare.Proyecto;
 
+import static com.example.babycare.Proyecto.ActividadesFragment.INFO_ACTIVIDAD;
+import static com.example.babycare.Proyecto.ConsejoFragment.INFO_CONSEJO;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -48,6 +52,19 @@ public class HomeFragment extends Fragment {
                 Actividad a = response.body();
 
                 tvActividadHome.setText(a.getNombre());
+                ivActividadHome.setImageResource(a.getIcono());
+
+                tvActividadHome.setOnClickListener((v)->{
+                    Intent i = new Intent(HomeFragment.super.getActivity(), ActividadDetalles.class);
+                    i.putExtra(INFO_ACTIVIDAD, a);
+                    startActivity(i);
+                });
+
+                ivActividadHome.setOnClickListener((v)->{
+                    Intent i = new Intent(HomeFragment.super.getActivity(), ActividadDetalles.class);
+                    i.putExtra(INFO_ACTIVIDAD, a);
+                    startActivity(i);
+                });
             }
 
             @Override
@@ -62,6 +79,19 @@ public class HomeFragment extends Fragment {
                 Consejo c = response.body();
 
                 tvConsejoHome.setText(c.getNombre());
+                ivConsejoHome.setImageResource(c.getIcono());
+
+                tvConsejoHome.setOnClickListener((v)->{
+                    Intent i = new Intent(HomeFragment.super.getActivity(), ConsejoDetalles.class);
+                    i.putExtra(INFO_CONSEJO, c);
+                    startActivity(i);
+                });
+
+                ivConsejoHome.setOnClickListener((v)->{
+                    Intent i = new Intent(HomeFragment.super.getActivity(), ConsejoDetalles.class);
+                    i.putExtra(INFO_CONSEJO, c);
+                    startActivity(i);
+                });
             }
 
             @Override
@@ -69,6 +99,7 @@ public class HomeFragment extends Fragment {
                 String nuncaToast = "Debug";
             }
         });
+
         return layout;
     }
 }
