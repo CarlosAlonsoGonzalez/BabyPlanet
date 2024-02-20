@@ -30,7 +30,7 @@ public class ActividadDetalles extends AppCompatActivity {
 
         tvNombre.setText(nuevaActividad.getNombre());
         tvDescripcion.setText(nuevaActividad.getDescripcion());
-        tvMateriales.setText(nuevaActividad.getMaterialesToString());
+        //tvMateriales.setText(nuevaActividad.getMaterialesToString());
         tvRango.setText(nuevaActividad.getRangoString());
     }
 }
