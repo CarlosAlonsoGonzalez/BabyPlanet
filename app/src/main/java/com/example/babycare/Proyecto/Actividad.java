@@ -1,21 +1,32 @@
 package com.example.babycare.Proyecto;
 
+import android.graphics.Color;
+import android.view.View;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.example.babycare.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Actividad {
+public class Actividad implements Serializable {
     int id;
     String nombre;
     String descripcion;
+    ArrayList<Material> materiales; //no se como implementar estoo :(
     int rango;
     String areaDesarrollo;
     int icono;//este esta fuera de la base de datos se pone sgun el areaDesarrollo
 
-    public Actividad(int id, String nombre, String descripcion, int rango, String areaDesarrollo) {
+    public Actividad(int id, String nombre, String descripcion, ArrayList<Material> listaMateriales,int rango, String areaDesarrollo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.materiales=listaMateriales;
         this.rango = rango;
         this.areaDesarrollo = areaDesarrollo;
     }
@@ -32,8 +43,17 @@ public class Actividad {
         return descripcion;
     }
 
-    public int getRango() {
-        return rango;
+    public String getMaterialesToString() {
+        String listadoMateriales="";
+        for (Material unMaterial: materiales) {
+            listadoMateriales+="- "+unMaterial.getNombre()+"\n";
+        }
+        return listadoMateriales;
+    }
+
+    public String getRangoString() {
+        //Aqui esta como un string a pesar de ser un int porque lo hacemos con el enum ya que en la base de datos son int pero para el usurio es string
+        return Rango.obtenerDescripcionPorCodigo(rango);
     }
 
     public String getAreaDesarrollo() {
@@ -41,38 +61,36 @@ public class Actividad {
     }
 
     public int getIcono() {
+        switch (areaDesarrollo.toLowerCase()) {
+            case "sensorial":
+                icono = R.drawable.area_sensorial;
+                break;
+            case "motriz":
+                icono = R.drawable.area_motora;
+                break;
+            case "cognitiva":
+                icono = R.drawable.area_cognitiva;
+                break;
+            case "socioafectiva":
+                icono = R.drawable.area_socioafectiva;
+                break;
+            case "del lenguaje":
+                icono = R.drawable.area_del_lenguaje;
+                break;
+        }
         return icono;
     }
 
-    public void setIcono(int icono) {
-        this.icono = icono;
-    }
 
+    static ArrayList<Actividad> listadoApi;
+    public static ArrayList<Actividad> generador(ViewModelStoreOwner owner){//TODO: API HERE NO SEEEEE
 
-    /*public static ArrayList<Actividad> generador(){//TODO: API HERE NO SEEEEE
-        ArrayList<Actividad> listadoApi = new ArrayList<Actividad>();
+        ActividadViewModel vm = new ViewModelProvider(owner).get(ActividadViewModel.class);
+        vm.getActividades().observe((LifecycleOwner) owner, listadoActividades -> { //no se que esta pasando ya lo digo
+            listadoApi= new ArrayList<>(listadoActividades);
+        });
 
-        listadoApi.add(new Actividad(4,"Comunicación positiva", "Habla con tu bebé regularmente, aunque no entienda todas las palabras. Usa un tono de voz suave y afectuoso. La comunicación positiva contribuye al desarrollo del lenguaje", 0,"sensorial"));
-
-        //Ponemos el icono segun el area
-        int iconoArea = 0;
-        for (Actividad actividad : listadoApi) {//TODO MEJORABLE que no recorra el array sino que lo haga segun lo crea
-
-            if (actividad.getAreaDesarrollo().equals("sensorial") ) {
-                iconoArea = R.drawable.sonajero;//TODO aqui se pondria el icono correspondiente
-            }else  if (actividad.getAreaDesarrollo().equals("motriz") ) {
-                iconoArea = R.drawable.sonajero;//TODO aqui se pondria el icono correspondiente
-            }else  if (actividad.getAreaDesarrollo().equals("cognitiva") ) {
-                iconoArea = R.drawable.sonajero;//TODO aqui se pondria el icono correspondiente
-            }else  if (actividad.getAreaDesarrollo().equals("sociafectiva") ) {
-                iconoArea = R.drawable.sonajero;//TODO aqui se pondria el icono correspondiente
-            } if (actividad.getAreaDesarrollo().equals("de lenguaje") ) {
-                iconoArea = R.drawable.sonajero;//TODO aqui se pondria el icono correspondiente
-            }
-
-            actividad.setIcono(iconoArea);
-        }
         return listadoApi;
-    }*/
+    }
 
 }

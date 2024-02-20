@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import com.example.babycare.R;
 
 public class ActividadesFragment extends Fragment {
-        RecyclerView rvActividades;
+    public static final String INFO_ACTIVIDAD = "into de una actividad" ;
+    RecyclerView rvActividades;
         ActividadAdapter adapter;
 
     @Override
@@ -26,23 +27,18 @@ public class ActividadesFragment extends Fragment {
 
         rvActividades.setLayoutManager(new LinearLayoutManager(ActividadesFragment.super.getContext()));
 
-        adapter = new ActividadAdapter(Actividad.generador());
+        adapter = new ActividadAdapter(Actividad.generador(this));
         rvActividades.setAdapter(adapter);
 
-        /*adapter.setClickListener(new ActividadAdapter().ItemClickListener() {
+        adapter.setClickListener(new ActividadAdapter.ItemClickListener() {
             @Override
             public void onClick(View view, int position, Actividad unaActividad) {
-
-                Intent i = new Intent(APListadoConsejos.this, APDetallesConsejos.class);
-                i.putExtra(INFO_CONSEJO,consejillo);
-
-                //i.putExtra(INFO_TITULO, consejillo.getTitulo());
-                //i.putExtra(INFO_DESCRIPCION, consejillo.getDescripcion());
-                //i.putExtra(INFO_EDAD_MESES, String.valueOf(consejillo.getEdadMeses()));
+                Intent i = new Intent(ActividadesFragment.super.getActivity(), ActividadDetalles.class);//no se si esto funciona la verdad eh esta apañado por los pelos y sin sentido
+                i.putExtra(INFO_ACTIVIDAD,unaActividad);
 
                 startActivity(i);
             }
-        });*/
+        });
 
         return layout;
 
