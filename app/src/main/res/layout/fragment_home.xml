@@ -38,9 +38,11 @@
         android:id="@+id/tvActividadHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/ivActividadHome"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivActividadHome"
         app:layout_constraintTop_toTopOf="@+id/ivActividadHome" />
 
@@ -48,10 +50,12 @@
         android:id="@+id/tvConsejoHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/ivConsejoHome"
         app:layout_constraintEnd_toStartOf="@+id/ivConsejoHome"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivConsejoHome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
