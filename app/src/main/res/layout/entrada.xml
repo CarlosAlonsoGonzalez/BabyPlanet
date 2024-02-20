@@ -9,15 +9,15 @@
 
   <ImageView
       android:id="@+id/ivSonajero"
-      android:layout_width="220dp"
-      android:layout_height="220dp"
+      android:layout_width="300dp"
+      android:layout_height="300dp"
       app:layout_constraintBottom_toTopOf="@+id/etCorreo"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/tvTituloConsejo"
       app:layout_constraintVertical_bias="0.5"
-      app:srcCompat="@drawable/sonajero" />
+      app:srcCompat="@drawable/logo_app" />
 
   <EditText
       android:id="@+id/etCorreo"
