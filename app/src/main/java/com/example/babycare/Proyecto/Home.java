@@ -16,6 +16,7 @@ public class Home extends AppCompatActivity {
 
     HomeBinding binding;
     FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
