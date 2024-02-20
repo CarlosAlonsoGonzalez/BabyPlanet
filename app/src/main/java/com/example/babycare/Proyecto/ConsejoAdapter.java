@@ -14,9 +14,7 @@ import com.example.babycare.R;
 import java.util.ArrayList;
 
 public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHolder>{
-
     private ArrayList<Consejo> datos;
-    private static final double COLOR_RANGE = 254;
 
     public interface ItemClickListener {
         void onClick(View view, int position, Consejo consejo);
@@ -41,10 +39,10 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
             icono = (ImageView) view.findViewById(R.id.imgIconoConsejo);
             view.setOnClickListener(this);
         }
-        int iconoSonajero = R.drawable.sonajero;
+
         public void setInfo(String titulo, int iconoCons) {
             tvTitulo.setText(titulo);
-            icono.setImageResource(R.drawable.sonajero);
+            icono.setImageResource(iconoCons);
         }
 
         @Override
@@ -77,7 +75,7 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             Consejo consejo = datos.get(position);
-            viewHolder.setInfo(consejo.getNombre(), consejo.getId());//TODO cambiar esto por icono si fuera necesario
+            viewHolder.setInfo(consejo.getNombre(), consejo.getIcono());
         }
 
         public int getItemCount() {
@@ -86,8 +84,8 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
 
         public void setConsejos(ArrayList<Consejo> consejos) {
             datos.clear(); // Limpiar los datos actuales
-            datos.addAll(consejos); // Agregar los nuevos datos
-            notifyDataSetChanged(); // Notificar al RecyclerView que los datos han cambiado
+            datos.addAll(consejos);
+            notifyDataSetChanged();
         }
 
 }

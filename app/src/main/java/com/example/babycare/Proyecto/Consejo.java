@@ -2,9 +2,10 @@ package com.example.babycare.Proyecto;
 
 import com.example.babycare.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Consejo {
+public class Consejo implements Serializable {
 
     int id;
     String nombre, descripcion;
@@ -61,6 +62,23 @@ public class Consejo {
     }
 
     public int getIcono() {
+        switch (tipo.toLowerCase()) {
+            case "educación":
+                icono = R.drawable.consejo_educacion;
+                break;
+            case "higiene":
+                icono = R.drawable.consejo_higiene;
+                break;
+            case "alimentación":
+                icono = R.drawable.consejo_alimentacion;
+                break;
+            case "emoción":
+                icono = R.drawable.consejo_gestion_emociones;
+                break;
+            case "salud":
+                icono = R.drawable.consejo_salud;
+                break;
+        }
         return icono;
     }
 
@@ -78,23 +96,6 @@ public class Consejo {
         // Si se proporciona una lista de consejos desde el ViewModel, la utilizamos
         if (listaConsejos != null && !listaConsejos.isEmpty()) {
             listadoApiConsejo.addAll(listaConsejos);
-        }
-
-        int iconoArea = 0;
-        for (Consejo consejo : listadoApiConsejo) {
-            // Asignar un icono según el rango del consejo
-            if (consejo.getRango().equals("sensorial")) {
-                iconoArea = R.drawable.sonajero;
-            } else if (consejo.getRango().equals("motriz")) {
-                iconoArea = R.drawable.sonajero;
-            } else if (consejo.getRango().equals("cognitiva")) {
-                iconoArea = R.drawable.sonajero;
-            } else if (consejo.getRango().equals("sociafectiva")) {
-                iconoArea = R.drawable.sonajero;
-            } else if (consejo.getRango().equals("de lenguaje")) {
-                iconoArea = R.drawable.sonajero;
-            }
-            consejo.setIcono(iconoArea);
         }
 
         return listadoApiConsejo;
