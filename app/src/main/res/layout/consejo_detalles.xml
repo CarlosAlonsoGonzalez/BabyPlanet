@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/tvTipoConsejo"
-        android:layout_width="265dp"
-        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNombreConsejo"
@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/tvNombreConsejo"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvDes"
@@ -44,8 +44,8 @@
 
     <TextView
         android:id="@+id/tvTextoDescripcion"
-        android:layout_width="327dp"
-        android:layout_height="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
