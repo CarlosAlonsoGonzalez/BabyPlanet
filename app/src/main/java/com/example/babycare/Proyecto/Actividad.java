@@ -17,16 +17,16 @@ public class Actividad implements Serializable {
     int id;
     String nombre;
     String descripcion;
-    ArrayList<Material> materiales; //no se como implementar estoo :(
+    //ArrayList<Material> materiales; //no se como implementar estoo :(
     int rango;
     String areaDesarrollo;
     int icono;//este esta fuera de la base de datos se pone sgun el areaDesarrollo
 
-    public Actividad(int id, String nombre, String descripcion, ArrayList<Material> listaMateriales,int rango, String areaDesarrollo) {
+    public Actividad(int id, String nombre, String descripcion,int rango, String areaDesarrollo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.materiales=listaMateriales;
+        //this.materiales=listaMateriales;
         this.rango = rango;
         this.areaDesarrollo = areaDesarrollo;
     }
@@ -43,13 +43,13 @@ public class Actividad implements Serializable {
         return descripcion;
     }
 
-    public String getMaterialesToString() {
+    /*public String getMaterialesToString() {
         String listadoMateriales="";
         for (Material unMaterial: materiales) {
             listadoMateriales+="- "+unMaterial.getNombre()+"\n";
         }
         return listadoMateriales;
-    }
+    }*/
 
     public String getRangoString() {
         //Aqui esta como un string a pesar de ser un int porque lo hacemos con el enum ya que en la base de datos son int pero para el usurio es string
@@ -86,9 +86,13 @@ public class Actividad implements Serializable {
     public static ArrayList<Actividad> generador(ViewModelStoreOwner owner){//TODO: API HERE NO SEEEEE
 
         ActividadViewModel vm = new ViewModelProvider(owner).get(ActividadViewModel.class);
+        vm.generarActividades();
+
         vm.getActividades().observe((LifecycleOwner) owner, listadoActividades -> { //no se que esta pasando ya lo digo
             listadoApi= new ArrayList<>(listadoActividades);
         });
+
+
 
         return listadoApi;
     }

@@ -25,8 +25,8 @@ public class ActividadViewModel extends ViewModel {
 
     public void generarActividades() {
         new Thread(() -> {
-            try {
-                Thread.sleep((long) ((Math.random() * DELAY) + DELAY));
+            //try {
+                //Thread.sleep((long) ((Math.random() * DELAY) + DELAY));
 
                 ServicioApiActividades ser = ServicioApiActividades.getInstancia();
                 Call<List<Actividad>> llamada = ser.getRepo().getActividades();
@@ -44,9 +44,9 @@ public class ActividadViewModel extends ViewModel {
                 });
 
                 //llamar al array de la API ArrayList<Actividad> listaActividades = ; haces call here
-            } catch (InterruptedException e) {
+            /*} catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         ).start();
     }
