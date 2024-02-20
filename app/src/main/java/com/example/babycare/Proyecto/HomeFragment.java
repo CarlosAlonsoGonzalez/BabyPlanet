@@ -34,11 +34,27 @@ public class HomeFragment extends Fragment {
         ivConsejoHome = layout.findViewById(R.id.ivConsejoHome);
 
         Random random = new Random();
-        int numeroAleatorio = random.nextInt(22) + 1;
+        int numeroAleatorioCon = random.nextInt(22) + 1;
+        int numeroAleatorioAct = random.nextInt(7) + 18;
 
         ServicioApiHome serHome = ServicioApiHome.getInstancia();
-        Call<Consejo> llamada = serHome.getRepo().getConsejo(numeroAleatorio);
+        Call<Consejo> llamada = serHome.getRepo().getConsejo(numeroAleatorioCon);
+        Call<Actividad> llamadaAc = serHome.getRepo().getActividad(numeroAleatorioAct);
 
+        llamadaAc.enqueue(new Callback<Actividad>() {
+            @Override
+            public void onResponse(Call<Actividad> call, Response<Actividad> response) {
+                //vas desglosando las clases hasta llegar a la base
+                Actividad a = response.body();
+
+                tvActividadHome.setText(a.getNombre());
+            }
+
+            @Override
+            public void onFailure(Call<Actividad> call, Throwable t) {
+                String nuncaToast = "Debug";
+            }
+        });
         llamada.enqueue(new Callback<Consejo>() {
             @Override
             public void onResponse(Call<Consejo> call, Response<Consejo> response) {
