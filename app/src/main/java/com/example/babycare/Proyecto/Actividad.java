@@ -19,16 +19,16 @@ public class Actividad implements Serializable {
     String descripcion;
     //ArrayList<Material> materiales; //no se como implementar estoo :(
     int rango;
-    String areaDesarrollo;
+    String area_desarrollo;
     int icono;//este esta fuera de la base de datos se pone sgun el areaDesarrollo
 
-    public Actividad(int id, String nombre, String descripcion,int rango, String areaDesarrollo) {
+    public Actividad(int id, String nombre, String descripcion,int rango, String area_desarrollo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         //this.materiales=listaMateriales;
         this.rango = rango;
-        this.areaDesarrollo = areaDesarrollo;
+        this.area_desarrollo = area_desarrollo;
     }
 
     public int getId() {
@@ -56,25 +56,21 @@ public class Actividad implements Serializable {
         return Rango.obtenerDescripcionPorCodigo(rango);
     }
 
-    public String getAreaDesarrollo() {
-        return areaDesarrollo;
-    }
-
     public int getIcono() {
-        switch (areaDesarrollo.toLowerCase()) {
+        switch (area_desarrollo.toLowerCase()) {
             case "sensorial":
                 icono = R.drawable.area_sensorial;
                 break;
-            case "motriz":
+            case "motora":
                 icono = R.drawable.area_motora;
                 break;
             case "cognitiva":
                 icono = R.drawable.area_cognitiva;
                 break;
-            case "socioafectiva":
+            case "socio-afectiva":
                 icono = R.drawable.area_socioafectiva;
                 break;
-            case "del lenguaje":
+            case "lenguaje":
                 icono = R.drawable.area_del_lenguaje;
                 break;
         }
@@ -82,19 +78,16 @@ public class Actividad implements Serializable {
     }
 
 
-    static ArrayList<Actividad> listadoApi;
-    public static ArrayList<Actividad> generador(ViewModelStoreOwner owner){//TODO: API HERE NO SEEEEE
+    public static ArrayList<Actividad> generador(ArrayList<Actividad> listadoActividades){
 
-        ActividadViewModel vm = new ViewModelProvider(owner).get(ActividadViewModel.class);
-        vm.generarActividades();
+        ArrayList<Actividad> listadoApiActividades= new ArrayList<Actividad>();
 
-        vm.getActividades().observe((LifecycleOwner) owner, listadoActividades -> { //no se que esta pasando ya lo digo
-            listadoApi= new ArrayList<>(listadoActividades);
-        });
+        // Si se proporciona una lista de consejos desde el ViewModel, la utilizamos
+        if (listadoActividades != null && !listadoActividades.isEmpty()) {
+            listadoApiActividades.addAll(listadoActividades);
+        }
 
-
-
-        return listadoApi;
+        return listadoActividades;
     }
 
 }
