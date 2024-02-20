@@ -28,6 +28,7 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
         this.clickListener = itemClickListener;
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView tvTitulo;
         private final ImageView icono;
@@ -40,10 +41,10 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
             icono = (ImageView) view.findViewById(R.id.imgIconoConsejo);
             view.setOnClickListener(this);
         }
-
+        int iconoSonajero = R.drawable.sonajero;
         public void setInfo(String titulo, int iconoCons) {
             tvTitulo.setText(titulo);
-            icono.setImageResource(iconoCons);
+            icono.setImageResource(R.drawable.sonajero);
         }
 
         @Override
@@ -61,38 +62,32 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
          * by RecyclerView.
          */
         public ConsejoAdapter(ArrayList<Consejo> dataSet) {
-            datos = new ArrayList<Consejo>();
-            add(dataSet);
+            datos = dataSet;
         }
 
-        public ConsejoAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            // Create a new view, which defines the UI of the list item
-            View view = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.row_consejo, viewGroup, false);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        // Create a new view, which defines the UI of the list item
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.row_consejo, viewGroup, false);
+        return new ViewHolder(view);
+    }
 
-            view.setBackgroundColor(Color.rgb(
-                    (int)(Math.random()*COLOR_RANGE),
-                    (int)(Math.random()*COLOR_RANGE),
-                    (int)(Math.random()*COLOR_RANGE)
-            ));
-            return new ConsejoAdapter.ViewHolder(view);
-        }
-
-        public void onBindViewHolder(ConsejoAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ConsejoAdapter.ViewHolder viewHolder, final int position) {
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             Consejo consejo = datos.get(position);
             viewHolder.setInfo(consejo.getNombre(), consejo.getId());//TODO cambiar esto por icono si fuera necesario
-
         }
 
         public int getItemCount() {
             return datos.size();
         }
 
-        public void add(ArrayList<Consejo> dataSet){
-            datos.addAll(dataSet);
-            notifyDataSetChanged();
+        public void setConsejos(ArrayList<Consejo> consejos) {
+            datos.clear(); // Limpiar los datos actuales
+            datos.addAll(consejos); // Agregar los nuevos datos
+            notifyDataSetChanged(); // Notificar al RecyclerView que los datos han cambiado
         }
+
 }

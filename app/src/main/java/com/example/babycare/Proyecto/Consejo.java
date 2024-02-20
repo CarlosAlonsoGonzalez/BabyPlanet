@@ -72,26 +72,28 @@ public class Consejo {
         this.tipo = tipo;
     }
 
-    public static ArrayList<Consejo> generador(){//TODO: API HERE YO TAMPOCO SEEEEE
+    public static ArrayList<Consejo> generador(ArrayList<Consejo> listaConsejos){
         ArrayList<Consejo> listadoApiConsejo = new ArrayList<Consejo>();
 
-        listadoApiConsejo.add(new Consejo(23, "hola", "como mola", "2-3", "Educacion"));
+        // Si se proporciona una lista de consejos desde el ViewModel, la utilizamos
+        if (listaConsejos != null && !listaConsejos.isEmpty()) {
+            listadoApiConsejo.addAll(listaConsejos);
+        }
 
         int iconoArea = 0;
-        for (Consejo consejo : listadoApiConsejo) {//TODO MEJORABLE que no recorra el array sino que lo haga segun lo crea
-
-            if (consejo.getRango().equals("sensorial") ) {
-                iconoArea = R.drawable.sonajero;//TODO cambiarlo para que tenga sentido con los consejos
-            }else  if (consejo.getRango().equals("motriz") ) {
-                iconoArea = R.drawable.sonajero;//TODO cambiarlo para que tenga sentido con los consejos
-            }else  if (consejo.getRango().equals("cognitiva") ) {
-                iconoArea = R.drawable.sonajero;//TODO cambiarlo para que tenga sentido con los consejos
-            }else  if (consejo.getRango().equals("sociafectiva") ) {
-                iconoArea = R.drawable.sonajero;//TODO cambiarlo para que tenga sentido con los consejos
-            } if (consejo.getRango().equals("de lenguaje") ) {
-                iconoArea = R.drawable.sonajero;//TODO cambiarlo para que tenga sentido con los consejos
+        for (Consejo consejo : listadoApiConsejo) {
+            // Asignar un icono según el rango del consejo
+            if (consejo.getRango().equals("sensorial")) {
+                iconoArea = R.drawable.sonajero;
+            } else if (consejo.getRango().equals("motriz")) {
+                iconoArea = R.drawable.sonajero;
+            } else if (consejo.getRango().equals("cognitiva")) {
+                iconoArea = R.drawable.sonajero;
+            } else if (consejo.getRango().equals("sociafectiva")) {
+                iconoArea = R.drawable.sonajero;
+            } else if (consejo.getRango().equals("de lenguaje")) {
+                iconoArea = R.drawable.sonajero;
             }
-
             consejo.setIcono(iconoArea);
         }
 

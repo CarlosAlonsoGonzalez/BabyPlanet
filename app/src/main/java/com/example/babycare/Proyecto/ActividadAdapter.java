@@ -18,9 +18,6 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
     private ArrayList<Actividad> datos;
     private static final double COLOR_RANGE =254 ;
 
-    /*
-     * Relacionado con el evento.
-     */
     public interface ItemClickListener {
         void onClick(View view, int position, Actividad unaActividad);
     }
@@ -31,11 +28,6 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
         this.clickListener = itemClickListener;
     }
 
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView tvTitulo;
         private final ImageView icono;
