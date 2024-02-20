@@ -28,8 +28,6 @@ public class ConsejoViewModel extends ViewModel {
 
     public void generoConsejos() {
         new Thread(() -> {
-            try {
-                Thread.sleep((long)((Math.random() * DELAY) + DELAY));
                 ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
 
                 Call<List<Consejo>> llamada = ser.getRepo().getConsejo();
@@ -54,9 +52,6 @@ public class ConsejoViewModel extends ViewModel {
                         System.out.println("Error en la llamada: " + t.getMessage());
                     }
                 });
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }).start();
     }
 }
