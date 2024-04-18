@@ -1,6 +1,5 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Consejo;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

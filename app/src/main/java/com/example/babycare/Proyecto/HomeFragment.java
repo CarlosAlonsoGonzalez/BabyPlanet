@@ -1,7 +1,7 @@
 package com.example.babycare.Proyecto;
 
-import static com.example.babycare.Proyecto.ActividadesFragment.INFO_ACTIVIDAD;
-import static com.example.babycare.Proyecto.ConsejoFragment.INFO_CONSEJO;
+import static com.example.babycare.Proyecto.Actividad.ActividadesFragment.INFO_ACTIVIDAD;
+import static com.example.babycare.Proyecto.Consejo.ConsejoFragment.INFO_CONSEJO;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.babycare.Proyecto.Actividad.Actividad;
+import com.example.babycare.Proyecto.Actividad.ActividadDetalles;
+import com.example.babycare.Proyecto.Consejo.Consejo;
+import com.example.babycare.Proyecto.Consejo.ConsejoDetalles;
 import com.example.babycare.R;
 
 import java.util.Random;

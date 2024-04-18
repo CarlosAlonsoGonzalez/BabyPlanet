@@ -1,4 +1,6 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Consejo;
+
+import com.example.babycare.Proyecto.Consejo.Consejo;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.babycare.R;
 
-public class entrada extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     Button btEntrar;
     @Override

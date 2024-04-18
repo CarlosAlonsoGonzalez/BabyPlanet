@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
+import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.R;
 import com.example.babycare.databinding.HomeBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

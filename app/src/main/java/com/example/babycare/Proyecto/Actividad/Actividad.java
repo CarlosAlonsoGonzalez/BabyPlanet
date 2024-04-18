@@ -1,13 +1,6 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Actividad;
 
-import android.graphics.Color;
-import android.view.View;
-
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
-
+import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
 import java.io.Serializable;
@@ -87,7 +80,7 @@ public class Actividad implements Serializable {
             listadoApiActividades.addAll(listadoActividades);
         }
 
-        return listadoActividades;
+        return listadoApiActividades;
     }
 
 }

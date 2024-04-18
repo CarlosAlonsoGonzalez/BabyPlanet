@@ -1,6 +1,4 @@
-package com.example.babycare.Proyecto;
-
-import android.util.Log;
+package com.example.babycare.Proyecto.Actividad;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

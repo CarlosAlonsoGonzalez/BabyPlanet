@@ -1,6 +1,7 @@
 package com.example.babycare.Proyecto;
 
-import java.util.List;
+import com.example.babycare.Proyecto.Actividad.Actividad;
+import com.example.babycare.Proyecto.Consejo.Consejo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

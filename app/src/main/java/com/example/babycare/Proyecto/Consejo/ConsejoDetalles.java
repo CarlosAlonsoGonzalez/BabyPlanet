@@ -1,4 +1,4 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Consejo;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Actividad;
 
 import android.content.Intent;
 import android.os.Bundle;
