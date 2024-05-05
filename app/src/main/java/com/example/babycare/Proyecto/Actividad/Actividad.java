@@ -10,16 +10,16 @@ public class Actividad implements Serializable {
     int id;
     String nombre;
     String descripcion;
-    //ArrayList<Material> materiales; //no se como implementar estoo :(
+    String materiales;
     int rango;
     String area_desarrollo;
     int icono;//este esta fuera de la base de datos se pone sgun el areaDesarrollo
 
-    public Actividad(int id, String nombre, String descripcion,int rango, String area_desarrollo) {
+    public Actividad(int id, String nombre, String descripcion,int rango, String area_desarrollo, String listaMateriales) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.materiales=listaMateriales;
+        this.materiales=listaMateriales;
         this.rango = rango;
         this.area_desarrollo = area_desarrollo;
     }
@@ -36,17 +36,19 @@ public class Actividad implements Serializable {
         return descripcion;
     }
 
-    /*public String getMaterialesToString() {
-        String listadoMateriales="";
-        for (Material unMaterial: materiales) {
-            listadoMateriales+="- "+unMaterial.getNombre()+"\n";
-        }
-        return listadoMateriales;
-    }*/
+    public String getMaterialesToString() {
+        String [] listadoMateriales = this.materiales.split("[,]");
+
+        return "- "+String.join("\n- ", listadoMateriales);
+    }
 
     public String getRangoString() {
         //Aqui esta como un string a pesar de ser un int porque lo hacemos con el enum ya que en la base de datos son int pero para el usurio es string
         return Rango.obtenerDescripcionPorCodigo(rango);
+    }
+
+    public String getArea_desarrollo() {
+        return area_desarrollo;
     }
 
     public int getIcono() {
