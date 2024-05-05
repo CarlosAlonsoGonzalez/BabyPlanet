@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Actividad {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,4 +24,5 @@ public class Actividad {
     private String descripcion;
     private Integer rango;
     private String area_desarrollo;
+    private String materiales;
 }

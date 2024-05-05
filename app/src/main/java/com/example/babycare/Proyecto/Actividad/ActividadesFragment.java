@@ -44,7 +44,7 @@ public class ActividadesFragment extends Fragment {
         adapter.setClickListener(new ActividadAdapter.ItemClickListener() {
             @Override
             public void onClick(View view, int position, Actividad unaActividad) {
-                Intent i = new Intent(ActividadesFragment.super.getActivity(), ActividadDetalles.class);//no se si esto funciona la verdad eh esta apañado por los pelos y sin sentido
+                Intent i = new Intent(ActividadesFragment.super.getActivity(), ActividadDetalles.class);
                 i.putExtra(INFO_ACTIVIDAD,unaActividad);
 
                 startActivity(i);

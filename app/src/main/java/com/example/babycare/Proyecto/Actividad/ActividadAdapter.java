@@ -28,6 +28,8 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView tvTitulo;
+        private final TextView tvTipo;
+        //private final TextView tvBreveDescripcion;
         private final ImageView icono;
 
         public ViewHolder(View view) {
@@ -36,12 +38,16 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
 
             tvTitulo = (TextView) view.findViewById(R.id.tvTituloActividad);
             icono = (ImageView) view.findViewById(R.id.imgIconoActividad);
+            tvTipo = (TextView) view.findViewById(R.id.tvTipoActividad);
+            //tvBreveDescripcion = (TextView) view.findViewById(R.id.tvBreveDescrion);
             view.setOnClickListener(this);
         }
 
-        public void setInfo(String titulo, int iconito) {
+        public void setInfo(String titulo, int iconito, String tipo, String breveDescripcion) {
             tvTitulo.setText(titulo);
             icono.setImageResource(iconito);
+            tvTipo.setText(tipo);
+            //tvBreveDescripcion.setText(breveDescripcion);
         }
 
         @Override
@@ -78,7 +84,7 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.View
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         Actividad unaActividad = datos.get(position);
-        viewHolder.setInfo(unaActividad.getNombre(), unaActividad.getIcono());
+        viewHolder.setInfo(unaActividad.getNombre(), unaActividad.getIcono(), unaActividad.getArea_desarrollo(), unaActividad.getDescripcion());
 
     }
 
