@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Proyecto.Perfil.PerfilFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/tvNombreUsuario"
+        android:layout_width="86dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.172" />
+
+    <TextView
+        android:id="@+id/tvApellidoUsuario"
+        android:layout_width="87dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="24dp"
+        android:text="Apellido"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvNombreUsuario"
+        app:layout_constraintStart_toStartOf="@+id/tvNombreUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuario" />
+
+    <TextView
+        android:id="@+id/tvCorreoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Correo"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvApellidoUsuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvApellidoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/tvApellidoUsuario" />
+
+    <TextView
+        android:id="@+id/tvContrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Contraseña"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvCorreoUsuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvCorreoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario" />
+
+    <TextView
+        android:id="@+id/tvNombreHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Nombre del hij@"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvContrasena"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvContrasena"
+        app:layout_constraintTop_toBottomOf="@+id/tvContrasena" />
+
+    <EditText
+        android:id="@+id/etNombreUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNombreUsuario"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreUsuario"
+        app:layout_constraintTop_toTopOf="@+id/tvNombreUsuario" />
+
+    <EditText
+        android:id="@+id/etApellidoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvApellidoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/tvApellidoUsuario"
+        app:layout_constraintTop_toTopOf="@+id/tvApellidoUsuario" />
+
+    <EditText
+        android:id="@+id/etCorreoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCorreoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/tvCorreoUsuario"
+        app:layout_constraintTop_toTopOf="@+id/tvCorreoUsuario" />
+
+    <TextView
+        android:id="@+id/tvEdadHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Edad del hij@"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvNombreHijo"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toStartOf="@+id/tvNombreHijo"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo" />
+
+    <EditText
+        android:id="@+id/etContrasenaUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvContrasena"
+        app:layout_constraintStart_toEndOf="@+id/tvContrasena"
+        app:layout_constraintTop_toTopOf="@+id/tvContrasena" />
+
+    <EditText
+        android:id="@+id/etNombreHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNombreHijo"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreHijo"
+        app:layout_constraintTop_toTopOf="@+id/tvNombreHijo" />
+
+    <EditText
+        android:id="@+id/etEdadHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEdadHijo"
+        app:layout_constraintStart_toEndOf="@+id/tvEdadHijo"
+        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
