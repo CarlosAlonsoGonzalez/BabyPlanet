@@ -15,6 +15,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.entrada);
+        getSupportActionBar().hide();
         btEntrar = findViewById(R.id.btEntrar);
 
         btEntrar.setOnClickListener((v)->{

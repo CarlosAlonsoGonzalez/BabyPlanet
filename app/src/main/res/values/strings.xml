@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">babycare</string>
+    <string name="app_name">BabyPlanet</string>
     <string name="title_activity_home">Home</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
