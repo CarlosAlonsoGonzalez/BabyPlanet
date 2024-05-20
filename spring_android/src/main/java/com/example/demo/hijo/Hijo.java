@@ -38,7 +38,7 @@ public class Hijo {
     private int edad;
     
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="usuario_id", nullable=false)
     private Usuario padre;
 
 
