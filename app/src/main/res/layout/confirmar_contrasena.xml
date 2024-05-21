@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="@color/Complementario">
+
+    <TextView
+        android:id="@+id/tvTituloDialog2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Introduzca la nueva contraseña"
+        android:layout_margin="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="5dp"
+        android:background="@color/Oscuro"/>
+
+    <EditText
+        android:id="@+id/etContrasenaNuevaInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:hint="Contraseña Nueva"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/tvTituloDialog3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Confirma la nueva contraseña"
+        android:layout_margin="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+    <EditText
+        android:id="@+id/etContrasenaNuevaInputConf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:hint="Confirmar Contraseña Nueva"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/tvErrorContrasenaNueva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Las contraseñas no coinciden"
+        android:textColor="#B60404" />
+
+    <Button
+        android:id="@+id/btAceptarContrasenaNueva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/Oscuro"
+        android:text="Aceptar"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btCancelarContrasenaNueva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/Oscuro"
+        android:text="Cancelar"
+        android:textSize="16sp" />
+
+</LinearLayout>
