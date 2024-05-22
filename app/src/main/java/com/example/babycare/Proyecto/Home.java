@@ -1,5 +1,6 @@
 package com.example.babycare.Proyecto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
@@ -14,6 +16,7 @@ import com.example.babycare.Proyecto.Perfil.PerfilFragment;
 import com.example.babycare.R;
 import com.example.babycare.databinding.HomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -53,15 +56,20 @@ public class Home extends AppCompatActivity {
         replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setBackground(null);
 
-        binding.bottomNavigationView.setOnItemReselectedListener(item ->{
-
-            if(item.getItemId() == R.id.actividades){
-                replaceFragment(new ActividadesFragment());
-            }else if(item.getItemId() == R.id.consejos){
-                replaceFragment(new ConsejoFragment());
+        binding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.actividades) {
+                    replaceFragment(new ActividadesFragment());
+                    return true;
+                } else if (item.getItemId() == R.id.consejos) {
+                    replaceFragment(new ConsejoFragment());
+                    return true;
+                }
+                return false;
             }
-
         });
+
 
         floatingActionButton.setOnClickListener((v)->{
             replaceFragment(new HomeFragment());
