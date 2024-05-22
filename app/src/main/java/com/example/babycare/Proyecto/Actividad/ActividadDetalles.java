@@ -20,6 +20,7 @@ public class ActividadDetalles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_detalles);
+        getSupportActionBar().hide();
         tvNombre=findViewById(R.id.tvNombreActividad);
         tvDescripcion=findViewById(R.id.tvDescripcionA);
         tvMateriales=findViewById(R.id.tvMateriales);
