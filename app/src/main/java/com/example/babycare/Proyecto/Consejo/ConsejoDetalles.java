@@ -17,6 +17,7 @@ public class ConsejoDetalles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consejo_detalles);
+        getSupportActionBar().hide();
         tvTipoConsejo = findViewById(R.id.tvTipoConsejo);
         tvNombreConsejo = findViewById(R.id.tvNombreConsejo);
         tvDescripcion = findViewById(R.id.tvTextoDescripcion);
