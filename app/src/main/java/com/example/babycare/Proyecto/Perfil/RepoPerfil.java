@@ -10,8 +10,8 @@ import retrofit2.http.Path;
 
 public interface RepoPerfil {
     @GET("/usuario/{id}")
-    Call<Perfil> getPerfilPorId(@Path("id") int id);
+    Call<Usuario> getUsuarioPorId(@Path("id") int id);
 
     @PATCH("/usuario/{id}")
-    Call<Perfil> actualizarPerfil(@Path("id") int id, @Body Map<String, Object> actualizaciones);
+    Call<Usuario> actualizarUsuario(@Path("id") int id, @Body Map<String, Object> actualizaciones);
 }

@@ -30,7 +30,9 @@ public class ConsejoViewModel extends ViewModel {
         new Thread(() -> {
                 ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
 
-                Call<List<Consejo>> llamada = ser.getRepo().getConsejo();
+            //TODO debe coger la edad del hijo
+            //Call<List<Consejo>> llamada = ser.getRepo().getConsejosPorEdad(1);
+            Call<List<Consejo>> llamada = ser.getRepo().getConsejos();
                 llamada.enqueue(new Callback<List<Consejo>>() {
                     @Override
                     public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {

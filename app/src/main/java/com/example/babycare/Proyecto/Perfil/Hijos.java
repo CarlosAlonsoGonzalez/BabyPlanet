@@ -1,8 +1,8 @@
 package com.example.babycare.Proyecto.Perfil;
 
 public class Hijos {
-    public String nombreHijo;
-    public int edad;
+    String nombreHijo;
+    int edad;
 
     public String getNombreHijo() {
         return nombreHijo;

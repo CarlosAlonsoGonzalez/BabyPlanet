@@ -2,11 +2,11 @@ package com.example.babycare.Proyecto.Perfil;
 
 import java.io.Serializable;
 
-public class Perfil implements Serializable {
-    public String nombreUsuario;
-    public String email;
-    public String password;
-    public Hijos [] hijos;
+public class Usuario implements Serializable {
+    String nombreUsuario;
+    String email;
+    String password;
+    Hijos [] hijos;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -24,14 +24,14 @@ public class Perfil implements Serializable {
         return hijos;
     }
 
-    public static Perfil generadorPerfil(Perfil perfil){
+    public static Usuario generadorPerfil(Usuario usuario){
 
-        Perfil apiPerfil = new Perfil();
+        Usuario apiUsuario = new Usuario();
 
-        if (perfil!= null) {
-            apiPerfil = perfil;
+        if (usuario != null) {
+            apiUsuario = usuario;
         }
 
-        return apiPerfil;
+        return apiUsuario;
     }
 }

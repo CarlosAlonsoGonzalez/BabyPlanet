@@ -29,16 +29,15 @@
         style="@style/SportsTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="#4A6EAF"
         android:fontFamily="sans-serif"
         android:text="Titulo bonito"
         android:textAlignment="center"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ivFondoTituloC"
-        app:layout_constraintTop_toBottomOf="@+id/ivFondoTituloC" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFondoTituloC"
+        app:layout_constraintStart_toStartOf="@+id/ivFondoTituloC" />
 
     <TextView
         android:id="@+id/tvNombreConsejo"

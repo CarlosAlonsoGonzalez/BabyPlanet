@@ -36,6 +36,23 @@ public class ActividadService {
         return actividadRepository.findAll();
     }
 
+    public List<Actividad> obtenerActividadesPorRango(int rango) {
+        return actividadRepository.findByRango(rango);
+    }
+
+    /*
+     * public List<Actividad> obtenerActividadesPorAreaDesarrollo(String
+     * area_desarrollo) {
+     * return actividadRepository.findByAreaDesarrollo(area_desarrollo);
+     * }
+     * 
+     * public List<Actividad> obtenerActividadesPorRangoYAreaDesarrollo(int rango,
+     * String areaDesarrollo) {
+     * return actividadRepository.findByRangoAndArea_desarrollo(rango,
+     * areaDesarrollo);
+     * }
+     */
+
     public Optional<Actividad> actualizarActividad(Integer id, Actividad actividad) {
         Optional<Actividad> a = actividadRepository.findById(id);
         if (a.isPresent()) {

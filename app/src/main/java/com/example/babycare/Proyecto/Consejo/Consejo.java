@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Consejo implements Serializable {
-
     int id;
     String nombre, descripcion;
     String rango;

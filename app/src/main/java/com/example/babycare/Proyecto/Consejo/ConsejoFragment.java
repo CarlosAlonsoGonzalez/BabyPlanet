@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.babycare.Proyecto.Actividad.Actividad;
 import com.example.babycare.Proyecto.Home;
 import com.example.babycare.R;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class ConsejoFragment extends Fragment {
     public static final String INFO_CONSEJO = "info de un consejo" ;
     RecyclerView rvConsejos;
-    ConsejoAdapter adapter;
+    static ConsejoAdapter adapter;
     private ConsejoViewModel consejoViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,5 +55,9 @@ public class ConsejoFragment extends Fragment {
 
 
         return layout;
+    }
+
+    public static void cambiarConsejosAdapter(ArrayList<Consejo> listadoFiltrado){
+        adapter.setConsejos(listadoFiltrado);
     }
 }

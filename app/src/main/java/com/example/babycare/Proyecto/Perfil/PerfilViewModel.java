@@ -11,10 +11,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PerfilViewModel extends ViewModel {
-    private MutableLiveData<Perfil> perfil;
+    private MutableLiveData<Usuario> perfil;
     public int idPerfil;
 
-    public LiveData<Perfil> getPerfil(int id) {
+    public LiveData<Usuario> getPerfil(int id) {
         idPerfil = id;
         if (perfil == null) {
             perfil = new MutableLiveData<>();
@@ -26,18 +26,18 @@ public class PerfilViewModel extends ViewModel {
     public void generarPerfil(int id) {
         new Thread(() -> {
             ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
-            Call<Perfil> llamada = ser.getRepo().getPerfilPorId(id);
-            llamada.enqueue(new Callback<Perfil>() {
+            Call<Usuario> llamada = ser.getRepo().getUsuarioPorId(id);
+            llamada.enqueue(new Callback<Usuario>() {
                 @Override
-                public void onResponse(Call<Perfil> call, Response<Perfil> response) {
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                     if (response.isSuccessful()) {
-                        Perfil c = response.body();
+                        Usuario c = response.body();
                         perfil.postValue(c);
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Perfil> call, Throwable t) {
+                public void onFailure(Call<Usuario> call, Throwable t) {
                     System.out.println("Error en la llamada: " + t.getMessage());
                 }
             });
@@ -46,19 +46,19 @@ public class PerfilViewModel extends ViewModel {
 
     public void actualizarPerfil(int id, Map<String, Object> actualizaciones) {
         ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
-        Call<Perfil> llamada = ser.getRepo().actualizarPerfil(id, actualizaciones);
-        llamada.enqueue(new Callback<Perfil>() {
+        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(id, actualizaciones);
+        llamada.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call<Perfil> call, Response<Perfil> response) {
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.isSuccessful()) {
-                    Perfil c = response.body();
+                    Usuario c = response.body();
                     // Actualiza el perfil en LiveData si la respuesta es exitosa
                     perfil.postValue(c);
                 }
             }
 
             @Override
-            public void onFailure(Call<Perfil> call, Throwable t) {
+            public void onFailure(Call<Usuario> call, Throwable t) {
                 System.out.println("Error en la llamada: " + t.getMessage());
             }
         });

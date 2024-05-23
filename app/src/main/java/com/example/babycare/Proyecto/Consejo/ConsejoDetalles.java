@@ -38,9 +38,7 @@ public class ConsejoDetalles extends AppCompatActivity {
         Serializable consejoRecibido = i.getSerializableExtra(ConsejoFragment.INFO_CONSEJO);
         Consejo nuevoConsejo = (Consejo) consejoRecibido;
 
-        //TODO cambiar esto para que sea o simplemente una imagen de fondo o ver como hacemos para que el color realmente cambie
         ivFondoTitulo.setImageResource(nuevoConsejo.getIcono());
-        // Aquí usamos ContextCompat para obtener el color real
         int color = ContextCompat.getColor(this, nuevoConsejo.getColorFondo());
         ivFondoTitulo.setBackgroundColor(color);
 

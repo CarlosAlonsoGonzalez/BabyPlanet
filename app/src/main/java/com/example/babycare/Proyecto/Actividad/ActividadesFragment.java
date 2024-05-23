@@ -15,11 +15,12 @@ import android.view.ViewGroup;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActividadesFragment extends Fragment {
     public static final String INFO_ACTIVIDAD = "into de una actividad" ;
     RecyclerView rvActividades;
-    ActividadAdapter adapter;
+    static ActividadAdapter adapter;
     private ActividadViewModel actividadViewModel;
 
     @Override
@@ -36,6 +37,7 @@ public class ActividadesFragment extends Fragment {
 
         // Inicializa y observa los cambios en el ViewModel
         actividadViewModel = new ViewModelProvider(this).get(ActividadViewModel.class);
+
         actividadViewModel.getActividades().observe(getViewLifecycleOwner(), actividades -> {
             // Actualiza los datos del adaptador cuando cambia la lista de consejos en el ViewModel
             adapter.setActividades(actividades);
@@ -52,6 +54,11 @@ public class ActividadesFragment extends Fragment {
         });
 
         return layout;
+
+    }
+
+    public static void cambiarActividadAdapter(ArrayList<Actividad> listadoFiltrado){
+        adapter.setActividades(listadoFiltrado);
 
     }
 }

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.babycare.Proyecto.Actividad.ActividadAdapter;
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.Proyecto.Perfil.PerfilFragment;
@@ -61,6 +62,13 @@ public class Home extends AppCompatActivity {
             AlertDialog ad = e.create();
 
             btAplicarFiltros.setOnClickListener((m) ->{
+                int rango;
+                String area;
+                String tipo;
+
+
+                //ActividadesFragment.cambiarActividadAdapter();
+                //ConsejoFragment.cambiarConsejosAdapter();
 
             });
 

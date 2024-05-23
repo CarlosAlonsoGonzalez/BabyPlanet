@@ -27,6 +27,9 @@ public class ActividadViewModel extends ViewModel {
         new Thread(() -> {
 
             ServicioApiActividades ser = ServicioApiActividades.getInstancia();
+
+            //TODO debe coger la edad del hijo
+            //Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorEdad(1);
             Call<List<Actividad>> llamada = ser.getRepo().getActividades();
             llamada.enqueue(new Callback<List<Actividad>>() {
                 @Override

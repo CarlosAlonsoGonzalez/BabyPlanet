@@ -2,56 +2,66 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Complementario"
     tools:context=".Proyecto.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
 
-    <ImageView
-        android:id="@+id/ivConsejoHome"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/actividad"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.587" />
+        <TextView
+            android:id="@+id/Welcome"
+            style="@style/SportsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Bienvenido/a:"
+            android:textColor="@color/Oscuro"
+            android:textSize="40sp"
+            android:textStyle="normal|bold" />
 
-    <ImageView
-        android:id="@+id/ivActividadHome"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/actividad"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198" />
+        <TextView
+            android:id="@+id/tvNombreUsuario"
+            style="@style/SportsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Usuario"
+            android:textAlignment="textEnd"
+            android:textColor="@color/Oscuro"
+            android:textSize="34sp"
+            android:textStyle="normal|bold" />
 
-    <TextView
-        android:id="@+id/tvActividadHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivActividadHome"
-        app:layout_constraintStart_toEndOf="@+id/ivActividadHome"
-        app:layout_constraintTop_toTopOf="@+id/ivActividadHome" />
+        <TextView
+            android:id="@+id/BasicMessageActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Esta es la actividad del día:"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/tvConsejoHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivConsejoHome"
-        app:layout_constraintEnd_toStartOf="@+id/ivConsejoHome"
-        app:layout_constraintTop_toTopOf="@+id/ivConsejoHome" />
+        <include
+            android:id="@+id/itemActividad"
+            layout="@layout/item_random_home" />
+
+        <TextView
+            android:id="@+id/BasicMessageConsejo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Este es el consejo del día:"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <include
+            android:id="@+id/itemConsejo"
+            layout="@layout/item_random_home" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
