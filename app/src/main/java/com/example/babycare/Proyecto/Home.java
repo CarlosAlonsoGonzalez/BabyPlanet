@@ -35,6 +35,7 @@ public class Home extends AppCompatActivity {
     HomeBinding binding;
     FloatingActionButton floatingActionButton;
     MaterialToolbar mt;
+    Button btAplicarFiltros, btCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,21 @@ public class Home extends AppCompatActivity {
             View vi = in.inflate(R.layout.filtro, null);
             e.setView(vi);
 
+            btAplicarFiltros = vi.findViewById(R.id.btAplicarFiltros);
+            btCancelar = vi.findViewById(R.id.btCancelar);
             //herramientas
 
             AlertDialog ad = e.create();
-            return false;
+
+            btAplicarFiltros.setOnClickListener((m) ->{
+
+            });
+
+            btCancelar.setOnClickListener((mi) ->{
+                ad.dismiss();
+            });
+            ad.show();
+            return true;
         });
 
         mt.setNavigationOnClickListener((v)->{

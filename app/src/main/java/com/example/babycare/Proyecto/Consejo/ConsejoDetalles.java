@@ -1,6 +1,7 @@
 package com.example.babycare.Proyecto.Consejo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -39,7 +40,9 @@ public class ConsejoDetalles extends AppCompatActivity {
 
         //TODO cambiar esto para que sea o simplemente una imagen de fondo o ver como hacemos para que el color realmente cambie
         ivFondoTitulo.setImageResource(nuevoConsejo.getIcono());
-        ivFondoTitulo.setBackgroundColor(nuevoConsejo.getColorFondo());
+        // Aquí usamos ContextCompat para obtener el color real
+        int color = ContextCompat.getColor(this, nuevoConsejo.getColorFondo());
+        ivFondoTitulo.setBackgroundColor(color);
 
         tvTipoConsejo.setText(nuevoConsejo.getTipo());
         tvNombreConsejo.setText(("\""+nuevoConsejo.getNombre())+"\"");
