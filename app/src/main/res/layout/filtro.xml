@@ -10,10 +10,10 @@
         android:id="@+id/tvTituloDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Slecciones los filtros"
         android:layout_margin="10dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:gravity="center"
+        android:text="Seleccione los filtros"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <View
         android:layout_width="match_parent"
