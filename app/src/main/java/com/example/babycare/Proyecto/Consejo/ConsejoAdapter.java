@@ -34,13 +34,13 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
             super(view);
             // Define click listener for the ViewHolder's View
 
-            tvTitulo = (TextView) view.findViewById(R.id.tvTituloConsejo);
+            tvTitulo = (TextView) view.findViewById(R.id.tvTipoConsejoRow);
             icono = (ImageView) view.findViewById(R.id.imgIconoConsejo);
             view.setOnClickListener(this);
         }
 
-        public void setInfo(String titulo, int iconoCons) {
-            tvTitulo.setText(titulo);
+        public void setInfo(String tipo, int iconoCons) {
+            tvTitulo.setText(tipo);
             icono.setImageResource(iconoCons);
         }
 
@@ -74,7 +74,7 @@ public class ConsejoAdapter extends RecyclerView.Adapter<ConsejoAdapter.ViewHold
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             Consejo consejo = datos.get(position);
-            viewHolder.setInfo(consejo.getNombre(), consejo.getIcono());
+            viewHolder.setInfo(consejo.getTipo(), consejo.getIcono());
         }
 
         public int getItemCount() {
