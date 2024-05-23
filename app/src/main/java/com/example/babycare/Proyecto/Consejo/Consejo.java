@@ -1,5 +1,7 @@
 package com.example.babycare.Proyecto.Consejo;
 
+import android.graphics.Color;
+
 import com.example.babycare.R;
 
 import java.io.Serializable;
@@ -80,6 +82,23 @@ public class Consejo implements Serializable {
                 break;
         }
         return icono;
+    }
+
+    public int getColorFondo() {
+        switch (this.tipo.toLowerCase()) {
+            case "educación":
+                return R.color.educacion;
+            case "higiene":
+                return R.color.higiene;
+            case "alimentación":
+                return R.color.alimentacion;
+            case "emoción":
+                return R.color.emocional;
+            case "salud":
+                return R.color.salud;
+            default:
+                return R.color.Principal;
+        }
     }
 
     public String getTipo() {

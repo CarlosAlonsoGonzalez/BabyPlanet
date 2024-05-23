@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +9,7 @@
     tools:context=".Proyecto.Actividad.ActividadDetalles">
 
     <ImageView
-        android:id="@+id/sportsImageDetail"
+        android:id="@+id/ivFondoTituloA"
         android:layout_width="0dp"
         android:layout_height="140dp"
         android:adjustViewBounds="true"
@@ -33,8 +32,8 @@
         android:text="Titulo bonito"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/sportsImageDetail"
-        app:layout_constraintStart_toStartOf="@+id/sportsImageDetail" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivFondoTituloA"
+        app:layout_constraintStart_toStartOf="@+id/ivFondoTituloA" />
 
     <TextView
         android:id="@+id/tvDescripcionA"
@@ -54,6 +53,7 @@
         android:id="@+id/tvRangoA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:padding="8dp"
         android:text="0-3 meses"
@@ -74,7 +74,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvDescripcionA"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sportsImageDetail"
+        app:layout_constraintTop_toBottomOf="@+id/ivFondoTituloA"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView

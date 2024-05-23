@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.babycare.Proyecto.Home;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class ConsejoFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_consejos, container, false);
         rvConsejos = layout.findViewById(R.id.rcvListaConsejos);
 
-        rvConsejos.setLayoutManager(new LinearLayoutManager(requireContext()));
+        rvConsejos.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
 
         adapter = new ConsejoAdapter(new ArrayList<>()); // Adapter sin datos inicialmente
         rvConsejos.setAdapter(adapter);

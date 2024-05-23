@@ -7,8 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
@@ -21,6 +28,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class Home extends AppCompatActivity {
+
+    //Heeramientas filtro
+    //Etiqueta hijos, 6 radio button edad + radio button tipo (varia segun consejo o actividad)
 
     HomeBinding binding;
     FloatingActionButton floatingActionButton;
@@ -38,14 +48,14 @@ public class Home extends AppCompatActivity {
 
         mt.setOnMenuItemClickListener((v)->{
             //Laura aqui va lo que harias con el filtro cogiendo el id del filtro
-            //ej de chat gpt
-            /*
-            int id = item.getItemId();
-            if (id == R.id.some_menu_item) {
-                Intent intent = new Intent(CurrentActivity.this, TargetActivity.class);
-                startActivity(intent);
-                return true;
-            }*/
+            AlertDialog.Builder e = new AlertDialog.Builder(this);
+            LayoutInflater in = getLayoutInflater();
+            View vi = in.inflate(R.layout.filtro, null);
+            e.setView(vi);
+
+            //herramientas
+
+            AlertDialog ad = e.create();
             return false;
         });
 
