@@ -1,6 +1,7 @@
 package com.example.babycare.Proyecto;
 
 import static com.example.babycare.Proyecto.Actividad.ActividadesFragment.INFO_ACTIVIDAD;
+import static com.example.babycare.Proyecto.Consejo.ConsejoFragment.INFO_CONSEJO;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class HomeFragment extends Fragment {
     private static Random random = new Random();
     TextView tvNombreUsuario;
     View itemActividad, itemConsejo;
-    TextView tvTextoActividad, getTvTextoConsejo;
+    TextView tvTextoActividad, tvTextoConsejo;
     ImageView ivIconoActividad, ivIconoConsejo;
 
     @Override
@@ -101,22 +102,21 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
                 List<Consejo> consejosPorEdadHijo = response.body();
 
-                //Hacer que no coja otro si es el mismo dia.
                 int indiceAleatorio = random.nextInt(consejosPorEdadHijo.size());
 
                 Consejo consejoRandom = consejosPorEdadHijo.get(indiceAleatorio);
 
-                getTvTextoConsejo = itemConsejo.findViewById(R.id.tvTextoCorrespondiente);
+                tvTextoConsejo = itemConsejo.findViewById(R.id.tvTextoCorrespondiente);
                 ivIconoConsejo = itemConsejo.findViewById(R.id.ivIcono);
 
-                getTvTextoConsejo.setText(consejoRandom.getTipo());
+                tvTextoConsejo.setText(consejoRandom.getNombre());
                 int color = ContextCompat.getColor(getContext(), consejoRandom.getColorFondo());
                 ivIconoConsejo.setBackgroundColor(color);
                 ivIconoConsejo.setImageResource(consejoRandom.getIcono());
 
                 itemConsejo.setOnClickListener((v)->{
                     Intent i = new Intent(HomeFragment.super.getActivity(), ConsejoDetalles.class);
-                    i.putExtra(INFO_ACTIVIDAD, consejoRandom);
+                    i.putExtra(INFO_CONSEJO, consejoRandom);
                     startActivity(i);
                 });
             }

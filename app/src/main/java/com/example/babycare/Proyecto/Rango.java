@@ -16,6 +16,10 @@ public enum Rango {
         this.descripcion = descripcion;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
     public static String obtenerDescripcionPorCodigo(int codigo) {
         for (Rango rango : Rango.values()) {
             if (rango.codigo == codigo) {

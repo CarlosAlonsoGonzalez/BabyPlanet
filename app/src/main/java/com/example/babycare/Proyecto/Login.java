@@ -5,21 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.babycare.R;
 
 public class Login extends AppCompatActivity {
 
-    Button btEntrar;
+    EditText etCorreo, etContraseña;
+    Button btInicio, btRegistro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.entrada);
         getSupportActionBar().hide();
-        btEntrar = findViewById(R.id.btEntrar);
+        etCorreo = findViewById(R.id.etCorreo);
+        etContraseña = findViewById(R.id.etContraseña);
+        btInicio = findViewById(R.id.btInicio);
+        btRegistro= findViewById(R.id.btRegistro);
 
-        btEntrar.setOnClickListener((v)->{
+        btInicio.setOnClickListener((v)->{
             Intent i = new Intent(this, Home.class);
+            startActivity(i);
+        });
+
+        btRegistro.setOnClickListener((v)->{
+            Intent i = new Intent(this, Registro.class);
             startActivity(i);
         });
     }

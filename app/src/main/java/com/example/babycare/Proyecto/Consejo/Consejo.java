@@ -1,7 +1,5 @@
 package com.example.babycare.Proyecto.Consejo;
 
-import android.graphics.Color;
-
 import com.example.babycare.R;
 
 import java.io.Serializable;
@@ -46,10 +44,6 @@ public class Consejo implements Serializable {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getRango() {
         return rango;
     }
@@ -58,26 +52,22 @@ public class Consejo implements Serializable {
         this.rango = rango;
     }
 
-    public void setIcono(int icono) {
-        this.icono = icono;
-    }
-
     public int getIcono() {
         switch (tipo.toLowerCase()) {
             case "educación":
                 icono = R.drawable.consejo_educacion;
                 break;
             case "higiene":
-                icono = R.drawable.consejo_higiene;
+                icono = R.drawable.consejo_higiene2;
                 break;
             case "alimentación":
-                icono = R.drawable.consejo_alimentacion;
+                icono = R.drawable.consejo_alimentacion2;
                 break;
-            case "emoción":
-                icono = R.drawable.consejo_gestion_emociones;
+            case "emocional":
+                icono = R.drawable.consejo_gestion_emociones2;
                 break;
             case "salud":
-                icono = R.drawable.consejo_salud;
+                icono = R.drawable.consejo_salud2;
                 break;
         }
         return icono;
