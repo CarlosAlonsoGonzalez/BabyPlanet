@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,6 +30,8 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 
 public class Home extends AppCompatActivity {
 
@@ -37,6 +42,9 @@ public class Home extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     MaterialToolbar mt;
     Button btAplicarFiltros, btCancelar;
+    RadioGroup rgRangoEdad;
+    RadioButton rb0006, rb0612, rb1218, rb1824, rb2430, rb3036;
+    Spinner spCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,22 +57,52 @@ public class Home extends AppCompatActivity {
 
 
         mt.setOnMenuItemClickListener((v)->{
-            //Laura aqui va lo que harias con el filtro cogiendo el id del filtro
             AlertDialog.Builder e = new AlertDialog.Builder(this);
             LayoutInflater in = getLayoutInflater();
             View vi = in.inflate(R.layout.filtro, null);
             e.setView(vi);
-
+            rgRangoEdad = vi.findViewById(R.id.rgEdadRango);
+            rb0006 = vi.findViewById(R.id.rb0006);
+            rb0612 = vi.findViewById(R.id.rb0612);
+            rb1218 = vi.findViewById(R.id.rb1218);
+            rb1824 = vi.findViewById(R.id.rb1824);
+            rb2430 = vi.findViewById(R.id.rb2430);
+            rb3036 = vi.findViewById(R.id.rb3036);
+            spCategoria = vi.findViewById(R.id.spCategoria);
             btAplicarFiltros = vi.findViewById(R.id.btAplicarFiltros);
             btCancelar = vi.findViewById(R.id.btCancelar);
-            //herramientas
 
+            //TODO dependiendo del fragment
+            setupSpinnerActividad();
+            setupSpinnerConsejo();
+
+
+
+            vi.findViewById(R.id.rb0006);
             AlertDialog ad = e.create();
 
             btAplicarFiltros.setOnClickListener((m) ->{
                 int rango;
-                String area;
-                String tipo;
+                if(rgRangoEdad.getCheckedRadioButtonId() == rb0006.getId()){
+                     rango= Rango.RANGO_0_6.getCodigo();
+                } else if (rgRangoEdad.getCheckedRadioButtonId() == rb0612.getId()) {
+                    rango= Rango.RANGO_6_12.getCodigo();
+                }else if (rgRangoEdad.getCheckedRadioButtonId() == rb1218.getId()) {
+                    rango= Rango.RANGO_12_18.getCodigo();
+                }else if (rgRangoEdad.getCheckedRadioButtonId() == rb1824.getId()) {
+                    rango= Rango.RANGO_18_24.getCodigo();
+                }else if (rgRangoEdad.getCheckedRadioButtonId() == rb2430.getId()) {
+                    rango= Rango.RANGO_24_30.getCodigo();
+                }else if (rgRangoEdad.getCheckedRadioButtonId() == rb3036.getId()) {
+                    rango= Rango.RANGO_30_36.getCodigo();
+                }
+
+                //TODO segun fragment
+
+                String area = spCategoria.getSelectedItem().toString();
+                String tipo = spCategoria.getSelectedItem().toString();
+
+                //TODO HACER LLAMADAS Y PASAR EL RESULTADO A CORRESPONDIENTE
 
 
                 //ActividadesFragment.cambiarActividadAdapter();
@@ -105,6 +143,20 @@ public class Home extends AppCompatActivity {
             replaceFragment(new HomeFragment());
         });
 
+    }
+
+
+    private void setupSpinnerActividad() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Actividades, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCategoria.setAdapter(adapter);
+    }
+    private void setupSpinnerConsejo() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Consejos, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCategoria.setAdapter(adapter);
     }
 
     private void replaceFragment(Fragment fragment){

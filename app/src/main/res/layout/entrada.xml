@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4A6EB0"
+    android:background="@color/Principal"
+    android:backgroundTintMode="screen"
     tools:context=".Proyecto.Login">
 
   <ImageView
-      android:id="@+id/ivSonajero"
-      android:layout_width="300dp"
-      android:layout_height="300dp"
-      app:layout_constraintBottom_toTopOf="@+id/etCorreo"
+      android:id="@+id/ivIconoApp"
+      android:layout_width="250dp"
+      android:layout_height="250dp"
+      app:layout_constraintBottom_toTopOf="@+id/tvTexto"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tvTituloConsejo"
+      app:layout_constraintTop_toBottomOf="@+id/tvTituloApp"
       app:layout_constraintVertical_bias="0.5"
       app:srcCompat="@drawable/logo_app" />
 
   <EditText
       android:id="@+id/etCorreo"
-      android:layout_width="345dp"
-      android:layout_height="28dp"
-      android:layout_marginTop="32dp"
-      android:background="@android:drawable/button_onoff_indicator_off"
+      android:layout_width="350dp"
+      android:layout_height="wrap_content"
+      android:background="@android:drawable/dialog_holo_light_frame"
       android:backgroundTint="@color/white"
       android:ems="10"
       android:hint="Correo electrónico"
@@ -32,21 +32,22 @@
       android:textAlignment="center"
       app:layout_constraintBottom_toTopOf="@+id/etContraseña"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.491"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/ivSonajero"
+      app:layout_constraintTop_toBottomOf="@+id/tvTexto"
       app:layout_constraintVertical_bias="0.5" />
 
   <EditText
       android:id="@+id/etContraseña"
-      android:layout_width="341dp"
-      android:layout_height="25dp"
-      android:background="@android:drawable/button_onoff_indicator_off"
+      android:layout_width="350dp"
+      android:layout_height="wrap_content"
+      android:background="@android:drawable/dialog_holo_light_frame"
       android:backgroundTint="@color/white"
       android:ems="10"
       android:hint="Contraseña"
       android:inputType="textPassword"
       android:textAlignment="center"
-      app:layout_constraintBottom_toTopOf="@+id/btEntrar"
+      app:layout_constraintBottom_toTopOf="@+id/btInicio"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.471"
       app:layout_constraintStart_toStartOf="parent"
@@ -54,33 +55,75 @@
       app:layout_constraintVertical_bias="0.5" />
 
   <Button
-      android:id="@+id/btEntrar"
-      android:layout_width="160dp"
+      android:id="@+id/btInicio"
+      android:layout_width="wrap_content"
       android:layout_height="49dp"
       android:layout_marginTop="8dp"
       android:backgroundTint="#9Cd2d3"
-      android:text="Entrar"
+      android:text="Iniciar Sesion"
       android:textColor="@color/Oscuro"
       android:textSize="20sp"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/tvTexto2"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/etContraseña"
       app:layout_constraintVertical_bias="0.5" />
 
   <TextView
-      android:id="@+id/tvTituloConsejo"
+      android:id="@+id/tvTituloApp"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
+      android:layout_marginTop="14dp"
+      android:fontFamily="sans-serif-condensed"
       android:text="Baby Planet"
       android:textAlignment="center"
       android:textAllCaps="false"
       android:textColor="@color/Claro"
       android:textSize="48sp"
-      app:layout_constraintBottom_toTopOf="@+id/ivSonajero"
+      android:textStyle="italic"
+      app:layout_constraintBottom_toTopOf="@+id/ivIconoApp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.5" />
+
+  <Button
+      android:id="@+id/btRegistro"
+      android:layout_width="wrap_content"
+      android:layout_height="49dp"
+      android:backgroundTint="#9Cd2d3"
+      android:text="REGISTRAte"
+      android:textColor="@color/Oscuro"
+      android:textSize="20sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvTexto2"
+      app:layout_constraintVertical_bias="0.5" />
+
+  <TextView
+      android:id="@+id/tvTexto"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="25dp"
+      android:text="Inicia sesion con tu cuenta"
+      app:layout_constraintBottom_toTopOf="@+id/etCorreo"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ivIconoApp"
+      app:layout_constraintVertical_bias="0.5" />
+
+  <TextView
+      android:id="@+id/tvTexto2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="¿Aun no tienes cuenta?"
+      app:layout_constraintBottom_toTopOf="@+id/btRegistro"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btInicio"
+      app:layout_constraintVertical_bias="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
