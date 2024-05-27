@@ -32,10 +32,6 @@ public class Consejo implements Serializable {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Consejo(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -48,8 +44,8 @@ public class Consejo implements Serializable {
         return rango;
     }
 
-    public void setRango(String rango) {
-        this.rango = rango;
+    public String getTipo() {
+        return tipo;
     }
 
     public int getIcono() {
@@ -81,7 +77,7 @@ public class Consejo implements Serializable {
                 return R.color.higiene;
             case "alimentación":
                 return R.color.alimentacion;
-            case "emoción":
+            case "emocional":
                 return R.color.emocional;
             case "salud":
                 return R.color.salud;
@@ -90,16 +86,8 @@ public class Consejo implements Serializable {
         }
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public static ArrayList<Consejo> generador(ArrayList<Consejo> listaConsejos){
-        ArrayList<Consejo> listadoApiConsejo = new ArrayList<Consejo>();
+        ArrayList<Consejo> listadoApiConsejo = new ArrayList<>();
 
         // Si se proporciona una lista de consejos desde el ViewModel, la utilizamos
         if (listaConsejos != null && !listaConsejos.isEmpty()) {
