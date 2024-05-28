@@ -45,6 +45,7 @@ public class Home extends AppCompatActivity {
     RadioGroup rgRangoEdad;
     RadioButton rb0006, rb0612, rb1218, rb1824, rb2430, rb3036;
     Spinner spCategoria;
+    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +161,13 @@ public class Home extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment){
+        currentFragment = fragment;
+        MenuItem filterItem = mt.getMenu().findItem(R.id.itemFiltro);
+        if (currentFragment instanceof ActividadesFragment || currentFragment instanceof ConsejoFragment) {
+            filterItem.setVisible(true);
+        } else {
+            filterItem.setVisible(false);
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
