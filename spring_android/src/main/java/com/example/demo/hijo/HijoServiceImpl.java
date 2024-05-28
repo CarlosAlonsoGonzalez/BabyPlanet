@@ -5,10 +5,11 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-
+@Service
 public class HijoServiceImpl implements HijoService {
 
     @Autowired
@@ -16,13 +17,23 @@ public class HijoServiceImpl implements HijoService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Transactional
     @Override
-    public HijoDto save(@Valid HijoDto hijo) {
-        Hijo hijoEntity = modelMapper.map(hijo, Hijo.class);
-        hijoEntity = hijoRepo.save(hijoEntity);
-        return modelMapper.map(hijoEntity, HijoDto.class);
+@Transactional
+public HijoDto save(@Valid HijoDto hijoDto) {
+    Hijo hijoEntity;
+    if (hijoDto.getId() != null) {
+        hijoEntity = hijoRepo.findById(hijoDto.getId())
+                             .orElseThrow(() -> new RuntimeException("Hijo no encontrado"));
+        modelMapper.map(hijoDto, hijoEntity);
+    } else {
+        hijoEntity = modelMapper.map(hijoDto, Hijo.class);
     }
+    
+    hijoEntity = hijoRepo.save(hijoEntity);
+
+    return modelMapper.map(hijoEntity, HijoDto.class);
+}
+
 
     @Override
     public HijoDto get(Long id) {
@@ -50,4 +61,11 @@ public class HijoServiceImpl implements HijoService {
         hijoRepo.deleteById(id);  
      }
 
+    @Override
+    public List<HijoDto> getByIdPadre(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getByIdPadre'");
+    }
+
 }
+

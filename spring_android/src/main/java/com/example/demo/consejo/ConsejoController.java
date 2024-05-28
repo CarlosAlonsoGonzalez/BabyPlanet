@@ -51,7 +51,10 @@ public class ConsejoController {
     }
 
     @GetMapping("obtenerPorRango/{rango}")
-    public List<Consejo> obtenerConsejosPorRango(@RequestParam int rango) {
+    public List<Consejo> obtenerConsejosPorRango(@RequestParam int rango)
+    //@RequestParam("valor") accede a las variables de una url ej: www.loquesea.com/consejo?valor=1 
+    //el int rango = 1 igual deberia ser con @PathVariable 
+     {
         return consejoService.obtenerConsejosPorRango(rango);
     }
 

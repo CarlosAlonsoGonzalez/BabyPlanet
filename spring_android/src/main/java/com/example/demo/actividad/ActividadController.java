@@ -54,7 +54,7 @@ public class ActividadController {
     }
 
     @GetMapping("obtenerPorRango/{rango}")
-    public List<Actividad> obtenerActividadesPorRango(@RequestParam int rango) {
+    public List<Actividad> obtenerActividadesPorRango(@PathVariable int rango) {
         return actividadService.obtenerActividadesPorRango(rango);
     }
 

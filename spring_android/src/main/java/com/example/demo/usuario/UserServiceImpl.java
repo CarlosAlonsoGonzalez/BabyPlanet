@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.example.demo.hijo.Hijo;
 import com.example.demo.hijo.HijoDto;
 import com.example.demo.hijo.HijoRepo;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
@@ -29,20 +31,32 @@ public class UserServiceImpl implements UserService  {
     
 
     @Override
-    public UserDto save(@Valid UserDto userDto) {
-        
-        Usuario userEntity = modelMapper.map(userDto, Usuario.class);
-        if (userDto.getId() == null) {
-            List<Long> ids = new ArrayList<Long>();
-            for (HijoDto hijo : userDto.getHijos()) {
-                ids.add(hijo.getId());
-            }
-            userEntity.setHijos(hijoRepo.findManyById(ids));
-        }
-        userEntity = userRepo.save(userEntity);        
-        return modelMapper.map(userEntity,UserDto.class);
-       
+@Transactional
+public UserDto save(@Valid UserDto userDto) {
+    Usuario userEntity;
+    if (userDto.getId() != null) {
+        userEntity = userRepo.findById(userDto.getId())
+                            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        modelMapper.map(userDto, userEntity);
+    } else {
+        userEntity = modelMapper.map(userDto, Usuario.class);
     }
+    
+    userEntity = userRepo.save(userEntity);
+
+    if (userDto.getHijos() != null && !userDto.getHijos().isEmpty()) {
+        for (HijoDto hijoDto : userDto.getHijos()) {
+            Hijo hijo = modelMapper.map(hijoDto, Hijo.class);
+            hijo.setPadre(userEntity);
+            hijoRepo.save(hijo);
+        }
+    }
+
+    userEntity = userRepo.findById(userEntity.getId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    return modelMapper.map(userEntity, UserDto.class);
+}
 
     @Override
     public UserDto findById(Long id) {
@@ -72,6 +86,12 @@ public class UserServiceImpl implements UserService  {
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
         return listaUserDtos;
+    }
+
+    @Override
+    public HijoDto getHijo(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getHijo'");
     }
 
    

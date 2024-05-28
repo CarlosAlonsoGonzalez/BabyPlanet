@@ -42,4 +42,14 @@ public class UserDto {
         this.password = password;
 
     }
-}
+//     {
+//         "nombreUsuario":"test",
+//         "email":"test@email.com",
+//         "password":"password",
+//        "hijos": [
+//           {"nombre":"hijo1",
+//             "edad":"6"
+//             }
+//         ]
+//       }
+ }

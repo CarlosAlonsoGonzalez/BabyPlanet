@@ -31,7 +31,7 @@ public class Hijo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
-    @Column(length= 60, nullable = false,unique = true) 
+    @Column(length= 60, nullable = false,unique = false) 
     private String nombreHijo;
 
     @Column(length= 60, nullable = false,unique = false)
