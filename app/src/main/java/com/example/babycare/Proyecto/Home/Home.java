@@ -1,8 +1,7 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,23 +13,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.example.babycare.Proyecto.Actividad.ActividadAdapter;
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.Proyecto.Perfil.PerfilFragment;
+import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 import com.example.babycare.databinding.HomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
+import com.google.android.material.navigation.NavigationBarView;
 
 
 public class Home extends AppCompatActivity {
@@ -56,7 +52,6 @@ public class Home extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.homee);
         mt = findViewById(R.id.normal_toolbar);
 
-
         mt.setOnMenuItemClickListener((v)->{
             AlertDialog.Builder e = new AlertDialog.Builder(this);
             LayoutInflater in = getLayoutInflater();
@@ -73,17 +68,18 @@ public class Home extends AppCompatActivity {
             btAplicarFiltros = vi.findViewById(R.id.btAplicarFiltros);
             btCancelar = vi.findViewById(R.id.btCancelar);
 
-            //TODO dependiendo del fragment
-            setupSpinnerActividad();
-            setupSpinnerConsejo();
-
-
+            if (currentFragment instanceof ActividadesFragment) {
+                setupSpinnerActividad();
+            } else if(currentFragment instanceof ConsejoFragment){
+                setupSpinnerConsejo();
+            }
 
             vi.findViewById(R.id.rb0006);
             AlertDialog ad = e.create();
 
             btAplicarFiltros.setOnClickListener((m) ->{
-                int rango;
+                int rango = 0;
+
                 if(rgRangoEdad.getCheckedRadioButtonId() == rb0006.getId()){
                      rango= Rango.RANGO_0_6.getCodigo();
                 } else if (rgRangoEdad.getCheckedRadioButtonId() == rb0612.getId()) {
@@ -98,22 +94,19 @@ public class Home extends AppCompatActivity {
                     rango= Rango.RANGO_30_36.getCodigo();
                 }
 
-                //TODO segun fragment
-
-                String area = spCategoria.getSelectedItem().toString();
-                String tipo = spCategoria.getSelectedItem().toString();
-
-                //TODO HACER LLAMADAS Y PASAR EL RESULTADO A CORRESPONDIENTE
-
-
-                //ActividadesFragment.cambiarActividadAdapter();
-                //ConsejoFragment.cambiarConsejosAdapter();
-
+                if (currentFragment instanceof ActividadesFragment) {
+                    String area = spCategoria.getSelectedItem().toString();
+                    ActividadesFragment.cambiarActividadesAdapter(rango,area);
+                } else if(currentFragment instanceof ConsejoFragment){
+                    String tipo = spCategoria.getSelectedItem().toString();
+                    ConsejoFragment.cambiarConsejosAdapter(rango,tipo);
+                }
             });
 
             btCancelar.setOnClickListener((mi) ->{
                 ad.dismiss();
             });
+
             ad.show();
             return true;
         });

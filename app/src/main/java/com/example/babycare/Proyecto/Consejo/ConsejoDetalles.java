@@ -39,10 +39,11 @@ public class ConsejoDetalles extends AppCompatActivity {
         Consejo nuevoConsejo = (Consejo) consejoRecibido;
 
         ivFondoTitulo.setImageResource(nuevoConsejo.getIcono());
-        int color = ContextCompat.getColor(this, nuevoConsejo.getColorFondo());
-        ivFondoTitulo.setBackgroundColor(color);
+        int colorIconoConsejo = ContextCompat.getColor(this, nuevoConsejo.getColorFondo());
+        ivFondoTitulo.setBackgroundColor(colorIconoConsejo);
 
         tvTipoConsejo.setText(nuevoConsejo.getTipo());
+        tvTipoConsejo.setBackgroundColor(colorIconoConsejo);
         tvNombreConsejo.setText(("\""+nuevoConsejo.getNombre())+"\"");
         tvDescripcion.setText(nuevoConsejo.getDescripcion());
 

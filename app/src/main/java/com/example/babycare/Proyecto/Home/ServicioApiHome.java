@@ -1,4 +1,4 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Home;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
