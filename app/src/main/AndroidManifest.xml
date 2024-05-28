@@ -39,7 +39,7 @@
             android:name=".Proyecto.Actividad.ActividadDetalles"
             android:exported="false" />
         <activity
-            android:name=".Proyecto.Home"
+            android:name=".Proyecto.Home.Home"
             android:exported="false" />
         <activity
             android:name=".Proyecto.Login"

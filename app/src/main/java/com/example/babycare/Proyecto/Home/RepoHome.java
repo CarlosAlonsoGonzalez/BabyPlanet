@@ -1,4 +1,4 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Home;
 
 import com.example.babycare.Proyecto.Actividad.Actividad;
 import com.example.babycare.Proyecto.Consejo.Consejo;

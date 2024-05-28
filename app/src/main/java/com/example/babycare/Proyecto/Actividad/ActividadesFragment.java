@@ -17,6 +17,10 @@ import com.example.babycare.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ActividadesFragment extends Fragment {
     public static final String INFO_ACTIVIDAD = "into de una actividad" ;
     RecyclerView rvActividades;
@@ -57,8 +61,33 @@ public class ActividadesFragment extends Fragment {
 
     }
 
-    public static void cambiarActividadAdapter(ArrayList<Actividad> listadoFiltrado){
-        adapter.setActividades(listadoFiltrado);
+    public static void cambiarActividadesAdapter(int rango, String areaDesarrollo){
+        ServicioApiActividades ser = ServicioApiActividades.getInstancia();
+        Call<List<Actividad>> llamadaFiltro = null;
+
+        if(rango!=0 && areaDesarrollo==null){
+            llamadaFiltro = ser.getRepo().getActividadesPorRango(rango);
+        } else if (rango==0 && areaDesarrollo!=null) {
+            llamadaFiltro = ser.getRepo().getActividadesPorAreaDesarrollo(areaDesarrollo);
+        } else {
+            llamadaFiltro = ser.getRepo().getActividadesPorRangoYAreaDesarrollo(rango, areaDesarrollo);
+        }
+
+        llamadaFiltro.enqueue(new Callback<List<Actividad>>() {
+            @Override
+            public void onResponse(Call<List<Actividad>> call, Response<List<Actividad>> response) {
+                if (response.isSuccessful()) {
+                    ArrayList<Actividad> listadoFiltrado = new ArrayList<>(response.body());
+                    //ArrayList<Actividad> actividadesProcesadas = Actividad.generador(listaActividades);
+                    adapter.setActividades(listadoFiltrado);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Actividad>> call, Throwable t) {
+                System.out.println("Error en la llamada de filtro Actividad(rango: "+rango+", areaDesarrollo:"+areaDesarrollo+")\n"+ t.getMessage());
+            }
+        });
 
     }
 }

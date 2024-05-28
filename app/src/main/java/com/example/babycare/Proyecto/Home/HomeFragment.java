@@ -1,4 +1,4 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Home;
 
 import static com.example.babycare.Proyecto.Actividad.ActividadesFragment.INFO_ACTIVIDAD;
 import static com.example.babycare.Proyecto.Consejo.ConsejoFragment.INFO_CONSEJO;
@@ -45,15 +45,15 @@ public class HomeFragment extends Fragment {
         itemActividad = layout.findViewById(R.id.itemActividad);
         itemConsejo = layout.findViewById(R.id.itemConsejo);
 
-        //TODO este id seria el de el usuario al inciar sesion (a las malas con un singleton con toda la info del usurio pillada desde el login)
+        //TODO este id seria el de el usuario al inciar sesion (a las malas con un singleton+csv con toda la info del usurio pillada desde el login)
         int id=0;
         ServicioApiHome serviceHome = ServicioApiHome.getInstancia();
         //Call<Usuario> llamadaInfoUsuario = serviceHome.getRepo().getUsuarioPorId(id);
 
-        //Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejosPorEdad(rangoHijo);
-        Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejos();
-        //Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividadesPorEdad(rangoHijo);
-        Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividades();
+        Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejosPorEdad(rangoHijo);
+        //Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejos();
+        Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividadesPorEdad(rangoHijo);
+        //Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividades();
 
         /*llamadaInfoUsuario.enqueue(new Callback<Usuario>() {
             @Override
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                String nuncaToast = "Debug";
+                System.out.println("Error en la llamada usuario Home(idUsuario: "+id+")\n"+ t.getMessage());
             }
         });*/
 
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Actividad>> call, Throwable t) {
-                String nuncaToast = "Debug";
+                System.out.println("Error en la llamada ActividadRandom Home(rangoHijo: "+rangoHijo+")\n"+ t.getMessage());
             }
         });
         llamadaConsejos.enqueue(new Callback<List<Consejo>>() {
@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Consejo>> call, Throwable t) {
-                String nuncaToast = "Debug";
+                System.out.println("Error en la llamada ConsejoRandom Home(rangoHijo: "+rangoHijo+")\n"+ t.getMessage());
             }
         });
 

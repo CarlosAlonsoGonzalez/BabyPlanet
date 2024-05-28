@@ -12,6 +12,10 @@ import retrofit2.http.Path;
 public interface RepoConsejo {
     @GET("/consejo/obtenerTodos")
     Call<List<Consejo>> getConsejos();
-    @GET("/consejo/obtenerConsejosEdad/{edadHijo}")
-    Call<List<Consejo>> getConsejosPorEdad(@Path("edadHijo") int edad);
+    @GET("/consejo/obtenerConsejosPorRango/{rango}")
+    Call<List<Consejo>> getConsejosPorRango(@Path("rango") int rango);
+    @GET("/consejo/obtenerConsejosPorTipo/{tipo}")
+    Call<List<Consejo>> getConsejosPorTipo(@Path("tipo") String tipo);
+    @GET("/actividad/obtenerConsejosPorRangoYTipo/{rango}/{tipo}")
+    Call<List<Consejo>> getConsejoPorRangoYTipo(@Path("rango") int rango, @Path("tipo") String tipo);
 }
