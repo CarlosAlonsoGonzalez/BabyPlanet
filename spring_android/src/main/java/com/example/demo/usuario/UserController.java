@@ -30,13 +30,13 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-    @PostMapping("/actualizar/{id}")
+    @PostMapping("/actualizar")
     public ResponseEntity<UserDto> updateUsuario(@RequestBody UserDto user) {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
     
-    @GetMapping("/obtenerUsuario")
+    @GetMapping("/obtenerUsuario/{id}")
     public ResponseEntity<UserDto> getUsuario(@PathVariable String id) {
         UserDto user = userService.findById(Long.parseLong(id));
         return new ResponseEntity<>(user, HttpStatus.OK);
