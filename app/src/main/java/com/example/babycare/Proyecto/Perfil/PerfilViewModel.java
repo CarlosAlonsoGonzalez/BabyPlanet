@@ -43,23 +43,15 @@ public class PerfilViewModel extends ViewModel {
             });
         }).start();
     }
-
-    public void actualizarPerfil(Map<String, Object> actualizaciones) {
+    public void sendPost(Usuario usuario) {
         ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
-        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(actualizaciones);
+        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(usuario);
         llamada.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if (response.isSuccessful()) {
-                    Usuario c = response.body();
-                    // Actualiza el perfil en LiveData si la respuesta es exitosa
-                    perfil.postValue(c);
-                }
             }
-
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                System.out.println("Error en la llamada: " + t.getMessage());
             }
         });
     }
