@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,10 @@ import com.example.babycare.R;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PerfilFragment extends Fragment {
 
     EditText etNombreUsuario, etCorreoUsuario, etContrasenaUsuario, etNombreHijo, etContrasenaAntigua, etContrasenaNueva, etContrasenaNuevaConfirm;
@@ -29,6 +34,7 @@ public class PerfilFragment extends Fragment {
     Button btAceptarContrasenaAntigua, btCancelarContrasenaAntigua, btAceptarContrasenaNueva, btCancelarContrasenaNueva, btModificarDatos;
     PerfilViewModel perfilViewModel;
     String contrasenaAntigua;
+    RepoPerfil repoPerfil;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class PerfilFragment extends Fragment {
         etNombreHijo = layout.findViewById(R.id.etNombreHijo);
         spEdadHijo = layout.findViewById(R.id.spRangoEdad);//SPINNER
         btModificarDatos = layout.findViewById(R.id.btModificarDatos);
+        repoPerfil = ServicioApiPerfil.getRepo();
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         int id = 1;
@@ -97,10 +104,10 @@ public class PerfilFragment extends Fragment {
                         tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
                         return;
                     }
-                    Map<String, Object> actualizaciones = new HashMap<>();
-                    actualizaciones.put("password", etContrasenaNuevaConfirm.getText().toString());
+                    //Map<String, Object> actualizaciones = new HashMap<>();
+                    //actualizaciones.put("password", etContrasenaNuevaConfirm.getText().toString());
 
-                    perfilViewModel.actualizarPerfil(actualizaciones);
+                    //perfilViewModel.actualizarPerfil(actualizaciones);
 
                     ad.dismiss();
                     ad2.dismiss();
@@ -122,17 +129,22 @@ public class PerfilFragment extends Fragment {
         });
 
         btModificarDatos.setOnClickListener((vie) -> {
-            Map<String, Object> actualizaciones = new HashMap<>();
-            actualizaciones.put("nombreUsuario", etNombreUsuario.getText().toString());
-            actualizaciones.put("email", etCorreoUsuario.getText().toString());
-            actualizaciones.put("password", etContrasenaUsuario.getText().toString());
-            actualizaciones.put("nombreHijo", etNombreHijo.getText().toString());
+            String nombreUsuario = etNombreUsuario.getText().toString().trim();
+            String email = etCorreoUsuario.getText().toString().trim();
+            String password = etContrasenaUsuario.getText().toString().trim();
             //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
-            actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
+            //actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
 
-            perfilViewModel.actualizarPerfil(actualizaciones);
+
+            if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) ){
+                Usuario usuario = new Usuario(nombreUsuario, email, password);
+                perfilViewModel.sendPost(usuario);
+            }
         });
+
+
 
         return layout;
     }
+
 }
