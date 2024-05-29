@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
 import java.util.HashMap;
@@ -21,7 +23,8 @@ import java.util.Map;
 
 public class PerfilFragment extends Fragment {
 
-    EditText etNombreUsuario, etCorreoUsuario, etContrasenaUsuario, etNombreHijo, etEdadHijo, etContrasenaAntigua, etContrasenaNueva, etContrasenaNuevaConfirm;
+    EditText etNombreUsuario, etCorreoUsuario, etContrasenaUsuario, etNombreHijo, etContrasenaAntigua, etContrasenaNueva, etContrasenaNuevaConfirm;
+    Spinner spEdadHijo;//SPINNER
     TextView tvCambiarContrasena, tvErrorContrasenaAntigua, tvErrorContrasenaNueva;
     Button btAceptarContrasenaAntigua, btCancelarContrasenaAntigua, btAceptarContrasenaNueva, btCancelarContrasenaNueva, btModificarDatos;
     PerfilViewModel perfilViewModel;
@@ -36,7 +39,7 @@ public class PerfilFragment extends Fragment {
         etContrasenaUsuario = layout.findViewById(R.id.etContrasenaUsuario);
         tvCambiarContrasena = layout.findViewById(R.id.tvCambiarContrasena);
         etNombreHijo = layout.findViewById(R.id.etNombreHijo);
-        etEdadHijo = layout.findViewById(R.id.etEdadHijo);
+        spEdadHijo = layout.findViewById(R.id.spRangoEdad);//SPINNER
         btModificarDatos = layout.findViewById(R.id.btModificarDatos);
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
@@ -48,7 +51,9 @@ public class PerfilFragment extends Fragment {
             contrasenaAntigua = perfil.getPassword();
             if (perfil.getHijos() != null && perfil.getHijos().length > 0) {
                 etNombreHijo.setText(perfil.getHijos()[0].getNombreHijo());
-                etEdadHijo.setText(String.valueOf(perfil.getHijos()[0].getEdad()));
+                //TODO MIRA ESTO CARLITOS QUE ES LO QUE PUSE DEL SPINNER
+                //etEdadHijo.setText(String.valueOf(perfil.getHijos()[0].getEdad()));
+                spEdadHijo.setSelection(perfil.getHijos()[0].getEdad());
             }
         });
 
@@ -122,7 +127,8 @@ public class PerfilFragment extends Fragment {
             actualizaciones.put("email", etCorreoUsuario.getText().toString());
             actualizaciones.put("password", etContrasenaUsuario.getText().toString());
             actualizaciones.put("nombreHijo", etNombreHijo.getText().toString());
-            actualizaciones.put("edad", etEdadHijo.getText().toString());
+            //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
+            actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
 
             perfilViewModel.actualizarPerfil(id, actualizaciones);
         });

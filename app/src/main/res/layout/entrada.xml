@@ -10,9 +10,10 @@
 
   <ImageView
       android:id="@+id/ivIconoApp"
-      android:layout_width="250dp"
+      android:layout_width="0dp"
       android:layout_height="250dp"
-      app:layout_constraintBottom_toTopOf="@+id/tvTexto"
+      android:background="#5D7CB1"
+      app:layout_constraintBottom_toTopOf="@+id/divider5"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
@@ -59,11 +60,11 @@
       android:layout_width="wrap_content"
       android:layout_height="49dp"
       android:layout_marginTop="8dp"
-      android:backgroundTint="#9Cd2d3"
+      android:backgroundTint="@color/Claro"
       android:text="Iniciar Sesion"
       android:textColor="@color/Oscuro"
       android:textSize="20sp"
-      app:layout_constraintBottom_toTopOf="@+id/tvTexto2"
+      app:layout_constraintBottom_toTopOf="@+id/divider4"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
@@ -75,15 +76,17 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="14dp"
+      android:background="#5D7CB2"
       android:fontFamily="sans-serif-condensed"
       android:text="Baby Planet"
       android:textAlignment="center"
       android:textAllCaps="false"
-      android:textColor="@color/Claro"
+      android:textColor="@color/Oscuro"
       android:textSize="48sp"
       android:textStyle="italic"
       app:layout_constraintBottom_toTopOf="@+id/ivIconoApp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.5" />
@@ -92,7 +95,7 @@
       android:id="@+id/btRegistro"
       android:layout_width="wrap_content"
       android:layout_height="49dp"
-      android:backgroundTint="#9Cd2d3"
+      android:backgroundTint="@color/Claro"
       android:text="REGISTRAte"
       android:textColor="@color/Oscuro"
       android:textSize="20sp"
@@ -108,10 +111,13 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="25dp"
       android:text="Inicia sesion con tu cuenta"
+      android:textColor="#FEFEFE"
+      android:textSize="16sp"
+      android:textStyle="italic"
       app:layout_constraintBottom_toTopOf="@+id/etCorreo"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/ivIconoApp"
+      app:layout_constraintTop_toBottomOf="@+id/divider5"
       app:layout_constraintVertical_bias="0.5" />
 
   <TextView
@@ -120,10 +126,33 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
       android:text="¿Aun no tienes cuenta?"
+      android:textColor="#FEFEFE"
       app:layout_constraintBottom_toTopOf="@+id/btRegistro"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/divider4"
+      app:layout_constraintVertical_bias="0.5" />
+
+  <View
+      android:id="@+id/divider4"
+      android:layout_width="409dp"
+      android:layout_height="5dp"
+      android:background="?android:attr/listDivider"
+      app:layout_constraintBottom_toTopOf="@+id/tvTexto2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/btInicio"
+      app:layout_constraintVertical_bias="0.5" />
+
+  <View
+      android:id="@+id/divider5"
+      android:layout_width="409dp"
+      android:layout_height="5dp"
+      android:background="?android:attr/listDivider"
+      app:layout_constraintBottom_toTopOf="@+id/tvTexto"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ivIconoApp"
       app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

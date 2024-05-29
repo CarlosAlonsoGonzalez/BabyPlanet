@@ -26,14 +26,11 @@ public interface RepoHome {
 
     //Datos usuario (nombre, hijos, edad)
     @GET("/usuario/{id}")
-    Call<Usuario> getUsuarioPorId(@Path("id") int id);
+    Call<Usuario> getUsuario(@Path("id") int id);
 
     //Lista actividades filtrada
     @GET("/actividad/obtenerPorRango/{rango}")
-    Call<List<Actividad>> getActividadesPorEdad(@Path("rango") int rangoHijo);
+    Call<List<Actividad>> getActividadesPorRango(@Path("rango") int rango);
     @GET("/consejo/obtenerPorRango/{rango}")
-    Call<List<Consejo>> getConsejosPorEdad(@Path("rango") int rangoHijo);
-
-
-
+    Call<List<Consejo>> getConsejosPorRango(@Path("rango") int rango);
 }

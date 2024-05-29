@@ -8,14 +8,54 @@
     android:background="@color/Complementario"
     tools:context=".Proyecto.Perfil.PerfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tvEditarPeril"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#EEE0C6"
+        android:fontFamily="sans-serif"
+        android:text="Editar perfil"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditarPeril" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:background="#EFE1C7"
+        android:src="@drawable/area_cognitiva"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Usuario"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -48,19 +88,6 @@
         app:layout_constraintStart_toStartOf="@+id/tvCorreoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario" />
 
-    <TextView
-        android:id="@+id/tvNombreHijo"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Nombre"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDatosHijos"
-        tools:ignore="MissingConstraints" />
-
     <EditText
         android:id="@+id/etNombreUsuario"
         android:layout_width="wrap_content"
@@ -86,19 +113,6 @@
         app:layout_constraintStart_toStartOf="@+id/etNombreUsuario"
         app:layout_constraintTop_toBottomOf="@+id/etNombreUsuario" />
 
-    <TextView
-        android:id="@+id/tvEdadHijo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Edad"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tvNombreHijo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvNombreHijo"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo" />
-
     <EditText
         android:id="@+id/etContrasenaUsuario"
         android:layout_width="wrap_content"
@@ -111,31 +125,6 @@
         app:layout_constraintStart_toStartOf="@+id/etCorreoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/etCorreoUsuario" />
 
-    <EditText
-        android:id="@+id/etNombreHijo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNombreHijo"
-        app:layout_constraintStart_toEndOf="@+id/tvNombreHijo"
-        app:layout_constraintTop_toTopOf="@+id/tvNombreHijo" />
-
-    <EditText
-        android:id="@+id/etEdadHijo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Edad"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/etNombreHijo"
-        app:layout_constraintStart_toStartOf="@+id/etNombreHijo"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreHijo" />
-
     <TextView
         android:id="@+id/tvCambiarContrasena"
         android:layout_width="227dp"
@@ -147,50 +136,6 @@
         app:layout_constraintEnd_toEndOf="@+id/etContrasenaUsuario"
         app:layout_constraintStart_toStartOf="@+id/tvContrasena"
         app:layout_constraintTop_toBottomOf="@+id/tvContrasena" />
-
-    <Button
-        android:id="@+id/btModificarDatos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/Oscuro"
-        android:text="Modificar datos"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEdadHijo" />
-
-    <TextView
-        android:id="@+id/tvEditarPeril"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#EEE0C6"
-        android:fontFamily="sans-serif"
-        android:text="Editar perfil"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="409dp"
-        android:layout_height="3dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditarPeril" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="409dp"
-        android:layout_height="3dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <View
         android:id="@+id/divider3"
@@ -207,21 +152,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Datos de hijo/a"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:background="#EFE1C7"
-        android:src="@drawable/area_cognitiva"
+    <TextView
+        android:id="@+id/tvNombreHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDatosHijos"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvEdadHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Edad"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvNombreHijo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvNombreHijo"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo" />
+
+    <EditText
+        android:id="@+id/etNombreHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNombreHijo"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreHijo"
+        app:layout_constraintTop_toTopOf="@+id/tvNombreHijo" />
+
+    <Spinner
+        android:id="@+id/spRangoEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:entries="@array/Rango"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEdadHijo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo" />
+
+    <Button
+        android:id="@+id/btModificarDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/Oscuro"
+        android:text="Modificar datos"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/spRangoEdad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

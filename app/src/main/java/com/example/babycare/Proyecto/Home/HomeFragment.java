@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-    private static int rangoHijo =1;
+    private static int rangoHijo = 1;
     private static Random random = new Random();
     TextView tvNombreUsuario;
     View itemActividad, itemConsejo;
@@ -50,9 +50,9 @@ public class HomeFragment extends Fragment {
         ServicioApiHome serviceHome = ServicioApiHome.getInstancia();
         //Call<Usuario> llamadaInfoUsuario = serviceHome.getRepo().getUsuarioPorId(id);
 
-        Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejosPorEdad(rangoHijo);
+        Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejosPorRango(1);
         //Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejos();
-        Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividadesPorEdad(rangoHijo);
+        Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividadesPorRango(1);
         //Call<List<Actividad>> llamadaActividades = serviceHome.getRepo().getActividades();
 
         /*llamadaInfoUsuario.enqueue(new Callback<Usuario>() {

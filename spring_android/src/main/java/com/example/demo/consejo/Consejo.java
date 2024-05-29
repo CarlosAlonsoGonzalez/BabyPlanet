@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Consejo {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,6 +22,6 @@ public class Consejo {
     @Basic
     private String nombre;
     private String descripcion;
-    private int rango;
+    private Integer rango;
     private String tipo;
 }

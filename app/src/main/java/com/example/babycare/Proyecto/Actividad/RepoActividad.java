@@ -12,11 +12,11 @@ import retrofit2.http.Path;
 public interface RepoActividad {
     @GET("/actividad/obtenerTodas")
     Call<List<Actividad>> getActividades();
-    @GET("/actividad/obtenerActividadesPorRango/{rango}")
+    @GET("/actividad/obtenerPorRango/{rango}")
     Call<List<Actividad>> getActividadesPorRango(@Path("rango") int rango);
-    @GET("/actividad/obtenerActividadesPorAreaDesarrollo/{area_desarrollo}")
+    @GET("/actividad/obtenerActividadesPorAreaDesarrollo/{area_desarrollo}/")
     Call<List<Actividad>> getActividadesPorAreaDesarrollo(@Path("area_desarrollo") String areaDesarrollo);
-    @GET("/actividad/obtenerPorRangoYAreaDesarrollo/{rango}/{area_desarrollo}")
+    @GET("/actividad/obtenerPorRangoYAreaDesarrollo/{rango}/{area_desarrollo}/")
     Call<List<Actividad>> getActividadesPorRangoYAreaDesarrollo(@Path("rango") int rango, @Path("area_desarrollo") String areaDesarrollo);
 
 

@@ -28,11 +28,12 @@ public class ConsejoViewModel extends ViewModel {
 
     public void generoConsejos() {
         new Thread(() -> {
-                ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
-
+            ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
+            int rangoHijo = 1;
             //TODO debe coger la edad del hijo
-            //Call<List<Consejo>> llamada = ser.getRepo().getConsejosPorEdad(1);
-            Call<List<Consejo>> llamada = ser.getRepo().getConsejos();
+            Call<List<Consejo>> llamada = ser.getRepo().getConsejosPorRango(rangoHijo);
+            //Call<List<Actividad>> llamada = ser.getRepo().getActividades();
+
                 llamada.enqueue(new Callback<List<Consejo>>() {
                     @Override
                     public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
