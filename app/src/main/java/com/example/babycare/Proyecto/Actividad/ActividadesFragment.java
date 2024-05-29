@@ -68,9 +68,11 @@ public class ActividadesFragment extends Fragment {
         if(rango!=0 && areaDesarrollo==null){
             llamadaFiltro = ser.getRepo().getActividadesPorRango(rango);
         } else if (rango==0 && areaDesarrollo!=null) {
-            llamadaFiltro = ser.getRepo().getActividadesPorAreaDesarrollo(areaDesarrollo);
+            String areaDesarrolloBd = areaDesarrollo.replaceAll("area","").trim();
+            llamadaFiltro = ser.getRepo().getActividadesPorAreaDesarrollo(areaDesarrolloBd);
         } else {
-            llamadaFiltro = ser.getRepo().getActividadesPorRangoYAreaDesarrollo(rango, areaDesarrollo);
+            String areaDesarrolloBd = areaDesarrollo.replaceAll("area","").trim();
+            llamadaFiltro = ser.getRepo().getActividadesPorRangoYAreaDesarrollo(rango, areaDesarrolloBd);
         }
 
         llamadaFiltro.enqueue(new Callback<List<Actividad>>() {
