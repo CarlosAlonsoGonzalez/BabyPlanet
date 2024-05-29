@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Actividades">
+        <item>--Seleccionar categoría--</item>
         <item>area sensorial</item>
         <item>area motora</item>
         <item>area cognitiva</item>
@@ -8,6 +9,7 @@
         <item>area lenguaje</item>
     </string-array>
     <string-array name="Consejos">
+        <item>--Seleccionar categoría--</item>
         <item>educación</item>
         <item>higiene</item>
         <item>alimentación</item>
