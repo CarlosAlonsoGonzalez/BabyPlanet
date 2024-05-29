@@ -82,6 +82,7 @@ public class ActividadesFragment extends Fragment {
                     ArrayList<Actividad> listadoFiltrado = new ArrayList<>(response.body());
                     //ArrayList<Actividad> actividadesProcesadas = Actividad.generador(listaActividades);
                     adapter.setActividades(listadoFiltrado);
+                    // TODO adapter.notifyDataSetChanged();
                 }
             }
 

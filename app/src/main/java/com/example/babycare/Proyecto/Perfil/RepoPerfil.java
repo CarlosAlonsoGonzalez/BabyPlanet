@@ -6,12 +6,13 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface RepoPerfil {
-    @GET("/usuario/{id}")
+    @GET("/user/obtenerUsuario/{id}")
     Call<Usuario> getUsuarioPorId(@Path("id") int id);
 
-    @PATCH("/usuario/{id}")
-    Call<Usuario> actualizarUsuario(@Path("id") int id, @Body Map<String, Object> actualizaciones);
+    @POST("/user/actualizar")
+    Call<Usuario> actualizarUsuario(@Body Map<String, Object> actualizaciones);
 }

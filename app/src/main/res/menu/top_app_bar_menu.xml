@@ -6,4 +6,10 @@
         android:icon="@drawable/baseline_filter_alt_24"
         android:title="Filtro"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/itemPower"
+        android:icon="@drawable/cerrar_sesion"
+        android:title="Cerrar sesion"
+        app:showAsAction="always" />
 </menu>

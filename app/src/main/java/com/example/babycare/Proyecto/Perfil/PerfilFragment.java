@@ -43,7 +43,7 @@ public class PerfilFragment extends Fragment {
         btModificarDatos = layout.findViewById(R.id.btModificarDatos);
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        int id = 0;
+        int id = 1;
         perfilViewModel.getPerfil(id).observe(getViewLifecycleOwner(), perfil -> {
             etNombreUsuario.setText(perfil.getNombreUsuario());
             etCorreoUsuario.setText(perfil.getEmail());
@@ -100,7 +100,7 @@ public class PerfilFragment extends Fragment {
                     Map<String, Object> actualizaciones = new HashMap<>();
                     actualizaciones.put("password", etContrasenaNuevaConfirm.getText().toString());
 
-                    perfilViewModel.actualizarPerfil(id, actualizaciones);
+                    perfilViewModel.actualizarPerfil(actualizaciones);
 
                     ad.dismiss();
                     ad2.dismiss();
@@ -121,7 +121,7 @@ public class PerfilFragment extends Fragment {
             ad.show();
         });
 
-        btModificarDatos.setOnClickListener((vie)->{
+        btModificarDatos.setOnClickListener((vie) -> {
             Map<String, Object> actualizaciones = new HashMap<>();
             actualizaciones.put("nombreUsuario", etNombreUsuario.getText().toString());
             actualizaciones.put("email", etCorreoUsuario.getText().toString());
@@ -130,7 +130,7 @@ public class PerfilFragment extends Fragment {
             //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
             actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
 
-            perfilViewModel.actualizarPerfil(id, actualizaciones);
+            perfilViewModel.actualizarPerfil(actualizaciones);
         });
 
         return layout;

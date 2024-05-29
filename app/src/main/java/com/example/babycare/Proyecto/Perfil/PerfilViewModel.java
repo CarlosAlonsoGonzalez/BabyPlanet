@@ -44,9 +44,9 @@ public class PerfilViewModel extends ViewModel {
         }).start();
     }
 
-    public void actualizarPerfil(int id, Map<String, Object> actualizaciones) {
+    public void actualizarPerfil(Map<String, Object> actualizaciones) {
         ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
-        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(id, actualizaciones);
+        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(actualizaciones);
         llamada.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {

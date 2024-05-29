@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Rango">
+        <item></item>
         <item>0-6 meses</item>
         <item>6-12 meses</item>
         <item>12-18 meses</item>
