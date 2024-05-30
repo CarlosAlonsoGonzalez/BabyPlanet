@@ -41,7 +41,7 @@ public class UserController {
         UserDto user = userService.findById(Long.parseLong(id));
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-    @GetMapping("/obtenerHijo")
+    @GetMapping("/obtenerHijo/{id}")
     public  ResponseEntity<HijoDto>getHijo (@PathVariable String id) {
         List<HijoDto> hijos = hijoService.getByIdPadre(Long.parseLong(id));
         HijoDto hijo = hijos.get(0);
