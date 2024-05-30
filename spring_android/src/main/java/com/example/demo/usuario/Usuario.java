@@ -2,6 +2,7 @@ package com.example.demo.usuario;
 import java.util.List;
 
 import com.example.demo.hijo.Hijo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
-    @Column(length= 60, nullable = false,unique = true) 
+    @Column(length= 60, nullable = false,unique = false) 
     private String nombreUsuario;
 
     @Column(length= 60, nullable = false,unique = true) 
@@ -41,7 +42,8 @@ public class Usuario {
     @Column(length= 60, nullable = false)
     private String password;
     
-    @OneToMany(mappedBy = "padre")    
+    @OneToMany(mappedBy = "padre")  
+    @JsonManagedReference  
     @ToString.Exclude
     private List<Hijo> hijos;
     

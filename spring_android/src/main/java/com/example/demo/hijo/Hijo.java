@@ -1,6 +1,8 @@
 package com.example.demo.hijo;
 
 import com.example.demo.usuario.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +41,8 @@ public class Hijo {
     
     @ManyToOne
     @JoinColumn(name="usuario_id", nullable=false)
+    @JsonBackReference
+    @JsonIgnore
     private Usuario padre;
 
 
