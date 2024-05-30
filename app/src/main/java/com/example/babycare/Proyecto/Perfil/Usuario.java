@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable {
 
+    long id;
     String nombreUsuario;
 
     String email;
@@ -15,7 +16,8 @@ public class Usuario implements Serializable {
 
     Hijos [] hijos;
 
-    public Usuario(String nombreUsuario, String email, String password) {
+    public Usuario(long id, String nombreUsuario, String email, String password) {
+        this.id = id;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
@@ -37,36 +39,15 @@ public class Usuario implements Serializable {
         return hijos;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public long getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setHijos(Hijos[] hijos) {
-        this.hijos = hijos;
-    }
-
-    public static Usuario generadorPerfil(Usuario usuario){
-
-        Usuario apiUsuario = new Usuario(usuario.nombreUsuario, usuario.email, usuario.password);
-
-        if (usuario != null) {
-            apiUsuario = usuario;
-        }
-
-        return apiUsuario;
-    }
 
     @Override
     public String toString() {
         return "{" +
+                "\"id\": \"" + id + "\"," +
                 "\"nombreUsuario\": \"" + nombreUsuario + "\"," +
                 "\"email\": \"" + email + "\"," +
                 "\"password\": \"" + password + "\"," +

@@ -12,6 +12,7 @@ import retrofit2.Response;
 
 public class PerfilViewModel extends ViewModel {
     private MutableLiveData<Usuario> perfil;
+    private MutableLiveData<Boolean> successMessage = new MutableLiveData<>();
     public int idPerfil;
 
     public LiveData<Usuario> getPerfil(int id) {
@@ -21,6 +22,10 @@ public class PerfilViewModel extends ViewModel {
             generarPerfil(idPerfil);
         }
         return perfil;
+    }
+
+    public LiveData<Boolean> getSuccessMessage() {
+        return successMessage;
     }
 
     public void generarPerfil(int id) {
@@ -43,17 +48,26 @@ public class PerfilViewModel extends ViewModel {
             });
         }).start();
     }
-    public void sendPost(Usuario usuario) {
-        ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
-        Call<Usuario> llamada = ser.getRepo().actualizarUsuario(usuario);
-        llamada.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-            }
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-            }
-        });
+    public void modificarPerfil(Usuario usuario) {
+        new Thread(() -> {
+            ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
+            Call<Usuario> llamada = ser.getRepo().actualizarUsuario(usuario);
+            llamada.enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    if (response.isSuccessful()) {
+                        successMessage.postValue(true);
+                    }
+                }
+                @Override
+                public void onFailure(Call<Usuario> call, Throwable t) {
+                }
+            });
+        }).start();
+    }
+    //este codigo lo hago porque si no el alert se acumula y te saltan 40 ventanas en vez de 1
+    public void resetSuccessMessage() {
+        successMessage.setValue(false);
     }
 }
 
