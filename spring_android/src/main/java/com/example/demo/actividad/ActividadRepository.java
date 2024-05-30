@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface ActividadRepository extends JpaRepository<Actividad, Integer> {
      @Query("SELECT a FROM Actividad a WHERE a.rango = :rango")
      List<Actividad> findByRango(@Param("rango") int rango);
+     @Query("SELECT a FROM Actividad a WHERE a.area_desarrollo = :area_desarrollo")
+     List<Actividad> findByArea(@Param("area_desarrollo") String area_desarrollo);
 }

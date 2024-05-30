@@ -52,5 +52,9 @@ public class ConsejoController {
     public List<Consejo> obtenerConsejosPorRango(@PathVariable int rango) {
         return consejoService.obtenerConsejosPorRango(rango);
     }
+    @GetMapping("obtenerPorTipo/{tipo}")
+    public List<Consejo> obtenerConsejosPorTipo(@PathVariable String tipo) {
+        return consejoService.obtenerConsejosPorTipo(tipo);
+    }
 
 }

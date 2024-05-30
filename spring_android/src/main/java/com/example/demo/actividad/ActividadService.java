@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.consejo.Consejo;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -38,5 +40,9 @@ public class ActividadService {
 
     public List<Actividad> obtenerActividadesPorRango(int rango) {
         return actividadRepository.findByRango(rango);
+        
     }
+      public List<Actividad> obtenerActividadesPorArea(String area_desarrollo) {
+      return actividadRepository.findByArea(area_desarrollo);
+   }
 }
