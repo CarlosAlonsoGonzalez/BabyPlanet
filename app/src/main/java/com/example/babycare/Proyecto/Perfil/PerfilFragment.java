@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,21 +130,32 @@ public class PerfilFragment extends Fragment {
         });
 
         btModificarDatos.setOnClickListener((vie) -> {
-            String nombreUsuario = etNombreUsuario.getText().toString().trim();
-            String email = etCorreoUsuario.getText().toString().trim();
-            String password = etContrasenaUsuario.getText().toString().trim();
+            String nombreUsuario = etNombreUsuario.getText().toString();
+            String email = etCorreoUsuario.getText().toString();
+            String password = etContrasenaUsuario.getText().toString();
             //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
             //actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
 
 
+
             if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) ){
-                Usuario usuario = new Usuario(nombreUsuario, email, password);
-                perfilViewModel.sendPost(usuario);
+                Usuario usuario = new Usuario( id, nombreUsuario, email, password);
+                perfilViewModel.modificarPerfil(usuario);
+
+                perfilViewModel.getSuccessMessage().observe(getViewLifecycleOwner(), success -> {
+                    if (success != null && success) {
+                        new AlertDialog.Builder(getContext())
+                                .setTitle("Éxito")
+                                .setMessage("El cambio se ha efectuado correctamente")
+                                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                                .show();
+
+                        perfilViewModel.resetSuccessMessage();
+                    }
+                });
+
             }
         });
-
-
-
         return layout;
     }
 
