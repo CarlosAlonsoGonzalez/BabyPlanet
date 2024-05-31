@@ -42,4 +42,8 @@ public class ConsejoService {
    public List<Consejo> obtenerConsejosPorTipo(String tipo) {
       return consejoRepository.findByTipo(tipo);
    }
+
+public List<Consejo> obtenerConsejosPorTipoYRango(int rango, String tipo) {    
+    return consejoRepository.findByTipoYRango(rango,tipo);
+}
 }

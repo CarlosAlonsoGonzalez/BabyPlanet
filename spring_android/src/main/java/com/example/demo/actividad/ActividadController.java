@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.consejo.Consejo;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -55,10 +52,16 @@ public class ActividadController {
     public List<Actividad> obtenerActividadesPorRango(@PathVariable int rango) {
         return actividadService.obtenerActividadesPorRango(rango);
     }
-     @GetMapping("obtenerPorArea/{area_desarrollo}")
+
+    @GetMapping("obtenerPorArea/{area_desarrollo}")
     public List<Actividad> obtenerActividadesPorArea(@PathVariable String area_desarrollo) {
         return actividadService.obtenerActividadesPorArea(area_desarrollo);
     }
 
+    @GetMapping("obtenerPorAreaYRango/{rango}/{area_desarrollo}")
+    public List<Actividad> obtenerActividadesPorAreaYRango(@PathVariable int rango,
+            @PathVariable String area_desarrollo) {
+        return actividadService.obtenerActividadesPorAreaYRango(rango, area_desarrollo);
 
+    }
 }

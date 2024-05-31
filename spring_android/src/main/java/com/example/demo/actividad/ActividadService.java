@@ -45,4 +45,8 @@ public class ActividadService {
       public List<Actividad> obtenerActividadesPorArea(String area_desarrollo) {
       return actividadRepository.findByArea(area_desarrollo);
    }
+
+    public List<Actividad> obtenerActividadesPorAreaYRango(int rango, String area_desarrollo) {
+        return actividadRepository.findByAreaYRango(rango, area_desarrollo);
+    }
 }
