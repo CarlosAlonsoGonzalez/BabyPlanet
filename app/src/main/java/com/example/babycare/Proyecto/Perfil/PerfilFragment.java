@@ -1,14 +1,12 @@
 package com.example.babycare.Proyecto.Perfil;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +18,8 @@ import android.widget.TextView;
 import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerfilFragment extends Fragment {
 
@@ -57,11 +51,9 @@ public class PerfilFragment extends Fragment {
             etCorreoUsuario.setText(perfil.getEmail());
             etContrasenaUsuario.setText(perfil.getPassword());
             contrasenaAntigua = perfil.getPassword();
-            if (perfil.getHijos() != null && perfil.getHijos().length > 0) {
-                etNombreHijo.setText(perfil.getHijos()[0].getNombreHijo());
-                //TODO MIRA ESTO CARLITOS QUE ES LO QUE PUSE DEL SPINNER
-                //etEdadHijo.setText(String.valueOf(perfil.getHijos()[0].getEdad()));
-                spEdadHijo.setSelection(perfil.getHijos()[0].getEdad());
+            if (perfil.getHijos() != null && perfil.getHijos().size() > 0) {
+                etNombreHijo.setText(perfil.getHijos().get(0).getNombreHijo());
+                spEdadHijo.setSelection(perfil.getHijos().get(0).getEdad());
             }
         });
 
@@ -133,13 +125,20 @@ public class PerfilFragment extends Fragment {
             String nombreUsuario = etNombreUsuario.getText().toString();
             String email = etCorreoUsuario.getText().toString();
             String password = etContrasenaUsuario.getText().toString();
+            String nombreHijo = etNombreHijo.getText().toString();
+            String edad = spEdadHijo.getSelectedItem().toString();
+            int rango = Rango.obtenerDecripcionPorCodigo(edad);
+
             //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
             //actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
 
 
 
-            if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) ){
-                Usuario usuario = new Usuario( id, nombreUsuario, email, password);
+            if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) &&!TextUtils.isEmpty(nombreHijo)){
+                Hijo hijo = new Hijo(3,nombreHijo, rango, id);
+                List<Hijo> hijos = new ArrayList<>();
+                hijos.add(hijo);
+                Usuario usuario = new Usuario(id, nombreUsuario, email, password, hijos);
                 perfilViewModel.modificarPerfil(usuario);
 
                 perfilViewModel.getSuccessMessage().observe(getViewLifecycleOwner(), success -> {

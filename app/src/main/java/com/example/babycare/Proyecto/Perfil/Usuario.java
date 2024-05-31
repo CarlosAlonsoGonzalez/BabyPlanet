@@ -1,9 +1,7 @@
 package com.example.babycare.Proyecto.Perfil;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
+import java.util.List;
 
 public class Usuario implements Serializable {
 
@@ -14,13 +12,14 @@ public class Usuario implements Serializable {
 
     String password;
 
-    Hijos [] hijos;
+    List<Hijo> hijos;
 
-    public Usuario(long id, String nombreUsuario, String email, String password) {
+    public Usuario(long id, String nombreUsuario, String email, String password, List<Hijo> hijos) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
+        this.hijos = hijos;
     }
 
     public String getNombreUsuario() {
@@ -35,7 +34,7 @@ public class Usuario implements Serializable {
         return password;
     }
 
-    public Hijos[] getHijos() {
+    public List<Hijo> getHijos() {
         return hijos;
     }
 
@@ -56,14 +55,14 @@ public class Usuario implements Serializable {
     }
 
     private String hijosToString() {
-        if (hijos == null || hijos.length == 0) {
+        if (hijos == null || hijos.size() == 0) {
             return "[]";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (int i = 0; i < hijos.length; i++) {
-            sb.append(hijos[i].toString());
-            if (i < hijos.length - 1) {
+        for (int i = 0; i < hijos.size(); i++) {
+            sb.append(hijos.get(i).toString());
+            if (i < hijos.size() - 1) {
                 sb.append(", ");
             }
         }

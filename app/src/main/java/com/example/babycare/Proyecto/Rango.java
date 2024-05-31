@@ -28,4 +28,13 @@ public enum Rango {
         }
         return "Rango inválido";
     }
+
+    public static int obtenerDecripcionPorCodigo(String descripcion) {
+        for (Rango rango : Rango.values()) {
+            if (rango.descripcion.equals(descripcion)) {
+                return rango.codigo;
+            }
+        }
+        return -1; // Código inválido
+    }
 }
