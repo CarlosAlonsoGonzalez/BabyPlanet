@@ -21,6 +21,13 @@ public class Usuario implements Serializable {
         this.password = password;
         this.hijos = hijos;
     }
+    public Usuario(String nombreUsuario, String email, String password, List<Hijo> hijos){
+
+        this.nombreUsuario = nombreUsuario;
+        this.email = email;
+        this.password = password;
+        this.hijos = hijos;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
