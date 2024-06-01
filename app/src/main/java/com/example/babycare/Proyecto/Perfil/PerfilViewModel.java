@@ -65,6 +65,23 @@ public class PerfilViewModel extends ViewModel {
             });
         }).start();
     }
+    public void crearUsuario(Usuario usuario) {
+        new Thread(() -> {
+            ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
+            Call<Usuario> llamada = ser.getRepo().crearUsuario(usuario);
+            llamada.enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    if (response.isSuccessful()) {
+                        successMessage.postValue(true);
+                    }
+                }
+                @Override
+                public void onFailure(Call<Usuario> call, Throwable t) {
+                }
+            });
+        }).start();
+    }
     //este codigo lo hago porque si no el alert se acumula y te saltan 40 ventanas en vez de 1
     public void resetSuccessMessage() {
         successMessage.setValue(false);

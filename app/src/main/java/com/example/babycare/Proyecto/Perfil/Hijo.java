@@ -14,6 +14,11 @@ public class Hijo {
         this.usuarioId = usuarioId;
     }
 
+    public Hijo(String nombreHijo, int edad) {
+        this.nombreHijo = nombreHijo;
+        this.edad = edad;
+    }
+
     public String getNombreHijo() {
         return nombreHijo;
     }

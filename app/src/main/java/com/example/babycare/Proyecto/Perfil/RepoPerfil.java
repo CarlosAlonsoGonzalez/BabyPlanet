@@ -17,4 +17,7 @@ public interface RepoPerfil {
 
     @POST("/user/actualizar")
     Call<Usuario> actualizarUsuario(@Body Usuario usuario);
+
+    @POST("/user/crear")
+    Call<Usuario> crearUsuario(@Body Usuario usuario);
 }

@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService  {
 @Transactional
 public UserDto save(@Valid UserDto userDto) {
     Usuario userEntity;
+    if (userDto.getId()==0){
+        userDto.setId(null);
+    }
     if (userDto.getId() != null) {
         userEntity = userRepo.findById(userDto.getId())
                             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

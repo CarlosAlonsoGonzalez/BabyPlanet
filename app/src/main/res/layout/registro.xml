@@ -151,6 +151,7 @@
         android:id="@+id/etConfirmarContrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
@@ -165,7 +166,7 @@
         android:id="@+id/divider3"
         android:layout_width="409dp"
         android:layout_height="3dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="32dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -247,5 +248,33 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEdadHijoReg" />
+
+    <TextView
+        android:id="@+id/tvErrCoincidencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F44336"
+        app:layout_constraintEnd_toEndOf="@+id/etConfirmarContrasena"
+        app:layout_constraintStart_toStartOf="@+id/etConfirmarContrasena"
+        app:layout_constraintTop_toBottomOf="@+id/etConfirmarContrasena" />
+
+    <TextView
+        android:id="@+id/tvErrFaltanCampos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F44336"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistro"
+        app:layout_constraintEnd_toEndOf="@+id/btRegistro"
+        app:layout_constraintStart_toStartOf="@+id/btRegistro" />
+
+    <TextView
+        android:id="@+id/tvErrCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F44336"
+        app:layout_constraintBottom_toTopOf="@+id/tvErrFaltanCampos"
+        app:layout_constraintEnd_toEndOf="@+id/btRegistro"
+        app:layout_constraintStart_toStartOf="@+id/btRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/spRangoEdadReg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
