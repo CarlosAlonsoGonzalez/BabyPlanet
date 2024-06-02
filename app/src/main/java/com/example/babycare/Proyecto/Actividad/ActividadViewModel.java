@@ -12,24 +12,34 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActividadViewModel extends ViewModel {
-
     private MutableLiveData<ArrayList<Actividad>> actividades;
+    //String areaDesarrollo;
+    //int rango;
 
-    public LiveData<ArrayList<Actividad>> getActividades() {
+    public LiveData<ArrayList<Actividad>> getActividades(String areaDesarrollo, int rango) {
+        //this.areaDesarrollo=aresDesarrollo;
+        //this.rango=rango;
+
         if (actividades == null) {
             actividades = new MutableLiveData<ArrayList<Actividad>>();
-            generarActividades();
+
+            if(rango!=0 && areaDesarrollo==null){
+                generarActividadesPorRango(rango);
+            } else if (rango==0 && areaDesarrollo!=null) {
+                generarActividadesPorAreaDesarrollo(areaDesarrollo);
+            } else {
+                generarActividadesPorAreaDesarrlloYRango(areaDesarrollo,rango);
+            }
         }
         return actividades;
     }
 
-    public void generarActividades() {
+    public void generarActividadesPorRango(int rango) {
         new Thread(() -> {
 
             ServicioApiActividades ser = ServicioApiActividades.getInstancia();
-            int rangoHijo = 1;
-            //TODO debe coger la edad del hijo
-            Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorRango(rangoHijo);
+
+            Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorRango(rango);
             //Call<List<Actividad>> llamada = ser.getRepo().getActividades();
             llamada.enqueue(new Callback<List<Actividad>>() {
                 @Override
@@ -45,7 +55,63 @@ public class ActividadViewModel extends ViewModel {
 
                 @Override
                 public void onFailure(Call<List<Actividad>> call, Throwable t) {
-                    System.out.println("Error en la llamada: " + t.getMessage());
+                    System.out.println("Error en la llamada de filtro Actividad(rango: "+rango+")\n"+ t.getMessage());
+                }
+            });
+
+        }
+        ).start();
+    }
+
+    public void generarActividadesPorAreaDesarrollo(String areaDesarrollo) {
+        new Thread(() -> {
+
+            ServicioApiActividades ser = ServicioApiActividades.getInstancia();
+
+            Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorAreaDesarrollo(areaDesarrollo);
+            llamada.enqueue(new Callback<List<Actividad>>() {
+                @Override
+                public void onResponse(Call<List<Actividad>> call, Response<List<Actividad>> response) {
+                    if (response.isSuccessful()) {
+                        ArrayList<Actividad> listaActividades = new ArrayList<>(response.body());
+
+                        // Utiliza el método generador() de Consejo para procesar los consejos
+                        ArrayList<Actividad> actividadesProcesadas = Actividad.generador(listaActividades);
+                        actividades.postValue(actividadesProcesadas);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Actividad>> call, Throwable t) {
+                    System.out.println("Error en la llamada de filtro Actividad(areaDesarrollo:"+areaDesarrollo+")\n"+ t.getMessage());;
+                }
+            });
+
+        }
+        ).start();
+    }
+
+    public void generarActividadesPorAreaDesarrlloYRango(String areaDesarrollo, int rango) {
+        new Thread(() -> {
+
+            ServicioApiActividades ser = ServicioApiActividades.getInstancia();
+
+            Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorRangoYAreaDesarrollo(rango,areaDesarrollo);
+            llamada.enqueue(new Callback<List<Actividad>>() {
+                @Override
+                public void onResponse(Call<List<Actividad>> call, Response<List<Actividad>> response) {
+                    if (response.isSuccessful()) {
+                        ArrayList<Actividad> listaActividades = new ArrayList<>(response.body());
+
+                        // Utiliza el método generador() de Consejo para procesar los consejos
+                        ArrayList<Actividad> actividadesProcesadas = Actividad.generador(listaActividades);
+                        actividades.postValue(actividadesProcesadas);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Actividad>> call, Throwable t) {
+                    System.out.println("Error en la llamada de filtro Actividad(rango: "+rango+", areaDesarrollo:"+areaDesarrollo+")\n"+ t.getMessage());
                 }
             });
 

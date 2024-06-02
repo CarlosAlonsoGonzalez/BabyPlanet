@@ -57,7 +57,7 @@ public class Consejo implements Serializable {
                 icono = R.drawable.consejo_higiene2;
                 break;
             case "alimentación":
-                icono = R.drawable.consejo_alimentacion2;
+                icono = R.drawable.consejo_alimentacion3;
                 break;
             case "emocional":
                 icono = R.drawable.consejo_gestion_emociones2;

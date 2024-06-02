@@ -24,8 +24,8 @@ import retrofit2.Response;
 public class ConsejoFragment extends Fragment {
     public static final String INFO_CONSEJO = "info de un consejo" ;
     RecyclerView rvConsejos;
-    static ConsejoAdapter adapter;
-    private ConsejoViewModel consejoViewModel;
+    private ConsejoAdapter adapter;
+    private static ConsejoViewModel consejoViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +49,10 @@ public class ConsejoFragment extends Fragment {
 
         // Inicializa y observa los cambios en el ViewModel
         consejoViewModel = new ViewModelProvider(this).get(ConsejoViewModel.class);
-        consejoViewModel.getConsejos().observe(getViewLifecycleOwner(), consejos -> {
+        //TODO LO COGES DE USUARIO
+        int rango=2;
+
+        consejoViewModel.getConsejos(null, rango).observe(getViewLifecycleOwner(), consejos -> {
             // Actualiza los datos del adaptador cuando cambia la lista de consejos en el ViewModel
             adapter.setConsejos(consejos);
         });
@@ -60,31 +63,14 @@ public class ConsejoFragment extends Fragment {
     }
 
     public static void cambiarConsejosAdapter(int rango, String tipo){
-        ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
-        Call<List<Consejo>> llamadaFiltro = null;
 
-        if(rango!=0 && tipo==null){
-            llamadaFiltro = ser.getRepo().getConsejosPorRango(rango);
-        } else if (rango==0 && tipo!=null) {
-            llamadaFiltro = ser.getRepo().getConsejosPorTipo(tipo);
-        } else {
-            llamadaFiltro = ser.getRepo().getConsejoPorRangoYTipo(rango, tipo);
-        }
+        if(tipo.matches("^--.*")) tipo = null;
 
-        llamadaFiltro.enqueue(new Callback<List<Consejo>>() {
-            @Override
-            public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
-                if (response.isSuccessful()) {
-                    ArrayList<Consejo> listadoFiltrado = new ArrayList<>(response.body());
-                    //ArrayList<Consejo> consejosProcesadas = Consejo.generador(listaActividades);
-                    adapter.setConsejos(listadoFiltrado);
-                }
-            }
+        consejoViewModel.getConsejos(tipo,rango);
 
-            @Override
-            public void onFailure(Call<List<Consejo>> call, Throwable t) {
-                System.out.println("Error en la llamada de filtro Consejo(rango: "+rango+", tipo:"+tipo+")\n"+ t.getMessage());
-            }
-        });
+
+
+
+
     }
 }

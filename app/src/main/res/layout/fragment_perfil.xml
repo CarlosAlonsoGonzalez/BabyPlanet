@@ -12,7 +12,7 @@
         android:id="@+id/tvEditarPeril"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#EEE0C6"
+        android:background="#EDDDBE"
         android:fontFamily="sans-serif"
         android:text="Editar perfil"
         android:textAlignment="center"
@@ -35,8 +35,8 @@
         android:id="@+id/imageView4"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:background="#EFE1C7"
-        android:src="@drawable/area_cognitiva"
+        android:background="#EDDDBE"
+        android:src="@drawable/icono_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -54,7 +54,7 @@
         android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:text="Usuario"
         android:textSize="20sp"
@@ -70,10 +70,12 @@
         android:text="Correo"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
         app:layout_constraintEnd_toEndOf="@+id/tvNombreUsuario"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvNombreUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuario"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/tvContrasena"
@@ -83,22 +85,24 @@
         android:text="Contraseña"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvCambiarContrasena"
         app:layout_constraintEnd_toEndOf="@+id/tvCorreoUsuario"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvCorreoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNombreUsuario"
-        app:layout_constraintStart_toEndOf="@+id/tvNombreUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvNombreUsuario" />
 
     <EditText
@@ -119,7 +123,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="text"
+        android:inputType="text|textPassword"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/etCorreoUsuario"
         app:layout_constraintStart_toStartOf="@+id/etCorreoUsuario"
@@ -133,16 +137,18 @@
         android:text="¿Desea cambiar la contraseña?"
         android:textColor="@color/Oscuro"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="@+id/etContrasenaUsuario"
         app:layout_constraintStart_toStartOf="@+id/tvContrasena"
-        app:layout_constraintTop_toBottomOf="@+id/tvContrasena" />
+        app:layout_constraintTop_toBottomOf="@+id/etContrasenaUsuario"
+        app:layout_constraintVertical_bias="0.5" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="409dp"
         android:layout_height="3dp"
-        android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvDatosHijos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCambiarContrasena" />
@@ -151,37 +157,38 @@
         android:id="@+id/tvDatosHijos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
         android:text="Datos de hijo/a"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etNombreHijo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/tvNombreHijo"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
         android:text="Nombre"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvEdadHijo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDatosHijos"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvEdadHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Rango de edad"
+        android:text="Edad"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btModificarDatos"
         app:layout_constraintEnd_toEndOf="@+id/tvNombreHijo"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvNombreHijo"
         app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo" />
 
@@ -189,37 +196,37 @@
         android:id="@+id/etNombreHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNombreHijo"
-        app:layout_constraintStart_toEndOf="@+id/tvNombreHijo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvNombreHijo" />
 
     <Spinner
         android:id="@+id/spRangoEdad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:drawable/btn_dropdown"
         android:entries="@array/Rango"
         app:layout_constraintBottom_toBottomOf="@+id/tvEdadHijo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo"
-        app:layout_constraintVertical_bias="0.619" />
+        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo"/>
 
     <Button
         android:id="@+id/btModificarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:background="@color/Oscuro"
         android:text="Modificar datos"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spRangoEdad" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

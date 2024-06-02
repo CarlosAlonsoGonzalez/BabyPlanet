@@ -3,6 +3,7 @@ package com.example.babycare.Proyecto.Inicio;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,30 +16,28 @@ import com.example.babycare.R;
 
 public class Login extends AppCompatActivity {
     public static final String ID_USUARIO = "id del usuario" ;
+    public static final String DATOS_INCORRECTOS="El correo o la contraseña son incorrectos";
     EditText etCorreo, etContraseña;
-    TextView tvErrLogin;
     Button btInicio, btRegistro;
     PerfilViewModel perfilViewModel;
-    RespuestaLogin respuestaLogin;
-    String email;
-    String password;
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.entrada);
         getSupportActionBar().hide();
+        builder = new AlertDialog.Builder(this);
         etCorreo = findViewById(R.id.etCorreo);
         etContraseña = findViewById(R.id.etContraseña);
         btInicio = findViewById(R.id.btInicio);
         btRegistro= findViewById(R.id.btRegistro);
-        tvErrLogin = findViewById(R.id.tvErrLogin);
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
         btInicio.setOnClickListener((v)->{
 
-            tvErrLogin.setText("");
-             email = etCorreo.getText().toString();
-             password = etContraseña.getText().toString();
+            String email = etCorreo.getText().toString();
+            String password = etContraseña.getText().toString();
 
             perfilViewModel.login(email, password);
             perfilViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
@@ -47,13 +46,15 @@ public class Login extends AppCompatActivity {
                     i.putExtra(ID_USUARIO, respuestaLogin.getUserId());
                     startActivity(i);
                 } else {
-                    tvErrLogin.setText("No existe ese usuario");
+                    builder.setMessage(DATOS_INCORRECTOS)
+                            .setPositiveButton("Entendido", null);
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
             });
         });
 
         btRegistro.setOnClickListener((v)->{
-            tvErrLogin.setText("");
             Intent i = new Intent(this, Registro.class);
             startActivity(i);
         });
