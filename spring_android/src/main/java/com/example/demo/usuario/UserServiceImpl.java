@@ -18,55 +18,53 @@ import jakarta.validation.Valid;
 
 @Service
 @Validated
-public class UserServiceImpl implements UserService  {
+public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepo userRepo;   
-   
+    private UserRepo userRepo;
+
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     private HijoRepo hijoRepo;
-   
-    
 
-@Override
-@Transactional
-public UserDto save(@Valid UserDto userDto) {
-    Usuario userEntity;
-    if (userDto.getId()==0){
-        userDto.setId(null);
-    }
-    if (userDto.getId() != null) {
-        userEntity = userRepo.findById(userDto.getId())
-                            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        modelMapper.map(userDto, userEntity);
-    } else {
-        userEntity = modelMapper.map(userDto, Usuario.class);
-    }
-    
-    userEntity = userRepo.save(userEntity);
-
-    if (userDto.getHijos() != null && !userDto.getHijos().isEmpty()) {
-        for (HijoDto hijoDto : userDto.getHijos()) {
-            Hijo hijo = modelMapper.map(hijoDto, Hijo.class);
-            hijo.setPadre(userEntity);
-            hijoRepo.save(hijo);
+    @Override
+    @Transactional
+    public UserDto save(@Valid UserDto userDto) {
+        Usuario userEntity;
+        if (userDto.getId() == 0) {
+            userDto.setId(null);
         }
+        if (userDto.getId() != null) {
+            userEntity = userRepo.findById(userDto.getId())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            modelMapper.map(userDto, userEntity);
+        } else {
+            userEntity = modelMapper.map(userDto, Usuario.class);
+        }
+
+        userEntity = userRepo.save(userEntity);
+
+        if (userDto.getHijos() != null && !userDto.getHijos().isEmpty()) {
+            for (HijoDto hijoDto : userDto.getHijos()) {
+                Hijo hijo = modelMapper.map(hijoDto, Hijo.class);
+                hijo.setPadre(userEntity);
+                hijoRepo.save(hijo);
+            }
+        }
+
+        userEntity = userRepo.findById(userEntity.getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return modelMapper.map(userEntity, UserDto.class);
     }
-
-    userEntity = userRepo.findById(userEntity.getId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-    return modelMapper.map(userEntity, UserDto.class);
-}
 
     @Override
     public UserDto findById(Long id) {
 
         Usuario userEntity = userRepo.getReferenceById(id);
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
-        return userDto; 
+        return userDto;
     }
 
     @Override
@@ -77,9 +75,9 @@ public UserDto save(@Valid UserDto userDto) {
 
     @Override
     public void delete(Long id) {
-        
-            userRepo.deleteById(id);
-        
+
+        userRepo.deleteById(id);
+
     }
 
     @Override
@@ -97,10 +95,14 @@ public UserDto save(@Valid UserDto userDto) {
         throw new UnsupportedOperationException("Unimplemented method 'getHijo'");
     }
 
-   
-     
-     }
+    @Override
+    public RespuestaLogin login(String email, String password) {
+        Usuario usuario = userRepo.login(email, password);
+        if (usuario != null) {
+            return new RespuestaLogin(true, usuario.getId());
+        } else {
+            return new RespuestaLogin(false, null);
+        }
+    }
 
-
-
-
+}

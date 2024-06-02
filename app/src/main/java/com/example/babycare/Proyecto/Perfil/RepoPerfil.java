@@ -1,5 +1,7 @@
 package com.example.babycare.Proyecto.Perfil;
 
+import com.example.babycare.Proyecto.Inicio.RespuestaLogin;
+
 import java.util.Map;
 
 import retrofit2.Call;
@@ -18,6 +20,8 @@ public interface RepoPerfil {
     @POST("/user/actualizar")
     Call<Usuario> actualizarUsuario(@Body Usuario usuario);
 
+    @GET("/user/login/{email}/{password}")
+    Call<RespuestaLogin> login(@Path("email") String email, @Path("password") String password);
     @POST("/user/crear")
     Call<Usuario> crearUsuario(@Body Usuario usuario);
 }

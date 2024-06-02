@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Principal"
     android:backgroundTintMode="screen"
-    tools:context=".Proyecto.Login">
+    tools:context=".Proyecto.Inicio.Login">
 
   <ImageView
       android:id="@+id/ivIconoApp"
@@ -59,7 +59,7 @@
       android:id="@+id/btInicio"
       android:layout_width="wrap_content"
       android:layout_height="49dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="24dp"
       android:backgroundTint="@color/Claro"
       android:text="Iniciar Sesion"
       android:textColor="@color/Oscuro"
@@ -154,5 +154,15 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/ivIconoApp"
       app:layout_constraintVertical_bias="0.5" />
+
+  <TextView
+      android:id="@+id/tvErrLogin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="#F44336"
+      app:layout_constraintBottom_toTopOf="@+id/btInicio"
+      app:layout_constraintEnd_toEndOf="@+id/btInicio"
+      app:layout_constraintHorizontal_bias="0.496"
+      app:layout_constraintStart_toStartOf="@+id/btInicio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

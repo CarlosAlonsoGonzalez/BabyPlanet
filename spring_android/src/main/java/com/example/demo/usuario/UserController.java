@@ -13,6 +13,8 @@ import com.example.demo.hijo.HijoDto;
 import com.example.demo.hijo.HijoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -46,6 +48,15 @@ public class UserController {
         List<HijoDto> hijos = hijoService.getByIdPadre(Long.parseLong(id));
         HijoDto hijo = hijos.get(0);
         return new ResponseEntity<>(hijo, HttpStatus.OK);
+    }
+    @GetMapping("/login/{email}/{password}")
+    public ResponseEntity<RespuestaLogin> login(@PathVariable String email, @PathVariable String password) {
+        RespuestaLogin respuestaLogin = userService.login(email, password);
+        if (respuestaLogin.isDatosCorrectos()) {
+            return new ResponseEntity<>(respuestaLogin, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(respuestaLogin, HttpStatus.UNAUTHORIZED);
+        }
     }
     
     }       

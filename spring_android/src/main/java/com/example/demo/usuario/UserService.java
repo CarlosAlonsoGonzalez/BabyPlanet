@@ -14,6 +14,7 @@ public interface UserService {
     public UserDto update(Long id, UserDto userDto);
     public void delete(Long id);
     public HijoDto getHijo(Long id);
-    public List<UserDto> getAll();        
+    public List<UserDto> getAll();
+    public RespuestaLogin login(String email, String password);
 }
 

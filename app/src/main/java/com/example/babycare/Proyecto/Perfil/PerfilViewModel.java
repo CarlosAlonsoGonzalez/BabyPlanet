@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.babycare.Proyecto.Inicio.RespuestaLogin;
+
 import java.util.Map;
 
 import retrofit2.Call;
@@ -22,6 +24,15 @@ public class PerfilViewModel extends ViewModel {
             generarPerfil(idPerfil);
         }
         return perfil;
+    }
+    //cosas login
+    private MutableLiveData<RespuestaLogin> respuestaLogin = new MutableLiveData<>();
+
+    public LiveData<RespuestaLogin> getRespuestaLogin() {
+        if(respuestaLogin==null){
+            respuestaLogin = new MutableLiveData<>();
+        }
+        return respuestaLogin;
     }
 
     public LiveData<Boolean> getSuccessMessage() {
@@ -78,6 +89,26 @@ public class PerfilViewModel extends ViewModel {
                 }
                 @Override
                 public void onFailure(Call<Usuario> call, Throwable t) {
+                }
+            });
+        }).start();
+    }
+    public void login(String email, String password) {
+        new Thread(() -> {
+            ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
+            Call<RespuestaLogin> llamada = ser.getRepo().login(email, password);
+            llamada.enqueue(new Callback<RespuestaLogin>() {
+                @Override
+                public void onResponse(Call<RespuestaLogin> call, Response<RespuestaLogin> response) {
+                    if (response.isSuccessful()) {
+                        respuestaLogin.postValue(response.body());
+                    } else {
+                        respuestaLogin.postValue(new RespuestaLogin(false, null)); // Asume un constructor para manejar fallos
+                    }
+                }
+                @Override
+                public void onFailure(Call<RespuestaLogin> call, Throwable t) {
+                    respuestaLogin.postValue(new RespuestaLogin(false, null)); // Asume un constructor para manejar fallos
                 }
             });
         }).start();
