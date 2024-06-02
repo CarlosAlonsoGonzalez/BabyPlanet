@@ -3,6 +3,7 @@ package com.example.babycare.Proyecto.Inicio;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,29 +34,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Registro extends AppCompatActivity {
-
-    public static final String ERROR_DATOS = "Los campos de correo, usuario y contraseña son obligatorios.";
+    public static final String REGEX_CORREO = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    public static final String ERROR_DATOS = "Los campos nombre usuario, correo electronico y contraseña son obligatorios.";
     public static final String CORREO_INCORRECTO = "Correo no válido.";
     public static final String CONTRASEÑAS_NO_COINCIDEN = "La contraseña no coincide";
-    EditText etNombreUsuario, etCorreoUsuario, etContrasena, etConfirmarContrasena,
-            etNombreHijo;
+    public static final String ERR_DATOS_HIJO = "Los datos de hijo/a son invalidos";
+    EditText etNombreUsuario, etCorreoUsuario, etContrasena, etConfirmarContrasena, etNombreHijo;
+    CheckBox chbOptionals;
     Spinner spEdadHijo;
-    TextView tvErrCampos, tvErrContraseña, tvCorreo;
     Button btRegistro, btVolver;
-    String nombreUsuario;
     RepoPerfil repoPerfil;
     PerfilViewModel perfilViewModel;
-    String email;
-    String password;
-    String nombreHijo;
-    String regex = "^[\\w.-]+@([\\w-]+\\.)+com$";
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher;
     Usuario usuario;
     List<Hijo> hijos = new ArrayList<>();
-    int rango;
-    String edadHijo;
-    boolean errores;
+    boolean hayErrores=true;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,91 +56,132 @@ public class Registro extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.registro);
         getSupportActionBar().hide();
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         etNombreUsuario = findViewById(R.id.etNombreUsuarioReg);
         etCorreoUsuario = findViewById(R.id.etCorreoUsuarioReg);
         etContrasena = findViewById(R.id.etContrasenaRegistro);
         etConfirmarContrasena = findViewById(R.id.etConfirmarContrasena);
+        chbOptionals=findViewById(R.id.chbDatosHijo);
         etNombreHijo = findViewById(R.id.etNombreHijoReg);
         spEdadHijo = findViewById(R.id.spRangoEdadReg);
         btRegistro = findViewById(R.id.btRegistro);
-        //  btVolver = findViewById(R.id.btVolver);
-        tvCorreo = findViewById(R.id.tvErrCorreo);
-        tvErrCampos = findViewById(R.id.tvErrFaltanCampos);
-        tvErrContraseña = findViewById(R.id.tvErrCoincidencia);
-
+        btVolver = findViewById(R.id.btVolver);
 
         repoPerfil = ServicioApiPerfil.getRepo();
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
+        builder = new AlertDialog.Builder(this);
+
+        chbOptionals.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            etNombreHijo.setEnabled(isChecked);
+            spEdadHijo.setEnabled(isChecked);
+        });
+
+
 
         btRegistro.setOnClickListener(v -> {
-            errores = false;
-            tvErrCampos.setText("");
-            tvCorreo.setText("");
-            tvErrContraseña.setText("");
-            nombreUsuario = etNombreUsuario.getText().toString();
-            email = etCorreoUsuario.getText().toString();
-            password = etContrasena.getText().toString();
-            nombreHijo = etNombreHijo.getText().toString();
-           // regex = "^[\\w.-]+@([\\w-]+\\.)+com$";
-            regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-            pattern = Pattern.compile(regex);
-            matcher = pattern.matcher(email);
-            edadHijo = spEdadHijo.getSelectedItem().toString();
-            rango = Rango.obtenerDecripcionPorCodigo(edadHijo);
+            //Pillamos los datos
+            String nombreUsuario = etNombreUsuario.getText().toString();
+            String email = etCorreoUsuario.getText().toString();
+            String password = etContrasena.getText().toString();
+            String confPassword= etConfirmarContrasena.getText().toString();
 
-            if (nombreUsuario.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                tvErrCampos.setText(ERROR_DATOS);
-                errores = true;
-            }
-            if (!password.equals(etConfirmarContrasena.getText().toString()) || !errores && (etConfirmarContrasena.getText().toString()).isEmpty()) {
-                tvErrContraseña.setText(CONTRASEÑAS_NO_COINCIDEN);
-                errores = true;
-            }
-            if (!matcher.matches() && !email.isEmpty()) {
-                tvCorreo.setText(CORREO_INCORRECTO);
-                errores = true;
-            }
-            if (!errores) {
-                if (!nombreHijo.isEmpty() || rango != 0) {
+            String nombreHijo = etNombreHijo.getText().toString();
+            int rango = spEdadHijo.getSelectedItemPosition();
+
+            if(chbOptionals.isChecked()){
+                //crear con datos hijo
+                if(validarCamposObligatorios(nombreUsuario, email, password, confPassword) && validarCamposOpcionales(nombreHijo, rango)){
                     Hijo hijo = new Hijo(nombreHijo, rango);
                     hijos.add(hijo);
-                }
-                usuario = new Usuario(nombreUsuario, email, password, hijos);
-                tvErrCampos.setText(":)");
+                    usuario = new Usuario(nombreUsuario, email, password, hijos);
+                    hayErrores=false;
+                }else hayErrores=true;
 
+            }else{
+                //sin datos hijo
+                if(validarCamposObligatorios(nombreUsuario, email, password, confPassword)){
+                    usuario = new Usuario(nombreUsuario, email, password, hijos);
+                    hayErrores=false;
+                }else hayErrores=true;
+            }
+
+            if(!hayErrores){ //salio bien
                 perfilViewModel.crearUsuario(usuario);
                 perfilViewModel.getSuccessMessage().observe(this, success -> {
                     if (success != null && success) {
-                        new AlertDialog.Builder(this)
+                        builder.setTitle("Éxito")
+                                .setMessage("¡El usuario se ha registrado correctamente!")
+                                .setPositiveButton("Entendido", null);
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        /*new AlertDialog.Builder(this)
                                 .setTitle("Éxito")
                                 .setMessage("El usuario se ha registrado correctamente")
                                 .setPositiveButton("Aceptar", (dialog, which) -> {
                                     dialog.dismiss();
-                                    finish();
+                                    //finish();
                                 })
-                                .show();
+                                .show();*/
 
                         perfilViewModel.resetSuccessMessage();
                     }else{
-                        new AlertDialog.Builder(this)
-                                .setTitle("Éxito")
+                        builder.setTitle("Error")
+                                .setMessage("Ese correo ya esta en uso")
+                                .setPositiveButton("Entendido", null);
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        /*new AlertDialog.Builder(this)
+                                .setTitle("Error")
                                 .setMessage("Ese correo ya existe")
                                 .setPositiveButton("Aceptar", (dialog, which) -> {
                                     dialog.dismiss();
                                 })
-                                .show();
+                                .show();*/
                     }
                 });
                 finish();
-
             }
 
         });
     }
+
+    private boolean validarCamposObligatorios(String nombreUsuario, String correo, String contrasena, String repContrasena){
+        if (nombreUsuario.isEmpty() || correo.isEmpty() || contrasena.isEmpty() || repContrasena.isEmpty()) {
+            builder.setMessage(ERROR_DATOS)
+                    .setPositiveButton("Entendido", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+            return false;
+        }
+
+        if (!contrasena.equals(repContrasena) || repContrasena.isEmpty()) {
+            builder.setMessage(CONTRASEÑAS_NO_COINCIDEN)
+                    .setPositiveButton("Entendido", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+            return false;
+        }
+
+        if (!correo.matches(REGEX_CORREO)) {
+            builder.setMessage(CORREO_INCORRECTO)
+                    .setPositiveButton("Entendido", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validarCamposOpcionales(String nombreHijo, int rango){
+        if (nombreHijo.isEmpty() || rango == 0) {
+            builder.setMessage(ERR_DATOS_HIJO)
+                    .setPositiveButton("Entendido", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+            return false;
+        }
+        return true;
+    }
+
 }

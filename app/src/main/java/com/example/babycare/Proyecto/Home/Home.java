@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.example.babycare.Proyecto.Actividad.ActividadDetalles;
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.Proyecto.Inicio.Login;
@@ -32,9 +33,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class Home extends AppCompatActivity {
+    private static final String INFO_RANGO = "rangoFiltrado";
+    private static final String INFO_AREA_DESARROLLO = "areaDesarrolloFiltrado";
+    private static final String INFO_TIPO = "tipoFiltrado";
 
-    //Heeramientas filtro
-    //Etiqueta hijos, 6 radio button edad + radio button tipo (varia segun consejo o actividad)
 
     HomeBinding binding;
     FloatingActionButton floatingActionButton;
@@ -100,6 +102,7 @@ public class Home extends AppCompatActivity {
                         rango= Rango.RANGO_30_36.getCodigo();
                     }
 
+                    //TODO PROBAR A HACERLO CON INTENT ES DECIR COMUNICANDOTE DIRECTAMENTE CON LA ACTIVIDAD, NO SE YO SI SALE PORQUE TIENES QUE HACER START PERO IDK
                     if (currentFragment instanceof ActividadesFragment) {
                         String area = spCategoria.getSelectedItem().toString();
                         ActividadesFragment.cambiarActividadesAdapter(rango,area);

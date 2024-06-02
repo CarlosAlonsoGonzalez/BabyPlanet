@@ -5,46 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5D7CB0"
-    android:backgroundTint="@color/Principal"
+    android:background="@color/Fondo"
     tools:context=".Proyecto.Inicio.Registro">
 
     <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="0dp"
+        android:id="@+id/tvTituloApp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:background="#5D7CB1"
-        android:fontFamily="sans-serif"
-        android:text="Bienvenido/a a BabyPlanet"
+        android:background="@color/FondoOscuro"
+        android:fontFamily="sans-serif-thin"
+        android:text="Bienvenido/a"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/Oscuro"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="409dp"
-        android:layout_height="3dp"
-        android:background="#5D7CB0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
-
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:background="#5D7CB1"
+        android:layout_width="411dp"
+        android:layout_height="180dp"
+        android:background="@color/FondoOscuro"
         android:src="@drawable/logo_app"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloApp" />
 
     <View
         android:id="@+id/divider2"
@@ -56,181 +45,205 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/tvNombreUsuarioReg"
+        android:id="@+id/tvDatosUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="Usuario"
-        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:text="Datos de usuario (obligatorios)"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Nombre"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDatosUsuario"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etNombreUsuarioReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Nombre usuario"
         android:inputType="text"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNombreUsuarioReg"
+        app:layout_constraintBottom_toBottomOf="@+id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvNombreUsuarioReg" />
+        app:layout_constraintTop_toTopOf="@+id/tvName" />
 
     <TextView
-        android:id="@+id/tvCorreoUsuarioReg"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Correo"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvPass"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuarioReg" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etCorreoUsuarioReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
-        android:hint="Correo"
-        android:inputType="text"
+        android:hint="Correo electronico"
+        android:inputType="text|textEmailAddress"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvCorreoUsuarioReg"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvCorreoUsuarioReg" />
+        app:layout_constraintTop_toTopOf="@+id/tvEmail" />
 
     <TextView
-        android:id="@+id/tvContrasenaRegistro"
+        android:id="@+id/tvPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="8dp"
         android:text="Contraseña"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tvCorreoUsuarioReg"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/tvConfirm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuarioReg" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etContrasenaRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="text"
+        android:inputType="text|textPassword"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvContrasenaRegistro"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvContrasenaRegistro" />
+        app:layout_constraintTop_toTopOf="@+id/tvPass" />
 
     <TextView
-        android:id="@+id/tvConfirmarContrasena"
-        android:layout_width="150dp"
+        android:id="@+id/tvConfirm"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="18dp"
-        android:text="Confirmar contraseña"
-        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:text="Confrimar contraseña"
+        android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContrasenaRegistro" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPass"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etConfirmarContrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
-        android:hint="Repetir contraseña"
-        android:inputType="text"
+        android:hint="Confirmar contraseña"
+        android:inputType="text|textPassword"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvConfirmarContrasena"
+        app:layout_constraintBottom_toBottomOf="@+id/tvConfirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvConfirmarContrasena" />
+        app:layout_constraintTop_toTopOf="@+id/tvConfirm"
+        app:layout_constraintVertical_bias="0.368" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="409dp"
         android:layout_height="3dp"
-        android:layout_marginTop="32dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDatosHijos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConfirmarContrasena" />
+        app:layout_constraintTop_toTopOf="@+id/tvConfirm" />
 
     <TextView
         android:id="@+id/tvDatosHijos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:text="Datos de hijo/a"
+        android:layout_marginStart="8dp"
+        android:text="Datos de hijo/a (opcionales)"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etNombreHijoReg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/tvNombreHijoReg"
+        android:id="@+id/tvNameSon"
         android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Nombre"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvEdadHijoReg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDatosHijos"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etNombreHijoReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:ems="10"
-        android:hint="Nombre"
+        android:enabled="false"
+        android:hint="Nombre hijo/a"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNombreHijoReg"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNameSon"
+        app:layout_constraintTop_toTopOf="@+id/tvNameSon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvNombreHijoReg" />
+        tools:layout_editor_absoluteY="548dp" />
 
     <TextView
         android:id="@+id/tvEdadHijoReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="8dp"
         android:text="Edad"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistro"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijoReg" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameSon"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Spinner
         android:id="@+id/spRangoEdadReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:drawable/btn_dropdown"
         android:entries="@array/Rango"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/tvEdadHijoReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvEdadHijoReg" />
@@ -239,42 +252,37 @@
         android:id="@+id/btRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/Claro"
         android:text="Registrar"
         android:textColor="@color/Oscuro"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btVolver"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Claro"
+        android:text="Volver"
+        android:textColor="@color/Oscuro"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEdadHijoReg" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btRegistro"
+        app:layout_constraintTop_toTopOf="@+id/btRegistro" />
 
-    <TextView
-        android:id="@+id/tvErrCoincidencia"
+    <CheckBox
+        android:id="@+id/chbDatosHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#F44336"
-        app:layout_constraintEnd_toEndOf="@+id/etConfirmarContrasena"
-        app:layout_constraintStart_toStartOf="@+id/etConfirmarContrasena"
-        app:layout_constraintTop_toBottomOf="@+id/etConfirmarContrasena" />
-
-    <TextView
-        android:id="@+id/tvErrFaltanCampos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#F44336"
-        app:layout_constraintBottom_toTopOf="@+id/btRegistro"
-        app:layout_constraintEnd_toEndOf="@+id/btRegistro"
-        app:layout_constraintStart_toStartOf="@+id/btRegistro" />
-
-    <TextView
-        android:id="@+id/tvErrCorreo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#F44336"
-        app:layout_constraintBottom_toTopOf="@+id/tvErrFaltanCampos"
-        app:layout_constraintEnd_toEndOf="@+id/btRegistro"
-        app:layout_constraintStart_toStartOf="@+id/btRegistro"
-        app:layout_constraintTop_toBottomOf="@+id/spRangoEdadReg" />
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDatosHijos"
+        app:layout_constraintStart_toEndOf="@+id/tvDatosHijos"
+        app:layout_constraintTop_toTopOf="@+id/tvDatosHijos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

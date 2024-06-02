@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="alimentacion">#FEF0BB</color>
+    <color name="alimentacion">#FFD994</color>
     <color name="educacion">#ABB2B6</color>
     <color name="emocional">#BB98DA</color>
     <color name="higiene">#84A9DA</color>
