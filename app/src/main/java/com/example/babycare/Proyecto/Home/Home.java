@@ -21,7 +21,7 @@ import android.widget.Spinner;
 
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
-import com.example.babycare.Proyecto.Login;
+import com.example.babycare.Proyecto.Inicio.Login;
 import com.example.babycare.Proyecto.Perfil.PerfilFragment;
 import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
@@ -29,7 +29,6 @@ import com.example.babycare.databinding.HomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 
 
 public class Home extends AppCompatActivity {

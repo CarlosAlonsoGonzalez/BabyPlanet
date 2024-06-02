@@ -1,9 +1,10 @@
-package com.example.babycare.Proyecto;
+package com.example.babycare.Proyecto.Inicio;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +21,7 @@ import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
 import com.example.babycare.Proyecto.Perfil.RepoPerfil;
 import com.example.babycare.Proyecto.Perfil.ServicioApiPerfil;
 import com.example.babycare.Proyecto.Perfil.Usuario;
+import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ public class Registro extends AppCompatActivity {
     public static final String CORREO_INCORRECTO = "Correo no válido.";
     public static final String CONTRASEÑAS_NO_COINCIDEN = "La contraseña no coincide";
     EditText etNombreUsuario, etCorreoUsuario, etContrasena, etConfirmarContrasena,
-            etNombreHijo, etEdadHijo;
+            etNombreHijo;
+    Spinner spEdadHijo;
     TextView tvErrCampos, tvErrContraseña, tvCorreo;
     Button btRegistro, btVolver;
     String nombreUsuario;
@@ -50,7 +53,8 @@ public class Registro extends AppCompatActivity {
     Matcher matcher;
     Usuario usuario;
     List<Hijo> hijos = new ArrayList<>();
-    int edadHijo;
+    int rango;
+    String edadHijo;
     boolean errores;
 
     @Override
@@ -69,7 +73,7 @@ public class Registro extends AppCompatActivity {
         etContrasena = findViewById(R.id.etContrasenaRegistro);
         etConfirmarContrasena = findViewById(R.id.etConfirmarContrasena);
         etNombreHijo = findViewById(R.id.etNombreHijoReg);
-        //  etEdadHijo = findViewById(R.id.etEdadHijo);
+        spEdadHijo = findViewById(R.id.spRangoEdadReg);
         btRegistro = findViewById(R.id.btRegistro);
         //  btVolver = findViewById(R.id.btVolver);
         tvCorreo = findViewById(R.id.tvErrCorreo);
@@ -90,10 +94,12 @@ public class Registro extends AppCompatActivity {
             email = etCorreoUsuario.getText().toString();
             password = etContrasena.getText().toString();
             nombreHijo = etNombreHijo.getText().toString();
-            regex = "^[\\w.-]+@([\\w-]+\\.)+com$";
+           // regex = "^[\\w.-]+@([\\w-]+\\.)+com$";
+            regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
             pattern = Pattern.compile(regex);
             matcher = pattern.matcher(email);
-            edadHijo = 2;
+            edadHijo = spEdadHijo.getSelectedItem().toString();
+            rango = Rango.obtenerDecripcionPorCodigo(edadHijo);
 
             if (nombreUsuario.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 tvErrCampos.setText(ERROR_DATOS);
@@ -108,8 +114,8 @@ public class Registro extends AppCompatActivity {
                 errores = true;
             }
             if (!errores) {
-                if (!nombreHijo.isEmpty() || edadHijo != 0) {
-                    Hijo hijo = new Hijo(nombreHijo, edadHijo);
+                if (!nombreHijo.isEmpty() || rango != 0) {
+                    Hijo hijo = new Hijo(nombreHijo, rango);
                     hijos.add(hijo);
                 }
                 usuario = new Usuario(nombreUsuario, email, password, hijos);
@@ -126,10 +132,19 @@ public class Registro extends AppCompatActivity {
                                     finish();
                                 })
                                 .show();
+
                         perfilViewModel.resetSuccessMessage();
+                    }else{
+                        new AlertDialog.Builder(this)
+                                .setTitle("Éxito")
+                                .setMessage("Ese correo ya existe")
+                                .setPositiveButton("Aceptar", (dialog, which) -> {
+                                    dialog.dismiss();
+                                })
+                                .show();
                     }
                 });
-
+                finish();
 
             }
 
