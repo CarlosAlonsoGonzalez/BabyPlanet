@@ -32,6 +32,7 @@ public class PerfilFragment extends Fragment {
     String contrasenaAntigua;
     RepoPerfil repoPerfil;
     int userId;
+    int hijoId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class PerfilFragment extends Fragment {
             if (perfil.getHijos() != null && perfil.getHijos().size() > 0) {
                 etNombreHijo.setText(perfil.getHijos().get(0).getNombreHijo());
                 spEdadHijo.setSelection(perfil.getHijos().get(0).getEdad());
+                hijoId = perfil.getHijos().get(0).getId();
             }
 
             tvCambiarContrasena.setOnClickListener((v)->{
@@ -135,7 +137,7 @@ public class PerfilFragment extends Fragment {
             int rango = Rango.obtenerDecripcionPorCodigo(edad);
 
             if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) &&!TextUtils.isEmpty(nombreHijo)){
-                Hijo hijo = new Hijo(3,nombreHijo, rango, userId);
+                Hijo hijo = new Hijo(hijoId,nombreHijo, rango, userId);
                 List<Hijo> hijos = new ArrayList<>();
                 hijos.add(hijo);
                 Usuario usuario = new Usuario(userId, nombreUsuario, email, password, hijos);
