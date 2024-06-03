@@ -17,8 +17,6 @@ public class ActividadViewModel extends ViewModel {
     //int rango;
 
     public LiveData<ArrayList<Actividad>> getActividades(String areaDesarrollo, int rango) {
-        //this.areaDesarrollo=aresDesarrollo;
-        //this.rango=rango;
 
         if (actividades == null) {
             actividades = new MutableLiveData<ArrayList<Actividad>>();
@@ -40,7 +38,6 @@ public class ActividadViewModel extends ViewModel {
             ServicioApiActividades ser = ServicioApiActividades.getInstancia();
 
             Call<List<Actividad>> llamada = ser.getRepo().getActividadesPorRango(rango);
-            //Call<List<Actividad>> llamada = ser.getRepo().getActividades();
             llamada.enqueue(new Callback<List<Actividad>>() {
                 @Override
                 public void onResponse(Call<List<Actividad>> call, Response<List<Actividad>> response) {

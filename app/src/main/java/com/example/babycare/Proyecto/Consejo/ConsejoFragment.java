@@ -66,7 +66,13 @@ public class ConsejoFragment extends Fragment {
 
         if(tipo.matches("^--.*")) tipo = null;
 
-        consejoViewModel.getConsejos(tipo,rango);
+        if(rango!=0 && tipo==null){
+            consejoViewModel.generarConsejosPorRango(rango);
+        } else if (rango==0 && tipo!=null) {
+            consejoViewModel.generarConsejosPorTipo(tipo);
+        } else {
+            consejoViewModel.generarConsejosPorTipoYRango(tipo, rango);
+        }
 
 
 

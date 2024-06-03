@@ -3,7 +3,6 @@ package com.example.babycare.Proyecto.Perfil;
 public class Hijo {
     int id;
     String nombreHijo;
-
     int edad;
     int usuarioId;
 

@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.babycare.Proyecto.Home.Home;
+import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
+import com.example.babycare.Proyecto.Perfil.RepoPerfil;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
@@ -26,6 +29,9 @@ public class ActividadesFragment extends Fragment {
     RecyclerView rvActividades;
     private ActividadAdapter adapter;
     private static ActividadViewModel actividadViewModel;
+    PerfilViewModel perfilViewModel;
+    int userId;
+    int rangoEdadHijo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,17 +39,32 @@ public class ActividadesFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_actividades, container, false);
         rvActividades = layout.findViewById(R.id.rcvListaActividades);
 
+        //cogemos el id del user
+        Home homeActivity = (Home) getActivity();
+        if (homeActivity != null) {
+            userId = homeActivity.getUserId();
+        }
+
         rvActividades.setLayoutManager(new LinearLayoutManager(ActividadesFragment.super.getContext()));
 
         adapter = new ActividadAdapter(new ArrayList<>());
         rvActividades.setAdapter(adapter);
 
+        //pillamos por el id le info del hijo
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
+            if (perfil.getHijos() != null && perfil.getHijos().size() > 0) {
+                rangoEdadHijo = perfil.getHijos().get(0).getEdad();
+            }else{
+                //dejamos por defecto uno y asi si no tiene hijo igualmente muestra cosas
+                rangoEdadHijo=1;
+            }
+        });
+
         // Inicializa y observa los cambios en el ViewModel
         actividadViewModel = new ViewModelProvider(this).get(ActividadViewModel.class);
-        //TODO LO COGES DE USUARIO
-        int rango=2;
 
-        actividadViewModel.getActividades(null,rango).observe(getViewLifecycleOwner(), actividades -> {
+        actividadViewModel.getActividades(null,rangoEdadHijo).observe(getViewLifecycleOwner(), actividades -> {
             // Actualiza los datos del adaptador cuando cambia la lista de consejos en el ViewModel
             adapter.setActividades(actividades);
             adapter.notifyDataSetChanged();
@@ -63,9 +84,15 @@ public class ActividadesFragment extends Fragment {
     }
 
     public static void cambiarActividadesAdapter(int rango, String areaDesarrollo){
-        areaDesarrollo = areaDesarrollo.replaceAll("area","").trim();
-        if(areaDesarrollo.matches("^--.*")) areaDesarrollo = null;
 
-        actividadViewModel.getActividades(areaDesarrollo,rango);
+        String area = (areaDesarrollo.matches("^--.*"))? null : areaDesarrollo.replaceAll("area","").trim();
+
+        if(rango!=0 && area==null){
+            actividadViewModel.generarActividadesPorRango(rango);
+        } else if (rango==0 && area!=null) {
+            actividadViewModel.generarActividadesPorAreaDesarrollo(area);
+        } else {
+           actividadViewModel.generarActividadesPorAreaDesarrlloYRango(area,rango);
+        }
     }
 }

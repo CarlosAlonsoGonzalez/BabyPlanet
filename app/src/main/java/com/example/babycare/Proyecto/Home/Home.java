@@ -94,21 +94,20 @@ public class Home extends AppCompatActivity {
                 btAplicarFiltros.setOnClickListener((m) ->{
                     int rango = 0;
 
-                    if(rgRangoEdad.getCheckedRadioButtonId() == rb0006.getId()){
+                    if(rb0006.isChecked()){
                         rango= Rango.RANGO_0_6.getCodigo();
-                    } else if (rgRangoEdad.getCheckedRadioButtonId() == rb0612.getId()) {
+                    } else if (rb0612.isChecked()) {
                         rango= Rango.RANGO_6_12.getCodigo();
-                    }else if (rgRangoEdad.getCheckedRadioButtonId() == rb1218.getId()) {
+                    }else if (rb1218.isChecked()) {
                         rango= Rango.RANGO_12_18.getCodigo();
-                    }else if (rgRangoEdad.getCheckedRadioButtonId() == rb1824.getId()) {
+                    }else if (rb1824.isChecked()) {
                         rango= Rango.RANGO_18_24.getCodigo();
-                    }else if (rgRangoEdad.getCheckedRadioButtonId() == rb2430.getId()) {
+                    }else if (rb2430.isChecked()) {
                         rango= Rango.RANGO_24_30.getCodigo();
-                    }else if (rgRangoEdad.getCheckedRadioButtonId() == rb3036.getId()) {
+                    }else if (rb3036.isChecked()) {
                         rango= Rango.RANGO_30_36.getCodigo();
                     }
 
-                    //TODO PROBAR A HACERLO CON INTENT ES DECIR COMUNICANDOTE DIRECTAMENTE CON LA ACTIVIDAD, NO SE YO SI SALE PORQUE TIENES QUE HACER START PERO IDK
                     if (currentFragment instanceof ActividadesFragment) {
                         String area = spCategoria.getSelectedItem().toString();
                         ActividadesFragment.cambiarActividadesAdapter(rango,area);
@@ -133,6 +132,7 @@ public class Home extends AppCompatActivity {
                 builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Acción para el botón "Sí"
+                        //TODO AQUI PONDRIAMOS EL BORRAR FILE DE LOS DATOS DE USUARIO
                         Intent intent = new Intent(Home.this, Login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
