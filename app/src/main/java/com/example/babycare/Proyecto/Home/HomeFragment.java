@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.babycare.Proyecto.Actividad.Actividad;
 import com.example.babycare.Proyecto.Actividad.ActividadDetalles;
 import com.example.babycare.Proyecto.Consejo.Consejo;
 import com.example.babycare.Proyecto.Consejo.ConsejoDetalles;
+import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
 import com.example.babycare.R;
 
 import java.util.List;
@@ -35,19 +37,29 @@ public class HomeFragment extends Fragment {
     View itemActividad, itemConsejo;
     TextView tvTextoActividad, tvTextoConsejo;
     ImageView ivIconoActividad, ivIconoConsejo;
+    int userId;
+    PerfilViewModel perfilViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_home, container, false);
 
+        Home homeActivity = (Home) getActivity();
+        if (homeActivity != null) {
+            userId = homeActivity.getUserId();
+        }
+
         tvNombreUsuario=layout.findViewById(R.id.tvNombreUsuario);
         itemActividad = layout.findViewById(R.id.itemActividad);
         itemConsejo = layout.findViewById(R.id.itemConsejo);
 
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         //TODO este id seria el de el usuario al inciar sesion (a las malas con un singleton+csv con toda la info del usurio pillada desde el login)
-        int id=0;
         ServicioApiHome serviceHome = ServicioApiHome.getInstancia();
+        perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
+            tvNombreUsuario.setText(perfil.getNombreUsuario());
+        });
         //Call<Usuario> llamadaInfoUsuario = serviceHome.getRepo().getUsuarioPorId(id);
 
         Call<List<Consejo>> llamadaConsejos = serviceHome.getRepo().getConsejosPorRango(1);
