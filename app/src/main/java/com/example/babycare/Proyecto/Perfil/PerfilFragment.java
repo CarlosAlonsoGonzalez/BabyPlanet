@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.babycare.Proyecto.Home.Home;
 import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
@@ -30,10 +31,16 @@ public class PerfilFragment extends Fragment {
     PerfilViewModel perfilViewModel;
     String contrasenaAntigua;
     RepoPerfil repoPerfil;
+    int userId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        Home homeActivity = (Home) getActivity();
+        if (homeActivity != null) {
+            userId = homeActivity.getUserId();
+        }
 
         etNombreUsuario = layout.findViewById(R.id.etNombreUsuario);
         etCorreoUsuario = layout.findViewById(R.id.etCorreoUsuario);
@@ -45,8 +52,7 @@ public class PerfilFragment extends Fragment {
         repoPerfil = ServicioApiPerfil.getRepo();
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        int id = 1;
-        perfilViewModel.getPerfil(id).observe(getViewLifecycleOwner(), perfil -> {
+        perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
             etNombreUsuario.setText(perfil.getNombreUsuario());
             etCorreoUsuario.setText(perfil.getEmail());
             etContrasenaUsuario.setText(perfil.getPassword());
@@ -55,70 +61,69 @@ public class PerfilFragment extends Fragment {
                 etNombreHijo.setText(perfil.getHijos().get(0).getNombreHijo());
                 spEdadHijo.setSelection(perfil.getHijos().get(0).getEdad());
             }
-        });
 
-        tvCambiarContrasena.setOnClickListener((v)->{
-            AlertDialog.Builder e = new AlertDialog.Builder(getContext());
-            LayoutInflater in = getLayoutInflater();
-            View vi = in.inflate(R.layout.contrasena, null);
-            e.setView(vi);
+            tvCambiarContrasena.setOnClickListener((v)->{
+                AlertDialog.Builder e = new AlertDialog.Builder(getContext());
+                LayoutInflater in = getLayoutInflater();
+                View vi = in.inflate(R.layout.contrasena, null);
+                e.setView(vi);
 
-            btAceptarContrasenaAntigua = (Button) vi.findViewById(R.id.btAceptarContrasenaAntigua);
-            btCancelarContrasenaAntigua = (Button) vi.findViewById(R.id.btCancelarContrasenaAntigua);
-            etContrasenaAntigua = (EditText) vi.findViewById(R.id.etContrasenaAntiguaInput);
-            tvErrorContrasenaAntigua = (TextView) vi.findViewById(R.id.tvErrorContrasenaAntigua);
-            tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
+                btAceptarContrasenaAntigua = (Button) vi.findViewById(R.id.btAceptarContrasenaAntigua);
+                btCancelarContrasenaAntigua = (Button) vi.findViewById(R.id.btCancelarContrasenaAntigua);
+                etContrasenaAntigua = (EditText) vi.findViewById(R.id.etContrasenaAntiguaInput);
+                tvErrorContrasenaAntigua = (TextView) vi.findViewById(R.id.tvErrorContrasenaAntigua);
+                tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
 
-            AlertDialog ad = e.create();
+                AlertDialog ad = e.create();
 
-            btAceptarContrasenaAntigua.setOnClickListener((vis) ->{
-                if(contrasenaAntigua != null && !contrasenaAntigua.equals(etContrasenaAntigua.getText())){
-                    tvErrorContrasenaAntigua.setVisibility(View.VISIBLE);
-                    return;
-                }
-                AlertDialog.Builder f = new AlertDialog.Builder(getContext());
-                LayoutInflater li = getLayoutInflater();
-                View vx = li.inflate(R.layout.confirmar_contrasena, null);
-                f.setView(vx);
-
-                btAceptarContrasenaNueva = (Button) vx.findViewById(R.id.btAceptarContrasenaNueva);
-                btCancelarContrasenaNueva = (Button) vx.findViewById(R.id.btCancelarContrasenaNueva);
-                etContrasenaNueva = (EditText) vx.findViewById(R.id.etContrasenaNuevaInput);
-                etContrasenaNuevaConfirm = (EditText) vx.findViewById(R.id.etContrasenaNuevaInputConf);
-                tvErrorContrasenaNueva = (TextView) vx.findViewById(R.id.tvErrorContrasenaNueva);
-                tvErrorContrasenaNueva.setVisibility(View.INVISIBLE);
-
-                AlertDialog ad2 = f.create();
-
-                btAceptarContrasenaNueva.setOnClickListener((v2)->{
-                    String contrasenaNueva = etContrasenaNueva.getText().toString();
-                    String contrasenaNuevaConfirm = etContrasenaNuevaConfirm.getText().toString();
-                    if(!contrasenaNueva.equals(contrasenaNuevaConfirm)){
-                        tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
+                btAceptarContrasenaAntigua.setOnClickListener((vis) ->{
+                    tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
+                    if(contrasenaAntigua != null && !contrasenaAntigua.equals(etContrasenaAntigua.getText().toString())){
+                        tvErrorContrasenaAntigua.setVisibility(View.VISIBLE);
                         return;
                     }
-                    //Map<String, Object> actualizaciones = new HashMap<>();
-                    //actualizaciones.put("password", etContrasenaNuevaConfirm.getText().toString());
+                    AlertDialog.Builder f = new AlertDialog.Builder(getContext());
+                    LayoutInflater li = getLayoutInflater();
+                    View vx = li.inflate(R.layout.confirmar_contrasena, null);
+                    f.setView(vx);
 
-                    //perfilViewModel.actualizarPerfil(actualizaciones);
+                    btAceptarContrasenaNueva = (Button) vx.findViewById(R.id.btAceptarContrasenaNueva);
+                    btCancelarContrasenaNueva = (Button) vx.findViewById(R.id.btCancelarContrasenaNueva);
+                    etContrasenaNueva = (EditText) vx.findViewById(R.id.etContrasenaNuevaInput);
+                    etContrasenaNuevaConfirm = (EditText) vx.findViewById(R.id.etContrasenaNuevaInputConf);
+                    tvErrorContrasenaNueva = (TextView) vx.findViewById(R.id.tvErrorContrasenaNueva);
+                    tvErrorContrasenaNueva.setVisibility(View.INVISIBLE);
 
-                    ad.dismiss();
-                    ad2.dismiss();
+                    AlertDialog ad2 = f.create();
+
+                    btAceptarContrasenaNueva.setOnClickListener((v2)->{
+                        String contrasenaNueva = etContrasenaNueva.getText().toString();
+                        String contrasenaNuevaConfirm = etContrasenaNuevaConfirm.getText().toString();
+                        if(!contrasenaNueva.equals(contrasenaNuevaConfirm)){
+                            tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
+                            return;
+                        }
+                        Hijo hijo = new Hijo(3,etNombreHijo.getText().toString(), Rango.obtenerDecripcionPorCodigo(spEdadHijo.getSelectedItem().toString()), userId);
+                        List<Hijo> hijos = new ArrayList<>();
+                        hijos.add(hijo);
+                        Usuario usuario = new Usuario(userId, etNombreUsuario.getText().toString(), etCorreoUsuario.getText().toString(), contrasenaNuevaConfirm, hijos);
+                        perfilViewModel.modificarPerfil(usuario);
+                        etContrasenaUsuario.setText(contrasenaNuevaConfirm);
+
+                        ad.dismiss();
+                        ad2.dismiss();
+                    });
+                    btCancelarContrasenaNueva.setOnClickListener((v3)->{
+                        ad.dismiss();
+                        ad2.dismiss();
+                    });
+                    ad2.show();
                 });
-
-                btCancelarContrasenaNueva.setOnClickListener((v3)->{
+                btCancelarContrasenaAntigua.setOnClickListener((vist)->{
                     ad.dismiss();
-                    ad2.dismiss();
                 });
-
-                ad2.show();
+                ad.show();
             });
-
-            btCancelarContrasenaAntigua.setOnClickListener((vist)->{
-                ad.dismiss();
-            });
-
-            ad.show();
         });
 
         btModificarDatos.setOnClickListener((vie) -> {
@@ -129,16 +134,11 @@ public class PerfilFragment extends Fragment {
             String edad = spEdadHijo.getSelectedItem().toString();
             int rango = Rango.obtenerDecripcionPorCodigo(edad);
 
-            //actualizaciones.put("edad", etEdadHijo.getText().toString()); SPINNER
-            //actualizaciones.put("edad", spEdadHijo.getSelectedItemPosition());
-
-
-
             if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) &&!TextUtils.isEmpty(nombreHijo)){
-                Hijo hijo = new Hijo(3,nombreHijo, rango, id);
+                Hijo hijo = new Hijo(3,nombreHijo, rango, userId);
                 List<Hijo> hijos = new ArrayList<>();
                 hijos.add(hijo);
-                Usuario usuario = new Usuario(id, nombreUsuario, email, password, hijos);
+                Usuario usuario = new Usuario(userId, nombreUsuario, email, password, hijos);
                 perfilViewModel.modificarPerfil(usuario);
 
                 perfilViewModel.getSuccessMessage().observe(getViewLifecycleOwner(), success -> {

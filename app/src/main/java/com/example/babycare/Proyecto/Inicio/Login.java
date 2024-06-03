@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
             perfilViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
                 if (respuestaLogin.isDatosCorrectos()) {
                     Intent i = new Intent(this, Home.class);
-                    i.putExtra(ID_USUARIO, respuestaLogin.getUserId());
+                    i.putExtra(ID_USUARIO, respuestaLogin.getUserId().intValue());
                     startActivity(i);
                 } else {
                     builder.setMessage(DATOS_INCORRECTOS)

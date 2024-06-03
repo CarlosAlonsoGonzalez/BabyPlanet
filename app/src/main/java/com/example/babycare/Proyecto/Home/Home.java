@@ -47,6 +47,7 @@ public class Home extends AppCompatActivity {
     Spinner spCategoria;
     Fragment currentFragment;
     MenuItem filterItem, powerItem;
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,11 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().hide();
         floatingActionButton = findViewById(R.id.homee);
         mt = findViewById(R.id.normal_toolbar);
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(Login.ID_USUARIO)) {
+            userId = intent.getIntExtra(Login.ID_USUARIO, -1);
+        }
 
         mt.setOnMenuItemClickListener((v)->{
             filterItem = mt.getMenu().findItem(R.id.itemFiltro);
@@ -173,6 +179,10 @@ public class Home extends AppCompatActivity {
             replaceFragment(new HomeFragment());
         });
 
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
 
