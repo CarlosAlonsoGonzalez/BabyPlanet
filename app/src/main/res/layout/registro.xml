@@ -249,32 +249,32 @@
         app:layout_constraintTop_toTopOf="@+id/tvEdadHijoReg" />
 
     <Button
-        android:id="@+id/btRegistro"
+        android:id="@+id/btVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/Claro"
-        android:text="Registrar"
+        android:text="Volver"
         android:textColor="@color/Oscuro"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btVolver"
+        app:layout_constraintEnd_toStartOf="@+id/btRegistro"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btVolver"
+        android:id="@+id/btRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/Claro"
-        android:text="Volver"
+        android:text="Registrarse"
         android:textColor="@color/Oscuro"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btRegistro"
+        app:layout_constraintBottom_toBottomOf="@+id/btVolver"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btRegistro"
-        app:layout_constraintTop_toTopOf="@+id/btRegistro" />
+        app:layout_constraintStart_toEndOf="@+id/btVolver"
+        app:layout_constraintTop_toTopOf="@+id/btVolver" />
 
     <CheckBox
         android:id="@+id/chbDatosHijo"

@@ -35,7 +35,7 @@
             android:text="Usuario"
             android:textAlignment="textEnd"
             android:textColor="@color/Oscuro"
-            android:textSize="34sp"
+            android:textSize="38sp"
             android:textStyle="normal|bold" />
 
         <TextView

@@ -37,17 +37,12 @@ public class ConsejoViewModel extends ViewModel {
             ServicioApiConsejos ser = ServicioApiConsejos.getInstancia();
 
             Call<List<Consejo>> llamada = ser.getRepo().getConsejosPorRango(rango);
-            //Call<List<Actividad>> llamada = ser.getRepo().getActividades();
 
                 llamada.enqueue(new Callback<List<Consejo>>() {
                     @Override
                     public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
                         if (response.isSuccessful()) {
                             ArrayList<Consejo> listaConsejos = new ArrayList<>(response.body());
-                            // Imprimir los datos recibidos para verificar si son válidos
-                            for (Consejo consejo : listaConsejos) {
-                                Log.d("ConsejoViewModel", "Consejo: " + consejo.getNombre() + ", Descripción: " + consejo.getDescripcion());
-                            }
 
                             // Utiliza el método generador() de Consejo para procesar los consejos
                             ArrayList<Consejo> consejosProcesados = Consejo.generador(listaConsejos);
@@ -74,10 +69,6 @@ public class ConsejoViewModel extends ViewModel {
                 public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
                     if (response.isSuccessful()) {
                         ArrayList<Consejo> listaConsejos = new ArrayList<>(response.body());
-                        // Imprimir los datos recibidos para verificar si son válidos
-                        for (Consejo consejo : listaConsejos) {
-                            Log.d("ConsejoViewModel", "Consejo: " + consejo.getNombre() + ", Descripción: " + consejo.getDescripcion());
-                        }
 
                         // Utiliza el método generador() de Consejo para procesar los consejos
                         ArrayList<Consejo> consejosProcesados = Consejo.generador(listaConsejos);
@@ -105,10 +96,6 @@ public class ConsejoViewModel extends ViewModel {
                 public void onResponse(Call<List<Consejo>> call, Response<List<Consejo>> response) {
                     if (response.isSuccessful()) {
                         ArrayList<Consejo> listaConsejos = new ArrayList<>(response.body());
-                        // Imprimir los datos recibidos para verificar si son válidos
-                        for (Consejo consejo : listaConsejos) {
-                            Log.d("ConsejoViewModel", "Consejo: " + consejo.getNombre() + ", Descripción: " + consejo.getDescripcion());
-                        }
 
                         // Utiliza el método generador() de Consejo para procesar los consejos
                         ArrayList<Consejo> consejosProcesados = Consejo.generador(listaConsejos);
