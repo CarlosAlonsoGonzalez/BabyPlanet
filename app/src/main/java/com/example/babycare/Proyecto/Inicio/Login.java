@@ -6,13 +6,19 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.babycare.Proyecto.Home.Home;
 import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
+import com.example.babycare.Proyecto.UsuarioSingleton;
 import com.example.babycare.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 public class Login extends AppCompatActivity {
     public static final String ID_USUARIO = "id del usuario" ;
@@ -34,6 +40,12 @@ public class Login extends AppCompatActivity {
         btRegistro= findViewById(R.id.btRegistro);
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
+        if(checkIfFileExists(UsuarioSingleton.NAME_FILE)) {
+            Intent i = new Intent(this, Home.class);
+            i.putExtra(ID_USUARIO, UsuarioSingleton.getAnfitrion().getId().intValue());
+            startActivity(i);
+        }
+
         btInicio.setOnClickListener((v)->{
 
             String email = etCorreo.getText().toString();
@@ -43,6 +55,7 @@ public class Login extends AppCompatActivity {
             perfilViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
                 if (respuestaLogin.isDatosCorrectos()) {
                     Intent i = new Intent(this, Home.class);
+                    crearAnfitrionCSV(respuestaLogin.getUserId().intValue());
                     i.putExtra(ID_USUARIO, respuestaLogin.getUserId().intValue());
                     startActivity(i);
                 } else {
@@ -58,6 +71,32 @@ public class Login extends AppCompatActivity {
             Intent i = new Intent(this, Registro.class);
             startActivity(i);
         });
+    }
+
+    private void crearAnfitrionCSV(int idAnfitrion){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), UsuarioSingleton.NAME_FILE);
+
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        perfilViewModel.getPerfil(idAnfitrion).observe(this, perfil -> {
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                OutputStreamWriter osw = new OutputStreamWriter(fos);
+
+                // Escribir los datos del usuario
+                //ESTE USUARIO SERIA EL DE LA LLAMADA A LA API AL HACER EL REGISTRO O EL LOGIN
+                osw.write(perfil.getId()+"");
+
+                osw.close();
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private boolean checkIfFileExists(String fileName) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+        return file.exists();
     }
 
 }

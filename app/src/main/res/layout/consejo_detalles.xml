@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNombreConsejo" />
 
     <TextView
-        android:id="@+id/tvRangoA"
+        android:id="@+id/tvRangoC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -77,21 +77,6 @@
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescripcionC" />
-
-    <!--<TextView
-        android:id="@+id/tvDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="24dp"
-        android:text="Descripcion:"
-        android:textColor="#4A6EAF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescripcionC"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreConsejo"
-        app:layout_constraintVertical_bias="0.5" />-->
 
 
     <Button

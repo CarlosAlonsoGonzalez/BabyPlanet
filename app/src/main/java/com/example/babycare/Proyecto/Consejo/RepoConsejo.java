@@ -14,8 +14,8 @@ public interface RepoConsejo {
     Call<List<Consejo>> getConsejos();
     @GET("/consejo/obtenerPorRango/{rango}")
     Call<List<Consejo>> getConsejosPorRango(@Path("rango") int rango);
-    @GET("/consejo/obtenerPorTipo/{tipo}/")
+    @GET("/consejo/obtenerPorTipo/{tipo}")
     Call<List<Consejo>> getConsejosPorTipo(@Path("tipo") String tipo);
-    @GET("/actividad/obtenerPorTipoYRango/{rango}/{tipo}/")
+    @GET("/actividad/obtenerPorTipoYRango/{rango}/{tipo}")
     Call<List<Consejo>> getConsejosPorRangoYTipo(@Path("rango") int rango, @Path("tipo") String tipo);
 }

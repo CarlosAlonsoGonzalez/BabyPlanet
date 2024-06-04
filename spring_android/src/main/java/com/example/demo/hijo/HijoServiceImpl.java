@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+
 @Service
 public class HijoServiceImpl implements HijoService {
 
@@ -18,22 +19,21 @@ public class HijoServiceImpl implements HijoService {
     private ModelMapper modelMapper;
 
     @Override
-@Transactional
-public HijoDto save(@Valid HijoDto hijoDto) {
-    Hijo hijoEntity;
-    if (hijoDto.getId() != null) {
-        hijoEntity = hijoRepo.findById(hijoDto.getId())
-                             .orElseThrow(() -> new RuntimeException("Hijo no encontrado"));
-        modelMapper.map(hijoDto, hijoEntity);
-    } else {
-        hijoEntity = modelMapper.map(hijoDto, Hijo.class);
+    @Transactional
+    public HijoDto save(@Valid HijoDto hijoDto) {
+        Hijo hijoEntity;
+        if (hijoDto.getId() != null) {
+            hijoEntity = hijoRepo.findById(hijoDto.getId())
+                    .orElseThrow(() -> new RuntimeException("Hijo no encontrado"));
+            modelMapper.map(hijoDto, hijoEntity);
+        } else {
+            hijoEntity = modelMapper.map(hijoDto, Hijo.class);
+        }
+
+        hijoEntity = hijoRepo.save(hijoEntity);
+
+        return modelMapper.map(hijoEntity, HijoDto.class);
     }
-    
-    hijoEntity = hijoRepo.save(hijoEntity);
-
-    return modelMapper.map(hijoEntity, HijoDto.class);
-}
-
 
     @Override
     public HijoDto get(Long id) {
@@ -51,15 +51,15 @@ public HijoDto save(@Valid HijoDto hijoDto) {
     public List<HijoDto> getMany(List<Long> ids) {
         List<Hijo> listaHijoEntities = hijoRepo.findManyById(ids);
         List<HijoDto> listaHijoDtos = listaHijoEntities.stream().map(hijo -> modelMapper.map(hijo, HijoDto.class))
-        .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return listaHijoDtos;
     }
 
     @Override
     public void delete(Long id) {
-        
-        hijoRepo.deleteById(id);  
-     }
+
+        hijoRepo.deleteById(id);
+    }
 
     @Override
     public List<HijoDto> getByIdPadre(Long id) {
@@ -68,4 +68,3 @@ public HijoDto save(@Valid HijoDto hijoDto) {
     }
 
 }
-

@@ -1,5 +1,6 @@
 package com.example.babycare.Proyecto.Consejo;
 
+import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
 import java.io.Serializable;
@@ -8,11 +9,11 @@ import java.util.ArrayList;
 public class Consejo implements Serializable {
     int id;
     String nombre, descripcion;
-    String rango;
+    int rango;
     String tipo;
     int icono;
 
-    public Consejo(int id, String nombre, String descripcion, String rango, String tipo) {
+    public Consejo(int id, String nombre, String descripcion, int rango, String tipo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,8 +41,9 @@ public class Consejo implements Serializable {
         return descripcion;
     }
 
-    public String getRango() {
-        return rango;
+    public String getRangoString() {
+        //Aqui esta como un string a pesar de ser un int porque lo hacemos con el enum ya que en la base de datos son int pero para el usurio es string
+        return Rango.obtenerDescripcionPorCodigo(rango);
     }
 
     public String getTipo() {

@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,11 +26,14 @@ import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.Proyecto.Inicio.Login;
 import com.example.babycare.Proyecto.Perfil.PerfilFragment;
 import com.example.babycare.Proyecto.Rango;
+import com.example.babycare.Proyecto.UsuarioSingleton;
 import com.example.babycare.R;
 import com.example.babycare.databinding.HomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
 
 
 public class Home extends AppCompatActivity {
@@ -132,7 +136,7 @@ public class Home extends AppCompatActivity {
                 builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Acción para el botón "Sí"
-                        //TODO AQUI PONDRIAMOS EL BORRAR FILE DE LOS DATOS DE USUARIO
+                        borrarAnfitrionCSV();
                         Intent intent = new Intent(Home.this, Login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -218,5 +222,10 @@ public class Home extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    private boolean borrarAnfitrionCSV() {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), UsuarioSingleton.NAME_FILE);
+        return file.delete();
     }
 }
