@@ -12,31 +12,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.babycare.Proyecto.Home.Home;
+import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ConsejoFragment extends Fragment {
     public static final String INFO_CONSEJO = "info de un consejo" ;
     RecyclerView rvConsejos;
     private ConsejoAdapter adapter;
     private static ConsejoViewModel consejoViewModel;
+    PerfilViewModel perfilViewModel;
+    int userId;
+    static int rangoEdadHijo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View layout = inflater.inflate(R.layout.fragment_consejos, container, false);
         rvConsejos = layout.findViewById(R.id.rcvListaConsejos);
-
         rvConsejos.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
 
         adapter = new ConsejoAdapter(new ArrayList<>()); // Adapter sin datos inicialmente
         rvConsejos.setAdapter(adapter);
+
+        //cogemos el id del user
+        Home homeActivity = (Home) getActivity();
+        if (homeActivity != null) {
+            userId = homeActivity.getUserId();
+        }
+
+        // Inicializa y observa los cambios en el ViewModel
+        consejoViewModel = new ViewModelProvider(this).get(ConsejoViewModel.class);
+
+        //pillamos por el id le info del hijo
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
+            if (perfil.getHijos() != null && perfil.getHijos().size() > 0) {
+                rangoEdadHijo = perfil.getHijos().get(0).getEdad();
+            }else{
+                //dejamos por defecto uno y asi si no tiene hijo igualmente muestra cosas
+                rangoEdadHijo=1;
+            }
+            consejoViewModel.getConsejos(null, rangoEdadHijo).observe(getViewLifecycleOwner(), consejos -> {
+                // Actualiza los datos del adaptador cuando cambia la lista de consejos en el ViewModel
+                adapter.setConsejos(consejos);
+                adapter.notifyDataSetChanged();
+            });
+        });
 
         adapter.setClickListener(new ConsejoAdapter.ItemClickListener() {
             @Override
@@ -46,18 +71,6 @@ public class ConsejoFragment extends Fragment {
                 startActivity(i);
             }
         });
-
-        // Inicializa y observa los cambios en el ViewModel
-        consejoViewModel = new ViewModelProvider(this).get(ConsejoViewModel.class);
-        //TODO LO COGES DE USUARIO
-        int rango=2;
-
-        consejoViewModel.getConsejos(null, rango).observe(getViewLifecycleOwner(), consejos -> {
-            // Actualiza los datos del adaptador cuando cambia la lista de consejos en el ViewModel
-            adapter.setConsejos(consejos);
-        });
-
-
 
         return layout;
     }

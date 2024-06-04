@@ -105,7 +105,7 @@ public class PerfilFragment extends Fragment {
                             tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
                             return;
                         }
-                        Hijo hijo = new Hijo(3,etNombreHijo.getText().toString(), Rango.obtenerDecripcionPorCodigo(spEdadHijo.getSelectedItem().toString()), userId);
+                        Hijo hijo = new Hijo(hijoId,etNombreHijo.getText().toString(), Rango.obtenerDecripcionPorCodigo(spEdadHijo.getSelectedItem().toString()), userId);
                         List<Hijo> hijos = new ArrayList<>();
                         hijos.add(hijo);
                         Usuario usuario = new Usuario(userId, etNombreUsuario.getText().toString(), etCorreoUsuario.getText().toString(), contrasenaNuevaConfirm, hijos);

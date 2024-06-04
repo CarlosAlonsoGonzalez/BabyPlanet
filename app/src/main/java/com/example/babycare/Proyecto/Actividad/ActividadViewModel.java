@@ -13,8 +13,6 @@ import retrofit2.Response;
 
 public class ActividadViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Actividad>> actividades;
-    //String areaDesarrollo;
-    //int rango;
 
     public LiveData<ArrayList<Actividad>> getActividades(String areaDesarrollo, int rango) {
 

@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class ConsejoDetalles extends AppCompatActivity {
 
     ImageView ivFondoTitulo;
-    TextView tvTipoConsejo, tvNombreConsejo, tvDescripcion;
+    TextView tvTipoConsejo, tvNombreConsejo, tvDescripcion, tvRango;
     Button btAtras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,8 @@ public class ConsejoDetalles extends AppCompatActivity {
         tvTipoConsejo = findViewById(R.id.tvTipoConsejo);
         tvNombreConsejo = findViewById(R.id.tvNombreConsejo);
         tvDescripcion = findViewById(R.id.tvDescripcionC);
+        tvRango = findViewById(R.id.tvRangoC);
+
         btAtras=findViewById(R.id.btAtrasC);
 
         Intent i = getIntent();
@@ -46,6 +48,7 @@ public class ConsejoDetalles extends AppCompatActivity {
         tvTipoConsejo.setBackgroundColor(colorIconoConsejo);
         tvNombreConsejo.setText(("\""+nuevoConsejo.getNombre())+"\"");
         tvDescripcion.setText(nuevoConsejo.getDescripcion());
+        tvRango.setText(nuevoConsejo.getRangoString());
 
         btAtras.setOnClickListener((View v)->{
             finish();

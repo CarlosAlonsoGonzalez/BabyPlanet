@@ -55,7 +55,6 @@ public class HomeFragment extends Fragment {
         itemConsejo = layout.findViewById(R.id.itemConsejo);
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        //TODO este id seria el de el usuario al inciar sesion (a las malas con un singleton+csv con toda la info del usurio pillada desde el login)
         ServicioApiHome serviceHome = ServicioApiHome.getInstancia();
         perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
             tvNombreUsuario.setText(perfil.getNombreUsuario());

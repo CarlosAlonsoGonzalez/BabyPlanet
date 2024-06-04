@@ -14,9 +14,9 @@ public interface RepoActividad {
     Call<List<Actividad>> getActividades();
     @GET("/actividad/obtenerPorRango/{rango}")
     Call<List<Actividad>> getActividadesPorRango(@Path("rango") int rango);
-    @GET("/actividad/obtenerPorArea/{area_desarrollo}/")
+    @GET("/actividad/obtenerPorArea/{area_desarrollo}")
     Call<List<Actividad>> getActividadesPorAreaDesarrollo(@Path("area_desarrollo") String areaDesarrollo);
-    @GET("/actividad/obtenerPorAreaYRango/{rango}/{area_desarrollo}/")
+    @GET("/actividad/obtenerPorAreaYRango/{rango}/{area_desarrollo}")
     Call<List<Actividad>> getActividadesPorRangoYAreaDesarrollo(@Path("rango") int rango, @Path("area_desarrollo") String areaDesarrollo);
 
 
