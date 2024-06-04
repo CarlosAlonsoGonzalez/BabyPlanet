@@ -53,7 +53,6 @@ public class Registro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.registro);
         getSupportActionBar().hide();
 
@@ -143,6 +142,10 @@ public class Registro extends AppCompatActivity {
                 finish();
             }
 
+        });
+
+        btVolver.setOnClickListener((v) ->{
+            finish();
         });
     }
 
