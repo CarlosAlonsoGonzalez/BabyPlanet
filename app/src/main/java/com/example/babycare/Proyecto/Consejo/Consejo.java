@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class Consejo implements Serializable {
     int id;
-    String nombre, descripcion;
+    String nombre;
+    String descripcion;
     int rango;
     String tipo;
     int icono;
@@ -25,17 +26,10 @@ public class Consejo implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
-    public Consejo(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public String getDescripcion() {
         return descripcion;
