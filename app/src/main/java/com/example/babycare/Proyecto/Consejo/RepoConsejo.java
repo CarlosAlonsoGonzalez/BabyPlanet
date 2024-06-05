@@ -1,7 +1,6 @@
 package com.example.babycare.Proyecto.Consejo;
 
-import com.example.babycare.Proyecto.Actividad.Actividad;
-import com.example.babycare.Proyecto.Consejo.Consejo;
+
 
 import java.util.List;
 
@@ -16,6 +15,6 @@ public interface RepoConsejo {
     Call<List<Consejo>> getConsejosPorRango(@Path("rango") int rango);
     @GET("/consejo/obtenerPorTipo/{tipo}")
     Call<List<Consejo>> getConsejosPorTipo(@Path("tipo") String tipo);
-    @GET("/actividad/obtenerPorTipoYRango/{rango}/{tipo}")
+    @GET("/consejo/obtenerPorTipoYRango/{rango}/{tipo}")
     Call<List<Consejo>> getConsejosPorRangoYTipo(@Path("rango") int rango, @Path("tipo") String tipo);
 }
