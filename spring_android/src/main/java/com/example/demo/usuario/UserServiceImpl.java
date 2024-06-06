@@ -31,9 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto save(@Valid UserDto userDto) {
+        if(!userDto.getHijos().isEmpty()){
         if (userDto.getHijos().get(0).getId() == 0) {
             userDto.getHijos().get(0).setId(null);
         }
+    }
         Usuario userEntity;
         if (userDto.getId() == 0) {
             userDto.setId(null);
