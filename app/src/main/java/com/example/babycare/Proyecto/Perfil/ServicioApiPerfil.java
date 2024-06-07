@@ -1,5 +1,7 @@
 package com.example.babycare.Proyecto.Perfil;
 
+import com.example.babycare.Proyecto.UsuarioSingleton;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,7 +11,7 @@ public class ServicioApiPerfil {
 
     private ServicioApiPerfil() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")
+                .baseUrl(UsuarioSingleton.PORTATIL_SERVER)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

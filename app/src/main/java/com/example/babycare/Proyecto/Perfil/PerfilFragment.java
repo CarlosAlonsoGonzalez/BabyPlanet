@@ -61,70 +61,83 @@ public class PerfilFragment extends Fragment {
                 spEdadHijo.setSelection(perfil.getHijos().get(0).getEdad());
                 hijoId = perfil.getHijos().get(0).getId();
             }
+        });
 
-            tvCambiarContrasena.setOnClickListener((v)->{
-                AlertDialog.Builder e = new AlertDialog.Builder(getContext());
-                LayoutInflater in = getLayoutInflater();
-                View vi = in.inflate(R.layout.contrasena, null);
-                e.setView(vi);
+        perfilViewModel.getSuccessMessage().observe(getViewLifecycleOwner(), success -> {
+            if (success != null && success) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Éxito")
+                        .setMessage("El cambio se ha efectuado correctamente")
+                        .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                        .show();
 
-                btAceptarContrasenaAntigua = (Button) vi.findViewById(R.id.btAceptarContrasenaAntigua);
-                btCancelarContrasenaAntigua = (Button) vi.findViewById(R.id.btCancelarContrasenaAntigua);
-                etContrasenaAntigua = (EditText) vi.findViewById(R.id.etContrasenaAntiguaInput);
-                tvErrorContrasenaAntigua = (TextView) vi.findViewById(R.id.tvErrorContrasenaAntigua);
+                perfilViewModel.resetSuccessMessage();
+            }
+        });
+
+        tvCambiarContrasena.setOnClickListener((v)->{
+            AlertDialog.Builder e = new AlertDialog.Builder(getContext());
+            LayoutInflater in = getLayoutInflater();
+            View vi = in.inflate(R.layout.contrasena, null);
+            e.setView(vi);
+
+            btAceptarContrasenaAntigua = (Button) vi.findViewById(R.id.btAceptarContrasenaAntigua);
+            btCancelarContrasenaAntigua = (Button) vi.findViewById(R.id.btCancelarContrasenaAntigua);
+            etContrasenaAntigua = (EditText) vi.findViewById(R.id.etContrasenaAntiguaInput);
+            tvErrorContrasenaAntigua = (TextView) vi.findViewById(R.id.tvErrorContrasenaAntigua);
+            tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
+
+            AlertDialog ad = e.create();
+
+            btAceptarContrasenaAntigua.setOnClickListener((vis) ->{
                 tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
+                if(contrasenaAntigua != null && !contrasenaAntigua.equals(etContrasenaAntigua.getText().toString())){
+                    tvErrorContrasenaAntigua.setVisibility(View.VISIBLE);
+                    return;
+                }
+                AlertDialog.Builder f = new AlertDialog.Builder(getContext());
+                LayoutInflater li = getLayoutInflater();
+                View vx = li.inflate(R.layout.confirmar_contrasena, null);
+                f.setView(vx);
 
-                AlertDialog ad = e.create();
+                btAceptarContrasenaNueva = (Button) vx.findViewById(R.id.btAceptarContrasenaNueva);
+                btCancelarContrasenaNueva = (Button) vx.findViewById(R.id.btCancelarContrasenaNueva);
+                etContrasenaNueva = (EditText) vx.findViewById(R.id.etContrasenaNuevaInput);
+                etContrasenaNuevaConfirm = (EditText) vx.findViewById(R.id.etContrasenaNuevaInputConf);
+                tvErrorContrasenaNueva = (TextView) vx.findViewById(R.id.tvErrorContrasenaNueva);
+                tvErrorContrasenaNueva.setVisibility(View.INVISIBLE);
 
-                btAceptarContrasenaAntigua.setOnClickListener((vis) ->{
-                    tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
-                    if(contrasenaAntigua != null && !contrasenaAntigua.equals(etContrasenaAntigua.getText().toString())){
-                        tvErrorContrasenaAntigua.setVisibility(View.VISIBLE);
+                AlertDialog ad2 = f.create();
+
+                btAceptarContrasenaNueva.setOnClickListener((v2)->{
+                    String contrasenaNueva = etContrasenaNueva.getText().toString();
+                    String contrasenaNuevaConfirm = etContrasenaNuevaConfirm.getText().toString();
+                    if(!contrasenaNueva.equals(contrasenaNuevaConfirm)){
+                        tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
                         return;
                     }
-                    AlertDialog.Builder f = new AlertDialog.Builder(getContext());
-                    LayoutInflater li = getLayoutInflater();
-                    View vx = li.inflate(R.layout.confirmar_contrasena, null);
-                    f.setView(vx);
+                    Hijo hijo = new Hijo(hijoId,etNombreHijo.getText().toString(), Rango.obtenerDecripcionPorCodigo(spEdadHijo.getSelectedItem().toString()), userId);
+                    List<Hijo> hijos = new ArrayList<>();
+                    hijos.add(hijo);
+                    Usuario usuario = new Usuario(userId, etNombreUsuario.getText().toString(), etCorreoUsuario.getText().toString(), contrasenaNuevaConfirm, hijos);
+                    perfilViewModel.modificarPerfil(usuario);
+                    etContrasenaUsuario.setText(contrasenaNuevaConfirm);
 
-                    btAceptarContrasenaNueva = (Button) vx.findViewById(R.id.btAceptarContrasenaNueva);
-                    btCancelarContrasenaNueva = (Button) vx.findViewById(R.id.btCancelarContrasenaNueva);
-                    etContrasenaNueva = (EditText) vx.findViewById(R.id.etContrasenaNuevaInput);
-                    etContrasenaNuevaConfirm = (EditText) vx.findViewById(R.id.etContrasenaNuevaInputConf);
-                    tvErrorContrasenaNueva = (TextView) vx.findViewById(R.id.tvErrorContrasenaNueva);
-                    tvErrorContrasenaNueva.setVisibility(View.INVISIBLE);
-
-                    AlertDialog ad2 = f.create();
-
-                    btAceptarContrasenaNueva.setOnClickListener((v2)->{
-                        String contrasenaNueva = etContrasenaNueva.getText().toString();
-                        String contrasenaNuevaConfirm = etContrasenaNuevaConfirm.getText().toString();
-                        if(!contrasenaNueva.equals(contrasenaNuevaConfirm)){
-                            tvErrorContrasenaNueva.setVisibility(View.VISIBLE);
-                            return;
-                        }
-                        Hijo hijo = new Hijo(hijoId,etNombreHijo.getText().toString(), Rango.obtenerDecripcionPorCodigo(spEdadHijo.getSelectedItem().toString()), userId);
-                        List<Hijo> hijos = new ArrayList<>();
-                        hijos.add(hijo);
-                        Usuario usuario = new Usuario(userId, etNombreUsuario.getText().toString(), etCorreoUsuario.getText().toString(), contrasenaNuevaConfirm, hijos);
-                        perfilViewModel.modificarPerfil(usuario);
-                        etContrasenaUsuario.setText(contrasenaNuevaConfirm);
-
-                        ad.dismiss();
-                        ad2.dismiss();
-                    });
-                    btCancelarContrasenaNueva.setOnClickListener((v3)->{
-                        ad.dismiss();
-                        ad2.dismiss();
-                    });
-                    ad2.show();
-                });
-                btCancelarContrasenaAntigua.setOnClickListener((vist)->{
                     ad.dismiss();
+                    ad2.dismiss();
                 });
-                ad.show();
+                btCancelarContrasenaNueva.setOnClickListener((v3)->{
+                    ad.dismiss();
+                    ad2.dismiss();
+                });
+                ad2.show();
             });
+            btCancelarContrasenaAntigua.setOnClickListener((vist)->{
+                ad.dismiss();
+            });
+            ad.show();
         });
+
 
         btModificarDatos.setOnClickListener((vie) -> {
             String nombreUsuario = etNombreUsuario.getText().toString();
@@ -140,18 +153,6 @@ public class PerfilFragment extends Fragment {
                 hijos.add(hijo);
                 Usuario usuario = new Usuario(userId, nombreUsuario, email, password, hijos);
                 perfilViewModel.modificarPerfil(usuario);
-
-                perfilViewModel.getSuccessMessage().observe(getViewLifecycleOwner(), success -> {
-                    if (success != null && success) {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Éxito")
-                                .setMessage("El cambio se ha efectuado correctamente")
-                                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
-                                .show();
-
-                        perfilViewModel.resetSuccessMessage();
-                    }
-                });
 
             }
         });

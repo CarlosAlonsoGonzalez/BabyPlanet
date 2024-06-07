@@ -48,7 +48,7 @@ public class PerfilViewModel extends ViewModel {
         }).start();
     }
     public void modificarPerfil(Usuario usuario) {
-        new Thread(() -> {
+        //new Thread(() -> {
             ServicioApiPerfil ser = ServicioApiPerfil.getInstancia();
             Call<Usuario> llamada = ser.getRepo().actualizarUsuario(usuario);
             llamada.enqueue(new Callback<Usuario>() {
@@ -62,7 +62,7 @@ public class PerfilViewModel extends ViewModel {
                 public void onFailure(Call<Usuario> call, Throwable t) {
                 }
             });
-        }).start();
+        //}).start();
     }
 
     //este codigo lo hago porque si no el alert se acumula y te saltan 40 ventanas en vez de 1

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioSingleton {
+    public static final String PORTATIL_SERVER = "http://10.0.2.2:8080/";
     public static final String NAME_FILE = "usuarioAnfitrion.csv" ;
     private long id;
     private static UsuarioSingleton anfitrion = null;

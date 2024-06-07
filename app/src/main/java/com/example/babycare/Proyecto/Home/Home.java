@@ -21,7 +21,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import com.example.babycare.Proyecto.Actividad.ActividadDetalles;
 import com.example.babycare.Proyecto.Actividad.ActividadesFragment;
 import com.example.babycare.Proyecto.Consejo.ConsejoFragment;
 import com.example.babycare.Proyecto.Inicio.Login;
@@ -182,6 +181,7 @@ public class Home extends AppCompatActivity {
 
 
         floatingActionButton.setOnClickListener((v)->{
+
             replaceFragment(new HomeFragment());
         });
 
