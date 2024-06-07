@@ -1,6 +1,7 @@
 package com.example.babycare.Proyecto.Perfil;
 
 import android.app.AlertDialog;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,11 @@ public class PerfilFragment extends Fragment {
         etContrasenaUsuario = layout.findViewById(R.id.etContrasenaUsuario);
         tvCambiarContrasena = layout.findViewById(R.id.tvCambiarContrasena);
         etNombreHijo = layout.findViewById(R.id.etNombreHijo);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            etNombreUsuario.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+            etNombreHijo.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        }
+
         spEdadHijo = layout.findViewById(R.id.spRangoEdad);//SPINNER
         btModificarDatos = layout.findViewById(R.id.btModificarDatos);
 
@@ -86,6 +92,9 @@ public class PerfilFragment extends Fragment {
             etContrasenaAntigua = (EditText) vi.findViewById(R.id.etContrasenaAntiguaInput);
             tvErrorContrasenaAntigua = (TextView) vi.findViewById(R.id.tvErrorContrasenaAntigua);
             tvErrorContrasenaAntigua.setVisibility(View.INVISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                etContrasenaAntigua.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+            }
 
             AlertDialog ad = e.create();
 
@@ -106,6 +115,10 @@ public class PerfilFragment extends Fragment {
                 etContrasenaNuevaConfirm = (EditText) vx.findViewById(R.id.etContrasenaNuevaInputConf);
                 tvErrorContrasenaNueva = (TextView) vx.findViewById(R.id.tvErrorContrasenaNueva);
                 tvErrorContrasenaNueva.setVisibility(View.INVISIBLE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    etContrasenaNueva.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+                    etContrasenaNuevaConfirm.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+                }
 
                 AlertDialog ad2 = f.create();
 
