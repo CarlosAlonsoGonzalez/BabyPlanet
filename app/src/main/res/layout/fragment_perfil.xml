@@ -54,25 +54,25 @@
         android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
         android:text="Usuario"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvCorreoUsuario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/tvCorreoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="Correo"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
-        app:layout_constraintEnd_toEndOf="@+id/tvNombreUsuario"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvNombreUsuario"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuario"
         app:layout_constraintVertical_bias="0.5" />
 
@@ -80,13 +80,12 @@
         android:id="@+id/tvContrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="Contraseña"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvCambiarContrasena"
-        app:layout_constraintEnd_toEndOf="@+id/tvCorreoUsuario"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvCorreoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario"
         app:layout_constraintVertical_bias="0.5" />
 
@@ -94,7 +93,7 @@
         android:id="@+id/etNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="text"
@@ -107,63 +106,64 @@
         android:id="@+id/etCorreoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:enabled="false"
         android:hint="Correo"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/etNombreUsuario"
-        app:layout_constraintStart_toStartOf="@+id/etNombreUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreUsuario" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvCorreoUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCorreoUsuario" />
 
     <EditText
         android:id="@+id/etContrasenaUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:enabled="false"
         android:hint="Contraseña"
         android:inputType="text|textPassword"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/etCorreoUsuario"
-        app:layout_constraintStart_toStartOf="@+id/etCorreoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/etCorreoUsuario" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvContrasena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvContrasena" />
 
     <TextView
         android:id="@+id/tvCambiarContrasena"
         android:layout_width="227dp"
         android:layout_height="28dp"
-        android:layout_marginTop="16dp"
         android:text="¿Desea cambiar la contraseña?"
         android:textColor="@color/Oscuro"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintEnd_toEndOf="@+id/etContrasenaUsuario"
-        app:layout_constraintStart_toStartOf="@+id/tvContrasena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContrasenaUsuario"
         app:layout_constraintVertical_bias="0.5" />
 
     <View
         android:id="@+id/divider3"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="3dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/tvDatosHijos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCambiarContrasena" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCambiarContrasena"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/tvDatosHijos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="3dp"
         android:text="Datos de hijo/a"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etNombreHijo"
+        app:layout_constraintBottom_toTopOf="@+id/tvNombreHijo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3"
         app:layout_constraintVertical_bias="0.5" />
@@ -172,7 +172,7 @@
         android:id="@+id/tvNombreHijo"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="5dp"
         android:text="Nombre"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -186,19 +186,20 @@
         android:id="@+id/tvEdadHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="Edad"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btModificarDatos"
-        app:layout_constraintEnd_toEndOf="@+id/tvNombreHijo"
-        app:layout_constraintStart_toStartOf="@+id/tvNombreHijo"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreHijo"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etNombreHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
@@ -211,18 +212,18 @@
         android:id="@+id/spRangoEdad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:background="@android:drawable/btn_dropdown"
         android:entries="@array/Rango"
         app:layout_constraintBottom_toBottomOf="@+id/tvEdadHijo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo"/>
+        app:layout_constraintTop_toTopOf="@+id/tvEdadHijo" />
 
     <Button
         android:id="@+id/btModificarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="18dp"
         android:background="@color/Oscuro"
         android:text="Modificar datos"
         android:textSize="16sp"
