@@ -1,8 +1,5 @@
 package com.example.babycare.Proyecto.Perfil;
 
-import com.example.babycare.Proyecto.Consejo.RepoConsejo;
-import com.example.babycare.Proyecto.Consejo.ServicioApiConsejos;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

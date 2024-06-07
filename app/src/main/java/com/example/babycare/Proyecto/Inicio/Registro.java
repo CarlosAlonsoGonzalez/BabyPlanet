@@ -7,32 +7,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.babycare.Proyecto.Perfil.Hijo;
-import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
-import com.example.babycare.Proyecto.Perfil.RepoPerfil;
-import com.example.babycare.Proyecto.Perfil.ServicioApiPerfil;
 import com.example.babycare.Proyecto.Perfil.Usuario;
-import com.example.babycare.Proyecto.Rango;
 import com.example.babycare.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.ListIterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class Registro extends AppCompatActivity {
     public static final String REGEX_CORREO = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -44,8 +32,7 @@ public class Registro extends AppCompatActivity {
     CheckBox chbOptionals;
     Spinner spEdadHijo;
     Button btRegistro, btVolver;
-    RepoPerfil repoPerfil;
-    PerfilViewModel perfilViewModel;
+    InicioViewModel inicioViewModel;
     Usuario usuario;
     List<Hijo> hijos = new ArrayList<>();
     boolean hayErrores=true;
@@ -68,9 +55,7 @@ public class Registro extends AppCompatActivity {
         btRegistro = findViewById(R.id.btRegistro);
         btVolver = findViewById(R.id.btVolver);
 
-        repoPerfil = ServicioApiPerfil.getRepo();
-        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-
+        inicioViewModel = new ViewModelProvider(this).get(InicioViewModel.class);
         builder = new AlertDialog.Builder(this);
 
         chbOptionals.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -78,80 +63,61 @@ public class Registro extends AppCompatActivity {
             spEdadHijo.setEnabled(isChecked);
         });
 
-
-
         btRegistro.setOnClickListener(v -> {
-            //Pillamos los datos
             String nombreUsuario = etNombreUsuario.getText().toString();
             String email = etCorreoUsuario.getText().toString();
             String password = etContrasena.getText().toString();
-            String confPassword= etConfirmarContrasena.getText().toString();
-
+            String confPassword = etConfirmarContrasena.getText().toString();
             String nombreHijo = etNombreHijo.getText().toString();
             int rango = spEdadHijo.getSelectedItemPosition();
 
-            if(chbOptionals.isChecked()){
-                //crear con datos hijo
-                if(validarCamposObligatorios(nombreUsuario, email, password, confPassword) && validarCamposOpcionales(nombreHijo, rango)){
+            if (chbOptionals.isChecked()) {
+                if (validarCamposObligatorios(nombreUsuario, email, password, confPassword) && validarCamposOpcionales(nombreHijo, rango)) {
                     Hijo hijo = new Hijo(nombreHijo, rango);
                     hijos.add(hijo);
                     usuario = new Usuario(nombreUsuario, email, password, hijos);
-                    hayErrores=false;
-                }else hayErrores=true;
-
-            }else{
-                //sin datos hijo
-                if(validarCamposObligatorios(nombreUsuario, email, password, confPassword)){
+                    hayErrores = false;
+                } else hayErrores = true;
+            } else {
+                if (validarCamposObligatorios(nombreUsuario, email, password, confPassword)) {
                     usuario = new Usuario(nombreUsuario, email, password, hijos);
-                    hayErrores=false;
-                }else hayErrores=true;
+                    hayErrores = false;
+                } else hayErrores = true;
             }
 
-            if(!hayErrores){ //salio bien
-                perfilViewModel.crearUsuario(usuario);
-                perfilViewModel.getSuccessMessage().observe(this, success -> {
-                    if (success != null && success) {
-                        builder.setTitle("Éxito")
-                                .setMessage("¡El usuario se ha registrado correctamente!")
-                                .setPositiveButton("Entendido", null);
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                        /*new AlertDialog.Builder(this)
-                                .setTitle("Éxito")
-                                .setMessage("El usuario se ha registrado correctamente")
-                                .setPositiveButton("Aceptar", (dialog, which) -> {
-                                    dialog.dismiss();
-                                    //finish();
-                                })
-                                .show();*/
-
-                        perfilViewModel.resetSuccessMessage();
-                    }else{
-                        builder.setTitle("Error")
-                                .setMessage("Ese correo ya esta en uso")
-                                .setPositiveButton("Entendido", null);
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                        /*new AlertDialog.Builder(this)
-                                .setTitle("Error")
-                                .setMessage("Ese correo ya existe")
-                                .setPositiveButton("Aceptar", (dialog, which) -> {
-                                    dialog.dismiss();
-                                })
-                                .show();*/
+            if (!hayErrores) {
+                inicioViewModel.crearUsuario(usuario);
+                inicioViewModel.getSuccessMessage().observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean success) {
+                        if (success != null && success) {
+                            new AlertDialog.Builder(Registro.this)
+                                    .setTitle("Éxito")
+                                    .setMessage("El usuario se ha registrado correctamente")
+                                    .setPositiveButton("Aceptar", (dialog, which) -> {
+                                        dialog.dismiss();
+                                        finish();
+                                    })
+                                    .show();
+                            inicioViewModel.resetSuccessMessage();
+                        } else {
+                            new AlertDialog.Builder(Registro.this)
+                                    .setTitle("Error")
+                                    .setMessage("Ese correo ya existe")
+                                    .setPositiveButton("Aceptar", (dialog, which) -> {
+                                        dialog.dismiss();
+                                    })
+                                    .show();
+                        }
                     }
                 });
-                finish();
             }
-
         });
 
-        btVolver.setOnClickListener((v) ->{
-            finish();
-        });
+        btVolver.setOnClickListener((v) -> finish());
     }
 
-    private boolean validarCamposObligatorios(String nombreUsuario, String correo, String contrasena, String repContrasena){
+    private boolean validarCamposObligatorios(String nombreUsuario, String correo, String contrasena, String repContrasena) {
         if (nombreUsuario.isEmpty() || correo.isEmpty() || contrasena.isEmpty() || repContrasena.isEmpty()) {
             builder.setMessage(ERROR_DATOS)
                     .setPositiveButton("Entendido", null);
@@ -178,7 +144,7 @@ public class Registro extends AppCompatActivity {
         return true;
     }
 
-    private boolean validarCamposOpcionales(String nombreHijo, int rango){
+    private boolean validarCamposOpcionales(String nombreHijo, int rango) {
         if (nombreHijo.isEmpty() || rango == 0) {
             builder.setMessage(ERR_DATOS_HIJO)
                     .setPositiveButton("Entendido", null);
@@ -188,5 +154,4 @@ public class Registro extends AppCompatActivity {
         }
         return true;
     }
-
 }

@@ -10,10 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.babycare.Proyecto.Home.Home;
-import com.example.babycare.Proyecto.Perfil.PerfilViewModel;
 import com.example.babycare.Proyecto.UsuarioSingleton;
 import com.example.babycare.R;
 
@@ -26,7 +24,7 @@ public class Login extends AppCompatActivity {
     public static final String DATOS_INCORRECTOS="El correo o la contraseña son incorrectos";
     EditText etCorreo, etContraseña;
     Button btInicio, btRegistro;
-    PerfilViewModel perfilViewModel;
+    InicioViewModel inicioViewModel;
     AlertDialog.Builder builder;
 
     @Override
@@ -40,7 +38,7 @@ public class Login extends AppCompatActivity {
         etContraseña = findViewById(R.id.etContraseña);
         btInicio = findViewById(R.id.btInicio);
         btRegistro= findViewById(R.id.btRegistro);
-        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        inicioViewModel = new ViewModelProvider(this).get(InicioViewModel.class);
 
         if(checkIfFileExists(UsuarioSingleton.NAME_FILE)) {
             Intent i = new Intent(this, Home.class);
@@ -53,8 +51,8 @@ public class Login extends AppCompatActivity {
             String email = etCorreo.getText().toString();
             String password = etContraseña.getText().toString();
 
-            perfilViewModel.login(email, password);
-            perfilViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
+            inicioViewModel.login(email, password);
+            inicioViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
                 if (respuestaLogin.isDatosCorrectos()) {
                     Intent i = new Intent(this, Home.class);
                     crearAnfitrionCSV(respuestaLogin.getUserId().intValue());
@@ -78,8 +76,8 @@ public class Login extends AppCompatActivity {
     private void crearAnfitrionCSV(int idAnfitrion){
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), UsuarioSingleton.NAME_FILE);
 
-        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        perfilViewModel.getPerfil(idAnfitrion).observe(this, perfil -> {
+        inicioViewModel = new ViewModelProvider(this).get(InicioViewModel.class);
+        inicioViewModel.getPerfil(idAnfitrion).observe(this, perfil -> {
             try {
                 FileOutputStream fos = new FileOutputStream(file);
                 OutputStreamWriter osw = new OutputStreamWriter(fos);

@@ -25,12 +25,11 @@ import java.util.List;
 public class PerfilFragment extends Fragment {
 
     EditText etNombreUsuario, etCorreoUsuario, etContrasenaUsuario, etNombreHijo, etContrasenaAntigua, etContrasenaNueva, etContrasenaNuevaConfirm;
-    Spinner spEdadHijo;//SPINNER
+    Spinner spEdadHijo;
     TextView tvCambiarContrasena, tvErrorContrasenaAntigua, tvErrorContrasenaNueva;
     Button btAceptarContrasenaAntigua, btCancelarContrasenaAntigua, btAceptarContrasenaNueva, btCancelarContrasenaNueva, btModificarDatos;
     PerfilViewModel perfilViewModel;
     String contrasenaAntigua;
-    RepoPerfil repoPerfil;
     int userId;
     int hijoId;
     @Override
@@ -50,7 +49,6 @@ public class PerfilFragment extends Fragment {
         etNombreHijo = layout.findViewById(R.id.etNombreHijo);
         spEdadHijo = layout.findViewById(R.id.spRangoEdad);//SPINNER
         btModificarDatos = layout.findViewById(R.id.btModificarDatos);
-        repoPerfil = ServicioApiPerfil.getRepo();
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         perfilViewModel.getPerfil(userId).observe(getViewLifecycleOwner(), perfil -> {
