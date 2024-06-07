@@ -134,7 +134,7 @@ public class PerfilFragment extends Fragment {
             String edad = spEdadHijo.getSelectedItem().toString();
             int rango = Rango.obtenerDecripcionPorCodigo(edad);
 
-            if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) &&!TextUtils.isEmpty(nombreHijo)){
+            if(!TextUtils.isEmpty(nombreUsuario) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
                 Hijo hijo = new Hijo(hijoId,nombreHijo, rango, userId);
                 List<Hijo> hijos = new ArrayList<>();
                 hijos.add(hijo);
