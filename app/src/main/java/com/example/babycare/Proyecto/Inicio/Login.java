@@ -45,6 +45,19 @@ public class Login extends AppCompatActivity {
             i.putExtra(ID_USUARIO, UsuarioSingleton.getAnfitrion().getId().intValue());
             startActivity(i);
         }
+        inicioViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
+            if (respuestaLogin.isDatosCorrectos()) {
+                Intent i = new Intent(this, Home.class);
+                crearAnfitrionCSV(respuestaLogin.getUserId().intValue());
+                i.putExtra(ID_USUARIO, respuestaLogin.getUserId().intValue());
+                startActivity(i);
+            } else {
+                builder.setMessage(DATOS_INCORRECTOS)
+                        .setPositiveButton("Entendido", null);
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         btInicio.setOnClickListener((v)->{
 
@@ -52,19 +65,7 @@ public class Login extends AppCompatActivity {
             String password = etContraseña.getText().toString();
 
             inicioViewModel.login(email, password);
-            inicioViewModel.getRespuestaLogin().observe(this, respuestaLogin -> {
-                if (respuestaLogin.isDatosCorrectos()) {
-                    Intent i = new Intent(this, Home.class);
-                    crearAnfitrionCSV(respuestaLogin.getUserId().intValue());
-                    i.putExtra(ID_USUARIO, respuestaLogin.getUserId().intValue());
-                    startActivity(i);
-                } else {
-                    builder.setMessage(DATOS_INCORRECTOS)
-                            .setPositiveButton("Entendido", null);
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-            });
+
         });
 
         btRegistro.setOnClickListener((v)->{

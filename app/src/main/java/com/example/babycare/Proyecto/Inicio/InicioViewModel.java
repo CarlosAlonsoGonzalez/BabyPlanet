@@ -49,7 +49,7 @@ public class InicioViewModel extends ViewModel {
     private MutableLiveData<RespuestaLogin> respuestaLogin = new MutableLiveData<>();
 
     public LiveData<RespuestaLogin> getRespuestaLogin() {
-        if(respuestaLogin==null){
+        if (respuestaLogin == null) {
             respuestaLogin = new MutableLiveData<>();
         }
         return respuestaLogin;
@@ -64,14 +64,19 @@ public class InicioViewModel extends ViewModel {
                 public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                     if (response.isSuccessful()) {
                         successMessage.postValue(true);
+                    } else if (response.code() == 500) {
+                        successMessage.postValue(false);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<Usuario> call, Throwable t) {
+                    successMessage.postValue(false);
                 }
             });
         }).start();
     }
+
     public void login(String email, String password) {
         new Thread(() -> {
             ServicioApiInicio ser = ServicioApiInicio.getInstancia();
@@ -85,6 +90,7 @@ public class InicioViewModel extends ViewModel {
                         respuestaLogin.postValue(new RespuestaLogin(false, null)); // Asume un constructor para manejar fallos
                     }
                 }
+
                 @Override
                 public void onFailure(Call<RespuestaLogin> call, Throwable t) {
                     respuestaLogin.postValue(new RespuestaLogin(false, null)); // Asume un constructor para manejar fallos
@@ -92,10 +98,12 @@ public class InicioViewModel extends ViewModel {
             });
         }).start();
     }
+
     public LiveData<Boolean> getSuccessMessage() {
         return successMessage;
     }
+
     public void resetSuccessMessage() {
-        successMessage.setValue(false);
+        successMessage.postValue(null);
     }
 }

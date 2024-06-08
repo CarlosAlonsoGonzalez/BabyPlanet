@@ -2,6 +2,7 @@ package com.example.babycare.Proyecto.Inicio;
 
 import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
 public class Registro extends AppCompatActivity {
     public static final String REGEX_CORREO = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     public static final String ERROR_DATOS = "Los campos nombre usuario, correo electronico y contraseña son obligatorios.";
@@ -35,7 +35,7 @@ public class Registro extends AppCompatActivity {
     InicioViewModel inicioViewModel;
     Usuario usuario;
     List<Hijo> hijos = new ArrayList<>();
-    boolean hayErrores=true;
+    boolean hayErrores = true;
     AlertDialog.Builder builder;
 
     @Override
@@ -49,7 +49,7 @@ public class Registro extends AppCompatActivity {
         etCorreoUsuario = findViewById(R.id.etCorreoUsuarioReg);
         etContrasena = findViewById(R.id.etContrasenaRegistro);
         etConfirmarContrasena = findViewById(R.id.etConfirmarContrasena);
-        chbOptionals=findViewById(R.id.chbDatosHijo);
+        chbOptionals = findViewById(R.id.chbDatosHijo);
         etNombreHijo = findViewById(R.id.etNombreHijoReg);
         spEdadHijo = findViewById(R.id.spRangoEdadReg);
         btRegistro = findViewById(R.id.btRegistro);
@@ -61,6 +61,16 @@ public class Registro extends AppCompatActivity {
         chbOptionals.setOnCheckedChangeListener((buttonView, isChecked) -> {
             etNombreHijo.setEnabled(isChecked);
             spEdadHijo.setEnabled(isChecked);
+        });
+
+        inicioViewModel.getSuccessMessage().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean success) {
+                if (success != null) {
+                    mostrarDialogoResultado(success);
+                    inicioViewModel.resetSuccessMessage();
+                }
+            }
         });
 
         btRegistro.setOnClickListener(v -> {
@@ -77,44 +87,39 @@ public class Registro extends AppCompatActivity {
                     hijos.add(hijo);
                     usuario = new Usuario(nombreUsuario, email, password, hijos);
                     hayErrores = false;
-                } else hayErrores = true;
+                } else {
+                    hayErrores = true;
+                }
             } else {
                 if (validarCamposObligatorios(nombreUsuario, email, password, confPassword)) {
                     usuario = new Usuario(nombreUsuario, email, password, hijos);
                     hayErrores = false;
-                } else hayErrores = true;
+                } else {
+                    hayErrores = true;
+                }
             }
 
             if (!hayErrores) {
-                inicioViewModel.crearUsuario(usuario);
-                inicioViewModel.getSuccessMessage().observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean success) {
-                        if (success != null && success) {
-                            new AlertDialog.Builder(Registro.this)
-                                    .setTitle("Éxito")
-                                    .setMessage("El usuario se ha registrado correctamente")
-                                    .setPositiveButton("Aceptar", (dialog, which) -> {
-                                        dialog.dismiss();
-                                        finish();
-                                    })
-                                    .show();
-                            inicioViewModel.resetSuccessMessage();
-                        } else {
-                            new AlertDialog.Builder(Registro.this)
-                                    .setTitle("Error")
-                                    .setMessage("Ese correo ya existe")
-                                    .setPositiveButton("Aceptar", (dialog, which) -> {
-                                        dialog.dismiss();
-                                    })
-                                    .show();
-                        }
-                    }
-                });
+                new CrearUsuarioTask().execute(usuario);
             }
         });
 
         btVolver.setOnClickListener((v) -> finish());
+    }
+
+    private void mostrarDialogoResultado(boolean success) {
+        if (!isFinishing()) {
+            new AlertDialog.Builder(Registro.this)
+                    .setTitle(success ? "Éxito" : "Error")
+                    .setMessage(success ? "El usuario se ha registrado correctamente" : "Ese correo ya existe")
+                    .setPositiveButton("Aceptar", (dialog, which) -> {
+                        dialog.dismiss();
+                        if (success) {
+                            finish();
+                        }
+                    })
+                    .show();
+        }
     }
 
     private boolean validarCamposObligatorios(String nombreUsuario, String correo, String contrasena, String repContrasena) {
@@ -153,5 +158,13 @@ public class Registro extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private class CrearUsuarioTask extends AsyncTask<Usuario, Void, Void> {
+        @Override
+        protected Void doInBackground(Usuario... usuarios) {
+            inicioViewModel.crearUsuario(usuarios[0]);
+            return null;
+        }
     }
 }
