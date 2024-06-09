@@ -86,7 +86,7 @@ public class ActividadesFragment extends Fragment {
         } else if (rango==0 && area!=null) {
             actividadViewModel.generarActividadesPorAreaDesarrollo(area);
         } else {
-           actividadViewModel.generarActividadesPorAreaDesarrlloYRango(area,rango);
+           actividadViewModel.generarActividadesPorAreaDesarrolloYRango(area,rango);
         }
     }
 }

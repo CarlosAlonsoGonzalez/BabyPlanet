@@ -32,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Usuario"
             android:textAlignment="textEnd"
             android:textColor="@color/Oscuro"
             android:textSize="38sp"

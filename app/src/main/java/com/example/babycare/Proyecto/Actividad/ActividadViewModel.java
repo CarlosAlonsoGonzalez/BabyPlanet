@@ -24,7 +24,7 @@ public class ActividadViewModel extends ViewModel {
             } else if (rango==0 && areaDesarrollo!=null) {
                 generarActividadesPorAreaDesarrollo(areaDesarrollo);
             } else {
-                generarActividadesPorAreaDesarrlloYRango(areaDesarrollo,rango);
+                generarActividadesPorAreaDesarrolloYRango(areaDesarrollo,rango);
             }
         }
         return actividades;
@@ -86,7 +86,7 @@ public class ActividadViewModel extends ViewModel {
         ).start();
     }
 
-    public void generarActividadesPorAreaDesarrlloYRango(String areaDesarrollo, int rango) {
+    public void generarActividadesPorAreaDesarrolloYRango(String areaDesarrollo, int rango) {
         new Thread(() -> {
 
             ServicioApiActividades ser = ServicioApiActividades.getInstancia();
